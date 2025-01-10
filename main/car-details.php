@@ -3,7 +3,6 @@
 include "dataconnection.php";
 
 ?>
-
 <!DOCTYPE html>
 <html lang="zxx">
 
