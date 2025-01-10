@@ -1,0 +1,15 @@
+HTTrack3.49-2+htsswf+htsjava launched on Wed, 25 Dec 2024 20:33:41 at https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/index.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/index.html -O1 "C:\Users\60111\Documents\TRY\XX" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+20:34:17	Error: 	"Bad Request" (400) at link https://www.googletagmanager.com/gtm.js?id= (from https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/index.html)
+20:34:34	Error: 	"Not Found" (404) at link https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/assets/images/spritemap.png (from https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/assets/css/dropzone.css)
+20:34:34	Error: 	"Not Found" (404) at link https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/assets/images/spritemap@2x.png (from https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/assets/css/dropzone.css)
+20:34:34	Error: 	"Not Found" (404) at link https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/assets/css/mCSB_buttons.png (from https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/assets/css/jquery.mCustomScrollbar.css)
+
+HTTrack Website Copier/3.49-2 mirror complete in 54 seconds : 171 links scanned, 166 files written (16794590 bytes overall) [16919858 bytes received at 313330 bytes/sec]
+(4 errors, 0 warnings, 0 messages)
