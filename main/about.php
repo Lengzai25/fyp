@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 07cb846eea08de3e7aefd351fe3186202f22cbb2
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/about-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:29 GMT -->
 <head>
     <!-- Google Tag Manager -->
