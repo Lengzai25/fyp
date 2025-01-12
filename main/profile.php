@@ -1,13 +1,22 @@
 <?php
 
 include "dataconnection.php";
+session_start();
+
+// get the session that keeps the Primary key
+$sess_id = $_SESSION["sess_id"]; 
+
+// find from the admintbl the record related to this Primary key
+$get_cust = mysqli_query($conn, "select * from customer where cust_id = '$sess_id'");
+
+// Retrieve the record
+$cust_rec = mysqli_fetch_assoc($get_cust);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/shop-cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:34 GMT -->
 <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -98,11 +107,11 @@ include "dataconnection.php";
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Account
+                                    <?php echo $cust_rec["cust_name"] ?>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="login.php">Login</a>
-                                    <a class="dropdown-item" href="register.php">Register</a>
+                                    <a class="dropdown-item" href="profile.php">Profile</a>
+                                    <a class="dropdown-item" href="logout.php">Log Out</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -123,92 +132,62 @@ include "dataconnection.php";
 <div class="sub-banner overview-bgi">
     <div class="container">
         <div class="page-name">
-            <h1>Shop Cart</h1>
-        </div>
-    </div>
-    <div class="page-info">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="breadcrumb-area">
-                        <ul>
-                            <li><a href="index.html">Index</a></li>
-                            <li><span>/</span>Shop Cart</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="contact-info">
-                        <ul>
-                            <li><i class="fa fa-phone"></i> +60185754753 / +60197784913</li>
-                            <li><a href="contact-1.html" class="btn btn-md btn-theme">Services</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <h1>Profile</h1>
         </div>
     </div>
 </div>
 <!-- Sub banner end -->
 
-<!-- Shop cart start -->
-<div class="shop-cart content-area-2">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="heading-2">
-                    <h4>Shopping Cart</h4>
-                    <p>View your shopping cart here!</p>
-                </div>
-                <table class="shop-table cart mb-20">
-                    <thead>
-                    <tr>
-                        <th  class="product-name">Product</th>
-                        <th class="product-price">Description</th>
-                        <th class="product-price">Price</th>
-                        <th class="product-quantity">Qty</th>
-                        <th class="product-subtotal">Total</th>
-                        <th class="product-remove">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="product-thumbnail"><img src="assets/img/shop/shop-1.jpg" alt="shop-1"></td>
+<!-- Agent page start -->
+<div class="agent-page content-area-2">
+    <!-- Agent detail start -->
+    <div class="agent-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row agent-5">
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-pad ">
+                            <div class="photo">
+                                <img src="assets/img/avatar/avatar-9.jpg" alt="agent-list-2" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-xl-7 col-lg-7 col-md-7 col-pad align-self-center">
+                            <div class="detail">
+                                <div class="contact">
+                                    <ul>
+                                        <li>
+                                            <span>Name: </span><?php echo $cust_rec["cust_name"] ?>
+                                        </li>
+                                        <li>
+                                            <span>Email:</span><?php echo $cust_rec["cust_email"] ?>
+                                        </li>
+                                        <li>
+                                            <span>Mobile:</span><?php echo $cust_rec["cust_tel"] ?></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <td class="product-name">
-                            <a href="#">left one</a>
-                        </td>
-                        <td>£58.00</td>
-                        <td><input class="qty" type="text" value="+1"></td>
-                        <td>£58.00</td>
-                        <td class="product-remove"><a href="#"><i class="fa fa-close"></i></a></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-lg-4">
-                <div class="cart-total-box bg-light hdn-mb-30 mb-30">
-                    <h5>Cart Totals</h5>
-                    <hr>
-                    <ul>
-                        <li>
-                            Subtotal<span class="pull-right">$170.00</span>
-                        </li>
-                    </ul>
-                    <hr>
-                    <p class="mar-b-50">
-                        Grand Total<span class="pull-right">$9531</span>
-                    </p>
-                    <br>
-
-                    <button class="btn btn-dark btn-block btn-md" type="submit">Update Cart</button>
-                    <button class="btn btn-color btn-block btn-md" type="submit">Proceed To Checkout</button>
+                    <div class="agent-description">
+                        <div class="tabbing tabbing-box mb-30">
+                            <ul class="nav nav-tabs" id="carTab" role="tablist">
+                                <li class="nav-item">
+                                <?php
+                                echo "<a class='nav-link active show' id='one-tab' data-toggle='tab' href='edit_profile.php?edit_cid=$sess_id'>Edit Profile</a>";
+                                ?>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Agent detail end -->
 </div>
-<!-- Shop cart end -->
+<!-- Agent page end -->
 
 <!-- Footer start -->
 <footer class="footer">
@@ -293,38 +272,12 @@ include "dataconnection.php";
 </footer>
 <!-- Footer end -->
 
-<!-- Full Page Search -->
-<div id="full-page-search">
-    <button type="button" class="close">×</button>
-    <form action="#">
-        <input type="search" value="" placeholder="type keyword(s) here" />
-        <button type="button" class="btn btn-sm btn-color">Search</button>
-    </form>
-</div>
-
 <!-- External JS libraries -->
-<script src="assets/js/jquery-2.2.0.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/jquery-2.2.0.min.js"></>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.selectBox.js"></script>
-<script src="assets/js/rangeslider.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/jquery.filterizr.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/backstretch.js"></script>
-<script src="assets/js/jquery.countdown.js"></script>
-<script src="assets/js/jquery.scrollUp.js"></script>
-<script src="assets/js/particles.min.js"></script>
-<script src="assets/js/typed.min.js"></script>
-<script src="assets/js/dropzone.js"></script>
-<script src="assets/js/jquery.mb.YTPlayer.js"></script>
-<script src="assets/js/slick.min.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0N5pbJN10Y1oYFRd0MJ_v2g8W2QT74JE"></script>
-<script src="assets/js/ie-emulation-modes-warning.js"></script>
 <!-- Custom JS Script -->
 <script  src="assets/js/app.js"></script>
 </body>
 
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/shop-cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:34 GMT -->
+<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/agent-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:31 GMT -->
 </html>

@@ -1,12 +1,30 @@
 <?php
 
 include "dataconnection.php";
+session_start();
+
+// get the session that keeps the Primary key
+$sess_id = $_SESSION["sess_id"]; 
+
+$carid = $_SESSION['carid'];
+echo "$carid";
+
+// find from the admintbl the record related to this Primary key
+$get_cust = mysqli_query($conn, "select * from customer where cust_id = '$sess_id'");
+
+// Retrieve the record
+$cust_rec = mysqli_fetch_assoc($get_cust);
+
+// find from the admintbl the record related to this Primary key
+$get_car = mysqli_query($conn, "select * from car where car_id = '$carid'");
+
+// Retrieve the record
 
 ?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/car-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:28 GMT -->
 <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -54,7 +72,7 @@ include "dataconnection.php";
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light rounded">
-                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
+                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
                         <img src="assets/img/logos/logo.png" alt="logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +81,7 @@ include "dataconnection.php";
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="register.php" id="navbarDropdownMenuLink">
+                                <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
                                     Home
                                 </a>
                             </li>
@@ -97,11 +115,16 @@ include "dataconnection.php";
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Account
+                                    <?php
+                                    while ($car_rec = mysqli_fetch_assoc($get_car))
+                                    {
+                                        echo $cust_rec["cust_name"];
+                                    }
+                                    ?>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="login.php">Login</a>
-                                    <a class="dropdown-item" href="register.php">Register</a>
+                                    <a class="dropdown-item" href="profile.php">Profile</a>
+                                    <a class="dropdown-item" href="logout.php">Log Out</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -123,28 +146,6 @@ include "dataconnection.php";
     <div class="container">
         <div class="page-name">
             <h1>Car Detail</h1>
-        </div>
-    </div>
-    <div class="page-info">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="breadcrumb-area">
-                        <ul>
-                            <li><a href="index.php">Index</a></li>
-                            <li><span>/</span>Car Detail</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="contact-info">
-                        <ul>
-                            <li><i class="fa fa-phone"></i> +60185754753 / +60197784913</li>
-                            <li><a href="contact.php" class="btn btn-md btn-theme">Contact us</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -206,11 +207,11 @@ include "dataconnection.php";
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="pull-left">
-                                    <h3>Lexus ct 2018</h3>
+                                    <h3><?php echo $car_rec ["car_name"] ?></h3>
                                     <p><i class="fa fa-map-marker"></i> 123 Kathal St. Tampa City,</p>
                                 </div>
                                 <div class="pull-right">
-                                    <h3><span class="text-right">$420,00</span></h3>
+                                    <h3><span class="text-right"><?php echo $car_rec ["car_price"]?></span></h3>
                                     <h5>Per Night</h5>
                                 </div>
                             </div>
@@ -1091,7 +1092,6 @@ include "dataconnection.php";
 
 <!-- External JS libraries -->
 <script src="assets/js/jquery-2.2.0.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.selectBox.js"></script>
 <script src="assets/js/rangeslider.js"></script>

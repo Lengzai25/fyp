@@ -64,7 +64,7 @@ include "dataconnection.php";
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="register.php" id="navbarDropdownMenuLink">
+                                <a class="nav-link dropdown-toggle" href="index.php" id="navbarDropdownMenuLink">
                                     Home
                                 </a>
                             </li>

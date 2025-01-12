@@ -1,11 +1,25 @@
+<?php
+
+include "dataconnection.php";
+session_start();
+if (!isset($_SESSION["sess_id"]))
+{
+    header("Location: login.php");
+} 
+
+// get the session that keeps the Primary key
+$sess_id = $_SESSION["sess_id"]; 
+
+// find from the admintbl the record related to this Primary key
+$get_cust = mysqli_query($conn, "select * from customer where cust_id = '$sess_id'");
+
+// Retrieve the record
+$cust_rec = mysqli_fetch_assoc($get_cust);
+
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
-    
-
-
-
-
-
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/car-list-fullwidth.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:28 GMT -->
 <head>
     <!-- Google Tag Manager -->
@@ -54,7 +68,7 @@
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light rounded">
-                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
+                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
                         <img src="assets/img/logos/logo.png" alt="logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +77,7 @@
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="register.php" id="navbarDropdownMenuLink">
+                                <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
                                     Home
                                 </a>
                             </li>
@@ -97,11 +111,11 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Account
+                                    <?php echo $cust_rec["cust_name"] ?>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="login.php">Login</a>
-                                    <a class="dropdown-item" href="register.php">Register</a>
+                                    <a class="dropdown-item" href="profile.php">Profile</a>
+                                    <a class="dropdown-item" href="logout.php">Log Out</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -125,30 +139,59 @@
             <h1>Car List</h1>
         </div>
     </div>
-    <div class="page-info">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="breadcrumb-area">
-                        <ul>
-                            <li><a href="index.html">Index</a></li>
-                            <li><span>/</span>Car List</li>
-                        </ul>
+</div>
+<!-- Sub banner end -->
+
+<div class="search-area" id="search-area-1">
+    <div class="container">
+        <div class="search-area-inner">
+            <div class="search-contents ">
+                <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/index.html" method="GET">
+                    <div class="row">
+                        <div class="col-6 col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="brand">
+                                    <option>Select Brand</option>
+                                    <option>BMW</option>
+                                    <option>Honda</option>
+                                    <option>Toyota</option>
+                                    <option>Mazda</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="Year">
+                                    <option>Select Year</option>
+                                    <option>2012</option>
+                                    <option>2013</option>
+                                    <option>2014</option>
+                                    <option>2015</option>
+                                    <option>2016</option>
+                                    <option>2017</option>
+                                    <option>2018</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <div class="range-slider">
+                                    <div data-min="0" data-max="150000" data-unit="MYR" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <button class="search-button btn-md btn-color" type="submit">Search</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="contact-info">
-                        <ul>
-                            <li><i class="fa fa-phone"></i> +60185754753 / +60197784913</li>
-                            <li><a href="contact-1.html" class="btn btn-md btn-theme">Contact us</a></li>
-                        </ul>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-<!-- Sub banner end -->
 
 <!-- Car list fullwidth start -->
 <div class="car-list-fullwidth content-area-2">
@@ -171,374 +214,52 @@
                 </div>
             </div>
         </div>
+        
         <div class="row">
             <div class="col-lg-12">
+            <?php
+                // find from the admintbl the record related to this Primary key
+                $get_car = mysqli_query($conn, "select * from car");
+
+                // Retrieve the record
+                
+                while($car_rec = mysqli_fetch_array($get_car))
+                {
+                    $carid = $car_rec["car_id"];
+            ?>
                 <div class="car-box-5 p-box">
                     <div class="row">
                         <div class="col-lg-4 col-md-12 col-pad">
-                            <a href="car-details.php" class="car-img">
-                                <div class="listing-badges">
-                                    <span class="featured">Featured</span>
-                                </div>
-                                <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators1" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carouselExampleIndicators1" data-slide-to="1"></li>
-                                        <li data-target="#carouselExampleIndicators1" data-slide-to="2"></li>
-                                    </ol>
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="assets/img/car-list-1.jpg" alt="car-list">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="assets/img/car-list-1.jpg" alt="car-list">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="assets/img/car-list-1.jpg" alt="car-list">
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                        <?php
+                            echo '<a href="car-details.php" class="car-img"><img src="assets/img/' . $car_rec["car_pic"] . '" alt="' . $car_rec["car_name"] . '"></a>';
+                            
+                        ?>
                         </div>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="detail ">
-                                <h3 class="title">
-                                    <a href="car-details.php">Audi A7 TDI</a>
-                                </h3>
-
-                                <div class="listing-price">
-                                    <span class="olg"><del>$1250.00</del></span><span class="new">$1000.00</span>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="detail ">
+                                    <h3 class="title">
+                                        <a href="car-details.php?"> 
+                                            <?php 
+                                                echo $car_rec["car_name"];  
+                                            ?> 
+                                        </a>
+                                    </h3>
+                                    <div class="listing-price">
+                                        </span><span class="new">RM <?php echo $car_rec["car_price"]; ?></span>
+                                    </div>
+                                    <p><?php echo $car_rec["car_des"]; ?></p>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel,dapibus tempus nulla. Donec vel nulla dui. Pellentesque sed ante sed ligula hendrerit condimentum. Suspendisse rhoncus fringilla ipsum quis porta.</p>
-                                <ul class="facilities-list clearfix">
-                                    <li>
-                                        <i class="flaticon-road"></i>
-                                        <span>12000</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-transport-4"></i>
-                                        <span>Sport Car</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i>
-                                        <span>Diesel</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-car"></i>
-                                        <span>320Hp</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-camera"></i>
-                                        <span>Automatic</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-time"></i>
-                                        <span>2018</span>
-                                    </li>
-                                </ul>
-                            </div>
                             <a href="shop-cart.html" class="btn btn-theme">Add to Cart</a>
                         </div>
-                    </div>
+                    </div>    
                 </div>
-                <div class="car-box-5 p-box">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12 col-pad">
-                            <a href="car-details.html" class="car-img">
-                                <div class="listing-time opening">For Sale</div>
-                                <img src="assets/img/car-list-2.jpg" alt="car-list" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="detail ">
-                                <h3 class="title">
-                                    <a href="car-details.html">2016 Audi R8</a>
-                                </h3>
+                <?php
 
-                                <div class="listing-price">
-                                    <span class="olg"><del>$1250.00</del></span><span class="new">$1000.00</span>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel,dapibus tempus nulla. Donec vel nulla dui. Pellentesque sed ante sed ligula hendrerit condimentum. Suspendisse rhoncus fringilla ipsum quis porta.</p>
-                                <ul class="facilities-list clearfix">
-                                    <li>
-                                        <i class="flaticon-road"></i>
-                                        <span>12000</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-transport-4"></i>
-                                        <span>Sport Car</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i>
-                                        <span>Diesel</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-car"></i>
-                                        <span>320Hp</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-camera"></i>
-                                        <span>Automatic</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-time"></i>
-                                        <span>2018</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <a href="car-details.html" class="btn btn-theme">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="car-box-5 p-box" >
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12 col-pad">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="listing-time opening">For Sale</div>
-                                    <img src="assets/img/car-list-3.jpg" alt="car-list" class="img-fluid">
-                                </a>
-                                <div class="car-overlay">
-                                    <a href="car-details.html" class="overlay-link">
-                                        <i class="fa fa-link"></i>
-                                    </a>
-                                    <a class="overlay-link car-video" title="Test Title">
-                                        <i class="fa fa-video-camera"></i>
-                                    </a>
-                                    <div class="car-magnify-gallery">
-                                        <a href="assets/img/car-list-3.jpg" class="overlay-link">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                        <a href="assets/img/car-list-2.jpg" class="hidden"></a>
-                                        <a href="assets/img/car-list-1.jpg" class="hidden"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="detail ">
-                                <h3 class="title">
-                                    <a href="car-details.html">Audi-s5 2018</a>
-                                </h3>
-
-                                <div class="listing-price">
-                                    <span class="olg"><del>$1250.00</del></span><span class="new">$1000.00</span>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel,dapibus tempus nulla. Donec vel nulla dui. Pellentesque sed ante sed ligula hendrerit condimentum. Suspendisse rhoncus fringilla ipsum quis porta.</p>
-                                <ul class="facilities-list clearfix">
-                                    <li>
-                                        <i class="flaticon-road"></i>
-                                        <span>12000</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-transport-4"></i>
-                                        <span>Sport Car</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i>
-                                        <span>Diesel</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-car"></i>
-                                        <span>320Hp</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-camera"></i>
-                                        <span>Automatic</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-time"></i>
-                                        <span>2018</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <a href="car-details.html" class="btn btn-theme">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="car-box-5 p-box">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12 col-pad">
-                            <a href="car-details.html" class="car-img">
-                                <div class="listing-badges">
-                                    <span class="featured">Featured</span>
-                                </div>
-                                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
-                                        <li data-target="#carouselExampleIndicators2" data-slide-to="2"></li>
-                                    </ol>
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="assets/img/car-list-1.jpg" alt="car-list">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="assets/img/car-list-1.jpg" alt="car-list">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="assets/img/car-list-1.jpg" alt="car-list">
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="detail ">
-                                <h3 class="title">
-                                    <a href="car-details.html">Audi A7 TDI</a>
-                                </h3>
-
-                                <div class="listing-price">
-                                    <span class="olg"><del>$1250.00</del></span><span class="new">$1000.00</span>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel,dapibus tempus nulla. Donec vel nulla dui. Pellentesque sed ante sed ligula hendrerit condimentum. Suspendisse rhoncus fringilla ipsum quis porta.</p>
-                                <ul class="facilities-list clearfix">
-                                    <li>
-                                        <i class="flaticon-road"></i>
-                                        <span>12000</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-transport-4"></i>
-                                        <span>Sport Car</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i>
-                                        <span>Diesel</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-car"></i>
-                                        <span>320Hp</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-camera"></i>
-                                        <span>Automatic</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-time"></i>
-                                        <span>2018</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <a href="car-details.html" class="btn btn-theme">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="car-box-5 p-box" >
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12 col-pad">
-                            <a href="car-details.html" class="car-img">
-                                <div class="listing-time opening">For Sale</div>
-                                <img src="assets/img/car-list-2.jpg" alt="car-list" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="detail ">
-                                <h3 class="title">
-                                    <a href="car-details.html">2016 Audi R8</a>
-                                </h3>
-
-                                <div class="listing-price">
-                                    <span class="olg"><del>$1250.00</del></span><span class="new">$1000.00</span>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel,dapibus tempus nulla. Donec vel nulla dui. Pellentesque sed ante sed ligula hendrerit condimentum. Suspendisse rhoncus fringilla ipsum quis porta.</p>
-                                <ul class="facilities-list clearfix">
-                                    <li>
-                                        <i class="flaticon-road"></i>
-                                        <span>12000</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-transport-4"></i>
-                                        <span>Sport Car</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i>
-                                        <span>Diesel</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-car"></i>
-                                        <span>320Hp</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-camera"></i>
-                                        <span>Automatic</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-time"></i>
-                                        <span>2018</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <a href="car-details.html" class="btn btn-theme">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="car-box-5 p-box" >
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12 col-pad">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="listing-time opening">For Sale</div>
-                                    <img src="assets/img/car-list-3.jpg" alt="car-list" class="img-fluid">
-                                </a>
-                                <div class="car-overlay">
-                                    <a href="car-details.html" class="overlay-link">
-                                        <i class="fa fa-link"></i>
-                                    </a>
-                                    <a class="overlay-link car-video" title="Test Title">
-                                        <i class="fa fa-video-camera"></i>
-                                    </a>
-                                    <div class="car-magnify-gallery">
-                                        <a href="assets/img/car-list-3.jpg" class="overlay-link">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                        <a href="assets/img/car-list-2.jpg" class="hidden"></a>
-                                        <a href="assets/img/car-list-1.jpg" class="hidden"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="detail ">
-                                <h3 class="title">
-                                    <a href="car-details.html">Audi-s5 2018</a>
-                                </h3>
-
-                                <div class="listing-price">
-                                    <span class="olg"><del>$1250.00</del></span><span class="new">$1000.00</span>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel,dapibus tempus nulla. Donec vel nulla dui. Pellentesque sed ante sed ligula hendrerit condimentum. Suspendisse rhoncus fringilla ipsum quis porta.</p>
-                                <ul class="facilities-list clearfix">
-                                    <li>
-                                        <i class="flaticon-road"></i>
-                                        <span>12000</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-transport-4"></i>
-                                        <span>Sport Car</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i>
-                                        <span>Diesel</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-car"></i>
-                                        <span>320Hp</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-camera"></i>
-                                        <span>Automatic</span>
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-time"></i>
-                                        <span>2018</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <a href="car-details.html" class="btn btn-theme">Details</a>
-                        </div>
-                    </div>
-                </div>
+                        $carid = $_SESSION['carid'];
+                    }
+                    
+                    
+                ?>
                 <div class="pagination-box">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">

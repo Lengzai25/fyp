@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/about-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:29 GMT -->
 <head>
     <!-- Google Tag Manager -->
@@ -50,7 +49,7 @@
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light rounded">
-                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
+                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
                         <img src="assets/img/logos/logo.png" alt="logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +58,7 @@
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="register.php" id="navbarDropdownMenuLink">
+                                <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
                                     Home
                                 </a>
                             </li>
@@ -93,11 +92,11 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Account
+                                    <?php echo $cust_rec["cust_name"] ?>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="login.php">Login</a>
-                                    <a class="dropdown-item" href="register.php">Register</a>
+                                    <a class="dropdown-item" href="profile.php">Profile</a>
+                                    <a class="dropdown-item" href="logout.php">Log Out</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
