@@ -253,18 +253,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
             <div class="col-lg-5 col-md-12 wow fadeInLeft delay-04s">
                 <div class="text">
                     <h1><span>Why</span> Choose Us?</h1>
-                    <p>You can buy from CARWOW to enjoy a trusted and easy end-to-end car buying experience. Firstly, we inspect all 
-                        our cars at 175 inspection points to ensure they're roadworthy and free of major accidents, fire, flood 
-                        damage and mileage tampering. When it comes to the buying process, it is worry-free as we offer end-to-end 
-                        assistance every step of the way including help with your car booking, paperwork, loan application, and even 
-                        doorstep delivery. You are welcome to test drive our cars at your convenience as we are open 7 days a week. 
-                        All the information about our cars is clearly displayed in our inspection report on our website so you can 
-                        know the exact car condition. You can even view the car through the high resolution 360-degree view of the 
-                        car's interior and exterior. The listed price is the final price, without any hidden fees, so you know exactly 
-                        how much you are paying for the car. With one of the widest and largest selections of cars in Malaysia in our 
-                        inventory, there's surely one that fits your needs. Vision To create the most trusted vehicle ownership 
-                        ecosystem powered by technology and data Mission To provide our customers with peace of mind through the
-                        entire lifecycle of their pre-owned vehicle ownership experience </p>
+                    <p>"At CARWOW, we pride ourselves on offering quality, inspected vehicles at competitive prices. With a diverse selection of cars, transparent pricing, and flexible financing options, we make finding your perfect vehicle easy and stress-free. Our friendly and knowledgeable team is committed to providing exceptional customer service and ensuring your satisfaction every step of the way. Choose us for a hassle-free car-buying experience you can trust."</p>
                     <a href="car-details.html" class="btn btn-lg btn-round btn-theme">View Details</a>
                 </div>
             </div>

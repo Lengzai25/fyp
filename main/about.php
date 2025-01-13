@@ -1,6 +1,21 @@
+<?php
+
+include "dataconnection.php";
+session_start();
+
+if (isset($_SESSION["sess_id"]))
+{
+    $sess_id = $_SESSION["sess_id"]; 
+
+    // find from the admintbl the record related to this Primary key
+    $get_cust = mysqli_query($conn, "select * from customer where cust_id = '$sess_id'");
+
+    // Retrieve the record
+    $cust_rec = mysqli_fetch_assoc($get_cust);
+}
+?>
+
 <!DOCTYPE html>
-
-
 <html lang="zxx">
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/about-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:29 GMT -->
 <head>
@@ -50,19 +65,51 @@
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light rounded">
-                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
-                        <img src="assets/img/logos/logo.png" alt="logo">
-                    </a>
+                    <?php
+                        if (isset($_SESSION["sess_id"])) 
+                        {
+                            ?>
+                            <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
+                                <img src="assets/img/logos/logo.png" alt="logo">
+                            </a>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
+                                <img src="assets/img/logos/logo.png" alt="logo">
+                            </a>
+                            <?php
+                        }
+                    ?>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="fa fa-bars"></span>
                     </button>
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
-                                    Home
-                                </a>
-                            </li>
+                            <?php
+                                if (isset($_SESSION["sess_id"])) 
+                                {
+                                    ?>
+                                    <li class="nav-item dropdown active">
+                                        <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                        <li class="nav-item dropdown active">
+                                        <a class="nav-link dropdown-toggle" href="index.php" id="navbarDropdownMenuLink">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                            ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="car-list.php" id="">
                                     Vehicle
@@ -92,13 +139,35 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <?php echo $cust_rec["cust_name"] ?>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="profile.php">Profile</a>
-                                    <a class="dropdown-item" href="logout.php">Log Out</a>
-                                </div>
+
+                            <?php
+                                if (isset($_SESSION["sess_id"])) 
+                                {
+                                    ?>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo $cust_rec["cust_name"]; ?>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        <a class="dropdown-item" href="profile.php">Profile</a>
+                                        <a class="dropdown-item" href="logout.php">Log Out</a>
+                                    </div>
+                                        <?php
+                                } 
+                                else 
+                                {
+                                    // If the session does not exist
+                                    ?>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Account
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        <a class="dropdown-item" href="login.php">Login</a>
+                                        <a class="dropdown-item" href="register.php">Register</a>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                
                             </li>
                             <li class="nav-item dropdown">
                                 <a href="#full-page-search" class="nav-link">
@@ -159,34 +228,35 @@
                 <div class="about-text">
                     <h3>Welcome to CARWOW</h3>
                     <p>CARWOW is Southeast Asia’s largest integrated car e-commerce platform.
-With presence across Malaysia, Indonesia, Thailand and Singapore,
-we aim to digitalize the region’s used car industry by reshaping and
-elevating the car buying and selling experience.
+                        With presence across Malaysia, Indonesia, Thailand and Singapore,
+                        we aim to digitalize the region’s used car industry by reshaping and
+                        elevating the car buying and selling experience.
 
-CARMART provides end-to-end solutions to consumers and used car dealers,
-from car inspection to ownership transfer to financing, promising a service that is
-trusted, convenient and efficient.</p>
+                        CARMART provides end-to-end solutions to consumers and used car dealers,
+                        from car inspection to ownership transfer to financing, promising a service that is
+                        trusted, convenient and efficient.
+                    </p>
 					<h3>Why Choose Us</h3>
 					<p>You can buy from CARWOW to enjoy a trusted and easy end-to-end car buying experience.
 
-Firstly, we inspect all our cars at 175 inspection points to ensure they're roadworthy
-and free of major accidents, fire, flood damage and mileage tampering. When it comes
-to the buying process, it is worry-free as we offer end-to-end assistance every step
-of the way including help with your car booking, paperwork, loan application, and even doorstep delivery.
+                        Firstly, we inspect all our cars at 175 inspection points to ensure they're roadworthy
+                        and free of major accidents, fire, flood damage and mileage tampering. When it comes
+                        to the buying process, it is worry-free as we offer end-to-end assistance every step
+                        of the way including help with your car booking, paperwork, loan application, and even doorstep delivery.
 
-You are welcome to test drive our cars at your convenience as we are open 7 days a week.
-All the information about our cars is clearly displayed in our inspection report on our website so
-you can know the exact car condition. You can even view the car through the high resolution
-360-degree view of the car's interior and exterior.
+                        You are welcome to test drive our cars at your convenience as we are open 7 days a week.
+                        All the information about our cars is clearly displayed in our inspection report on our website so
+                        you can know the exact car condition. You can even view the car through the high resolution
+                        360-degree view of the car's interior and exterior.
 
-The listed price is the final price, without any hidden fees, so you know exactly how much you
-are paying for the car. With one of the widest and largest selections of cars in Malaysia in our inventory,
-there's surely one that fits your needs.
+                        The listed price is the final price, without any hidden fees, so you know exactly how much you
+                        are paying for the car. With one of the widest and largest selections of cars in Malaysia in our inventory,
+                        there's surely one that fits your needs.
 
-Vision
-To create the most trusted vehicle ownership ecosystem powered by technology and data
-Mission
-To provide our customers with peace of mind through the entire lifecycle of their pre-owned vehicle ownership experience
+                        Vision
+                        To create the most trusted vehicle ownership ecosystem powered by technology and data
+                        Mission
+                        To provide our customers with peace of mind through the entire lifecycle of their pre-owned vehicle ownership experience
 					</p>
                 </div>
             </div>
