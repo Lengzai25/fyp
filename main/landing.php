@@ -64,7 +64,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light rounded">
-                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
+                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
                         <img src="assets/img/logos/logo.png" alt="logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="register.php" id="navbarDropdownMenuLink">
+                                <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
                                     Home
                                 </a>
                             </li>
@@ -110,8 +110,8 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                                     <?php echo $cust_rec["cust_name"] ?>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="#">Profile</a>
-                                    <a class="dropdown-item" href="#">Log Out</a>
+                                    <a class="dropdown-item" href="profile.php">Profile</a>
+                                    <a class="dropdown-item" href="logout.php">Log Out</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -213,18 +213,6 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                         </div>
                         <div class="col-6 col-lg-3 col-md-3">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="category">
-                                    <option>Select Category</option>
-                                    <option>Pickup Truck</option>
-                                    <option>Minivan</option>
-                                    <option>Sports Car</option>
-                                    <option>Van</option>
-                                    <option>Wagon</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
                                 <select class="selectpicker search-fields" name="Year">
                                     <option>Select Year</option>
                                     <option>2012</option>
@@ -239,41 +227,8 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                         </div>
                         <div class="col-6 col-lg-3 col-md-3">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="location">
-                                    <option>Select Location</option>
-                                    <option>United States</option>
-                                    <option>United Kingdom</option>
-                                    <option>American Samoa</option>
-                                    <option>Belgium/option>
-                                    <option>Canada</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="bathrooms">
-                                    <option>Select Transmission</option>
-                                    <option>Automatic</option>
-                                    <option>Manual</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="body">
-                                    <option>Select Body</option>
-                                    <option>Sedan</option>
-                                    <option>Minivan</option>
-                                    <option>Truck</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
                                 <div class="range-slider">
-                                    <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                    <div data-min="0" data-max="150000" data-unit="MYR" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
@@ -298,8 +253,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
             <div class="col-lg-5 col-md-12 wow fadeInLeft delay-04s">
                 <div class="text">
                     <h1><span>Why</span> Choose Us?</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
+                    <p>"At CARWOW, we pride ourselves on offering quality, inspected vehicles at competitive prices. With a diverse selection of cars, transparent pricing, and flexible financing options, we make finding your perfect vehicle easy and stress-free. Our friendly and knowledgeable team is committed to providing exceptional customer service and ensuring your satisfaction every step of the way. Choose us for a hassle-free car-buying experience you can trust."</p>
                     <a href="car-details.html" class="btn btn-lg btn-round btn-theme">View Details</a>
                 </div>
             </div>

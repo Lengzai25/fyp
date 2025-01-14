@@ -1,13 +1,37 @@
 <?php
 
 include "dataconnection.php";
+session_start();
+
+if (isset($_SESSION["sess_id"]))
+{
+    $sess_id = $_SESSION["sess_id"]; 
+
+    // find from the admintbl the record related to this Primary key
+    $get_cust = mysqli_query($conn, "select * from customer where cust_id = '$sess_id'");
+
+    // Retrieve the record
+    $cust_rec = mysqli_fetch_assoc($get_cust);
+}
+
+// get the session that keeps the Primary key
+
+if (isset($_GET["carid"])) 
+{
+    $car_id = $_GET["carid"];
+}
+
+// find from the admintbl the record related to this Primary key
+$get_car = mysqli_query($conn, "select * from car where car_id = '$car_id'");
+
+// Retrieve the record
+$car_rec = mysqli_fetch_assoc($get_car);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/car-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:28 GMT -->
 <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -55,19 +79,51 @@ include "dataconnection.php";
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light rounded">
-                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
-                        <img src="assets/img/logos/logo.png" alt="logo">
-                    </a>
+                    <?php
+                        if (isset($_SESSION["sess_id"])) 
+                        {
+                            ?>
+                            <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
+                                <img src="assets/img/logos/logo.png" alt="logo">
+                            </a>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
+                                <img src="assets/img/logos/logo.png" alt="logo">
+                            </a>
+                            <?php
+                        }
+                    ?>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="fa fa-bars"></span>
                     </button>
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="register.php" id="navbarDropdownMenuLink">
-                                    Home
-                                </a>
-                            </li>
+                            <?php
+                                if (isset($_SESSION["sess_id"])) 
+                                {
+                                    ?>
+                                    <li class="nav-item dropdown active">
+                                        <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                        <li class="nav-item dropdown active">
+                                        <a class="nav-link dropdown-toggle" href="index.php" id="navbarDropdownMenuLink">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                            ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="car-list.php" id="">
                                     Vehicle
@@ -97,13 +153,35 @@ include "dataconnection.php";
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Account
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="login.php">Login</a>
-                                    <a class="dropdown-item" href="register.php">Register</a>
-                                </div>
+
+                            <?php
+                                if (isset($_SESSION["sess_id"])) 
+                                {
+                                    ?>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo $cust_rec["cust_name"]; ?>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        <a class="dropdown-item" href="profile.php">Profile</a>
+                                        <a class="dropdown-item" href="logout.php">Log Out</a>
+                                    </div>
+                                        <?php
+                                } 
+                                else 
+                                {
+                                    // If the session does not exist
+                                    ?>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Account
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        <a class="dropdown-item" href="login.php">Login</a>
+                                        <a class="dropdown-item" href="register.php">Register</a>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                
                             </li>
                             <li class="nav-item dropdown">
                                 <a href="#full-page-search" class="nav-link">
@@ -126,28 +204,6 @@ include "dataconnection.php";
             <h1>Car Detail</h1>
         </div>
     </div>
-    <div class="page-info">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="breadcrumb-area">
-                        <ul>
-                            <li><a href="index.php">Index</a></li>
-                            <li><span>/</span>Car Detail</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="contact-info">
-                        <ul>
-                            <li><i class="fa fa-phone"></i> +60185754753 / +60197784913</li>
-                            <li><a href="contact.php" class="btn btn-md btn-theme">Contact us</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <!-- Sub banner end -->
 
@@ -160,46 +216,46 @@ include "dataconnection.php";
                     <!-- main slider carousel items -->
                     <div class="carousel-inner">
                         <div class="active item carousel-item" data-slide-number="0">
-                            <img src="assets/img/car-2.jpg" class="img-fluid" alt="car-Slider">
+                            <img src="assets/img/<?php echo $car_rec["car_pic"];?>" style="height:500px; width:800px" class="img-fluid" alt="car-Slider">
                         </div>
                         <div class="item carousel-item" data-slide-number="1">
-                            <img src="assets/img/car-6.jpg" class="img-fluid" alt="car-Slider">
+                            <img src="assets/img/<?php echo $car_rec["car_pic2"];?>" style="height:500px; width:800px" class="img-fluid" alt="car-Slider">
                         </div>
                         <div class="item carousel-item" data-slide-number="2">
-                            <img src="assets/img/car-1.jpg" class="img-fluid" alt="car-Slider">
+                            <img src="assets/img/<?php echo $car_rec["car_pic3"];?>" style="height:500px; width:800px" class="img-fluid" alt="car-Slider">
                         </div>
                         <div class="item carousel-item" data-slide-number="4">
-                            <img src="assets/img/car-4.jpg" class="img-fluid" alt="car-Slider">
+                            <img src="assets/img/<?php echo $car_rec["car_pic4"];?>" style="height:500px; width:800px" class="img-fluid" alt="car-Slider">
                         </div>
                         <div class="item carousel-item" data-slide-number="5">
-                            <img src="assets/img/car-5.jpg" class="img-fluid" alt="car-Slider">
+                            <img src="assets/img/<?php echo $car_rec["car_pic5"];?>" style="height:500px; width:800px" class="img-fluid" alt="car-Slider">
                         </div>
                     </div>
                     <!-- main slider carousel nav controls -->
                     <ul class="carousel-indicators smail-car list-inline nav nav-justified">
                         <li class="list-inline-item active">
                             <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#carDetailsSlider">
-                                <img src="assets/img/car-2.jpg" class="img-fluid" alt="sub-car">
+                                <img src="assets/img/<?php echo $car_rec["car_pic"];?>" style="height:98px; width:800px"class="img-fluid" alt="sub-car">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
-                                <img src="assets/img/car-6.jpg" class="img-fluid" alt="sub-car">
+                                <img src="assets/img/<?php echo $car_rec["car_pic2"];?>" style="height:98px; width:800px" class="img-fluid" alt="sub-car">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-2" data-slide-to="2" data-target="#carDetailsSlider">
-                                <img src="assets/img/car-1.jpg" class="img-fluid" alt="sub-car">
+                                <img src="assets/img/<?php echo $car_rec["car_pic3"];?>" style="height:98px; width:800px" class="img-fluid" alt="sub-car">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-3" data-slide-to="3" data-target="#carDetailsSlider">
-                                <img src="assets/img/car-4.jpg" class="img-fluid" alt="sub-car">
+                                <img src="assets/img/<?php echo $car_rec["car_pic4"];?>" style="height:98px; width:800px" class="img-fluid" alt="sub-car">
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a id="carousel-selector-4" data-slide-to="4" data-target="#carDetailsSlider">
-                                <img src="assets/img/car-5.jpg" class="img-fluid" alt="sub-car">
+                                <img src="assets/img/<?php echo $car_rec["car_pic5"];?>" style="height:98px; width:800px" class="img-fluid" alt="sub-car">
                             </a>
                         </li>
                     </ul>
@@ -207,413 +263,23 @@ include "dataconnection.php";
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="pull-left">
-                                    <h3>Lexus ct 2018</h3>
-                                    <p><i class="fa fa-map-marker"></i> 123 Kathal St. Tampa City,</p>
+                                    <h3><?php echo $car_rec["car_name"]; ?></h3>
                                 </div>
                                 <div class="pull-right">
-                                    <h3><span class="text-right">$420,00</span></h3>
-                                    <h5>Per Night</h5>
+                                    <h3><span class="text-right">RM <?php echo $car_rec["car_price"]; ?></span></h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Car meta start -->
-                <div class="car-meta mb-60">
-                    <ul>
-                        <li>
-                            <i class="flaticon-road"></i>
-                            <p>12000</p>
-                        </li>
-                        <li>
-                            <i class="flaticon-transport-4"></i>
-                            <p>Sport Car</p>
-                        </li>
-                        <li>
-                            <i class="flaticon-petrol"></i>
-                            <p>Diesel</p>
-                        </li>
-                        <li>
-                            <i class="flaticon-camera"></i>
-                            <p>Automatic</p>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Specifications start -->
-                <div >
-                    <h5 class="sidebar-title">Specifications</h5>
-                    <ul>
-                        <li>
-                            <span>Brand</span>Toyota
-                        </li>
-                        <li>
-                            <span>Model</span>Maxima
-                        </li>
-                        <li>
-                            <span>Body Style</span>Convertible
-                        </li>
-                        <li>
-                            <span>Year</span>2018
-                        </li>
-                        <li>
-                            <span>Mileage</span>37,000 mi
-                        </li>
-                        <li>
-                            <span>Color</span>Dark Grey
-                        </li>
-                        <li>
-                            <span>Engine</span>3.4L Mid-Engine V6
-                        </li>
-                    </ul>
-                </div>
+                
                 <!-- Tabbing box start -->
                 <div class="tabbing tabbing-box mb-60">
-                    <ul class="nav nav-tabs" id="carTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active show" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="false">Vehicle Overview</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">Features & Options</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="three" aria-selected="true">Video</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="4-tab" data-toggle="tab" href="#4" role="tab" aria-controls="4" aria-selected="true">Location</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="5-tab" data-toggle="tab" href="#5" role="tab" aria-controls="5" aria-selected="true">Contact</a>
-                        </li>
-                    </ul>
                     <div class="tab-content" id="carTabContent">
                         <div class="tab-pane fade active show" id="one" role="tabpanel" aria-labelledby="one-tab">
                             <h3 class="heading">Car Description</h3>
-                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel,dapibus tempus nulla. Donec vel nulla dui. Pellentesque sed ante sed ligula hendrerit condimentum.
-                            Suspendisse rhoncus fringilla ipsum quis porta. Morbi tincidunt viverra pharetra.</p>
-                            <p>Vestibulum vel mauris et odio lobortis laoreet eget eu magna. Proin mauris erat, luctus at nulla ut, lobortis mattis magna. Morbi a arcu lacus. Maecenas tristique velit vitae nisi consectetur, in mattis diam sodales. Mauris sagittis sem mattis justo bibendum, a eleifend dolor facilisis. Mauris
-                                nec pharetra tortor, ac aliquam felis. Nunc pretium erat sed quam consectetur fringilla.</p>
-                            <p>Aliquam ultricies nunc porta metus interdum mollis. Donec porttitor libero augue, vehicula tincidunt lectus placerat a. Sed tincidunt dolor non sem dictum dignissim. Nulla vulputate orci felis, ac ornare purus ultricies a. Fusce euismod magna orci, sit amet aliquam turpis dignissim ac. In at
-                                tortor at ligula pharetra sollicitudin. Sed tincidunt, purus eget laoreet elementum, felis est pharetra ante, tincidunt feugiat libero enim sed risus.</p>
-                            <p>Sed at leo sit amet mi bibendum aliquam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent cursus varius odio, non faucibus dui. Nunc vehicula lectus sed velit suscipit aliquam vitae eu ipsum. adipiscing elit.</p>
-                        </div>
-                        <div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="two-tab">
-                            <div class="features-opions features-opions-2 mb-60">
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-6">
-                                        <ul>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Adaptive Cruise Control
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Airbags
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Air Conditioning
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Alarm System
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Anti-theft Protection
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Audio Interface
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Automatic Climate Control
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Automatic Headlights
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Auto Start/Stop
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Bi-Xenon Headlights
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Audio Interface
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Bluetooth Handset
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                BOSE Surround Sound
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Burmester Surround Sound
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                CD/DVD Autochanger
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6">
-                                        <ul>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                CDR Audio
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Cruise Control
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Direct Fuel Injection
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Electric Parking Brake
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Floor Mats
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Garage Door Opener
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Leather Package
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Locking Rear Differential
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Luggage Compartments
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Manual Transmission
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Navigation Module
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Online Services
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                ParkAssist
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Porsche Communication
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                CD/DVD Autochanger
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6">
-                                        <ul>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Power Steering
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Reversing Camera
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Roll-over Protection
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Seat Heating
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Seat Ventilation
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Sound Package Plus
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Sport Chrono Package
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Steering Wheel Heating
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Tire Pressure Monitoring
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Universal Audio Interface
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Voice Control System
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-check"></i>
-                                                Wind Deflector
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade " id="three" role="tabpanel" aria-labelledby="three-tab">
-                            <div class="car-video">
-                                <h3 class="heading">Car Video</h3>
-                                <iframe src="https://www.youtube.com/embed/m5_AKjDdqaU"></iframe>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade " id="4" role="tabpanel" aria-labelledby="4-tab">
-                            <div class="section location">
-                                <h3 class="heading">Car Location</h3>
-                                <div class="map">
-                                    <div id="contactMap" class="contact-map"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade " id="5" role="tabpanel" aria-labelledby="5-tab">
-                            <div class="section location">
-                                <h3 class="heading">Contact Us</h3>
-                                <div class="contact-1">
-                                    <form action="#" method="GET" enctype="multipart/form-data">
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="form-group name">
-                                                            <input type="text" name="name" class="form-control" placeholder="Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="form-group email">
-                                                            <input type="email" name="email" class="form-control" placeholder="Email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="form-group subject">
-                                                            <input type="text" name="subject" class="form-control" placeholder="Subject">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="form-group number">
-                                                            <input type="text" name="phone" class="form-control" placeholder="Number">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="form-group message">
-                                                            <textarea class="form-control" name="message" placeholder="Write message"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="send-btn">
-                                                            <button type="submit" class="btn btn-color btn-md btn-message">Send Message</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Features opions start -->
-                <div class="features-opions mb-60">
-                    <h3 class="heading">Features</h3>
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6">
-                            <ul>
-                                <li>
-                                    <i class="flaticon-vehicle"></i>
-                                    Top Speed: 260
-                                </li>
-                                <li>
-                                    <i class="flaticon-petrol"></i>
-                                    Fuel Type: Diesel
-                                </li>
-                                <li>
-                                    <i class="flaticon-road"></i>
-                                    Mileage: 40,200 KM
-                                </li>
-                                <li>
-                                    <i class="flaticon-car"></i>
-                                    Engine: 2901
-                                </li>
-                                <li>
-                                    <i class="flaticon-car-1"></i>
-                                    Gear: 5
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <ul>
-                                <li>
-                                    <i class="flaticon-transport-4"></i>
-                                    Body Style: Sedan
-                                </li>
-                                <li>
-                                    <i class="flaticon-time"></i>
-                                    Year:2018
-                                </li>
-                                <li>
-                                    <i class="flaticon-paint"></i>
-                                    Interior Color: White
-                                </li>
-                                <li>
-                                    <i class="flaticon-transport-2"></i>
-                                    Horse Power: 310
-                                </li>
-                                <li>
-                                    <i class="flaticon-repair"></i>
-                                    Doors: 4
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <ul>
-                                <li>
-                                    <i class="flaticon-location"></i>
-                                    Location: Florisa, USA
-                                </li>
-                                <li>
-                                    <i class="flaticon-car-2"></i>
-                                    Free Services
-                                </li>
-                                <li>
-                                    <i class="flaticon-paint"></i>
-                                    Interior Color: Black
-                                </li>
-                                <li>
-                                    <i class="flaticon-technology"></i>
-                                    Electric Range
-                                </li>
-                                <li>
-                                    <i class="flaticon-transport-3"></i>
-                                    Oll Changes
-                                </li>
-                            </ul>
+                           <p><?php echo $car_rec["car_des"];?></p>
                         </div>
                     </div>
                 </div>
@@ -625,257 +291,29 @@ include "dataconnection.php";
                         <h5 class="sidebar-title">Specifications</h5>
                         <ul>
                         <li>
-                            <span>Brand</span>Toyota
+                            <span>Brand</span><?php echo $car_rec["car_brand"];?>
                         </li>
                         <li>
-                            <span>Model</span>Maxima
+                            <span>Model</span><?php echo $car_rec["car_name"];?>
                         </li>
                         <li>
-                            <span>Body Style</span>Convertible
+                            <span>Year</span><?php echo $car_rec["car_year"];?>
                         </li>
                         <li>
-                            <span>Year</span>2018
+                            <span>Mileage</span><?php echo $car_rec["car_mil"];?>
                         </li>
                         <li>
-                            <span>Mileage</span>37,000 mi
+                            <span>Color</span><?php echo $car_rec["car_col"];?>
                         </li>
                         <li>
-                            <span>Color</span>Dark Grey
-                        </li>
-                        <li>
-                            <span>Engine</span>3.4L Mid-Engine V6
+                            <span>Engine</span><?php echo $car_rec["car_eng"];?>
                         </li>
                     </ul>
                     </div>
-                    <!-- Social list start -->
-                    <div class="social-list widget clearfix">
-                        <h5 class="sidebar-title">Follow Us</h5>
-                        <ul>
-                            <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
-                            <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- Helping center start -->
-                    <div class="helping-center widget clearfix">
-                        <div class="media">
-                            <i class="fa fa-mobile"></i>
-                            <div class="media-body  align-self-center">
-                                <h5 class="mt-0">Helping Center</h5>
-                                <h4><a href="tel:+0477-85x6-552">+XXXX XXXX XXX</a></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Financing calculator  start -->
-                    <div class="contact-1 financing-calculator widget">
-                        <h5 class="sidebar-title">Mortgage Calculator</h5>
-                        <form action="#" method="GET" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label class="form-label">Car Price</label>
-                                <input type="text" class="form-control" placeholder="$36.400">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Interest Rate (%)</label>
-                                <input type="text" class="form-control" placeholder="10%">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Period In Months</label>
-                                <input type="text" class="form-control" placeholder="10 Months">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Down PaymenT</label>
-                                <input type="text" class="form-control" placeholder="$21,300">
-                            </div>
-                            <br>
-                            <div class="form-group mb-0">
-                                <button type="submit" class="btn btn-color btn-md btn-message btn-block">Cauculate</button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="related-cars">
-        <div class="container">
-            <h3 class="heading">Related Cars</h3>
-            <div class="slick-slider-area">
-                <div class="row slick-carousel" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                    <div class="slick-slide-item">
-                        <div class="car-box">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="listing-badges">
-                                        <span class="featured">Featured</span>
-                                    </div>
-                                    <div id="carouselExampleIndicators4" class="carousel slide" data-ride="carousel">
-                                        <ol class="carousel-indicators">
-                                            <li data-target="#carouselExampleIndicators4" data-slide-to="0" class="active"></li>
-                                            <li data-target="#carouselExampleIndicators4" data-slide-to="1"></li>
-                                            <li data-target="#carouselExampleIndicators4" data-slide-to="2"></li>
-                                        </ol>
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <img class="d-block w-100" src="assets/img/car-1.jpg" alt="car">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="assets/img/car-1.jpg" alt="car">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="assets/img/car-1.jpg" alt="car">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="detail">
-                                <div class="heading clearfix">
-                                    <div class="title pull-left">
-                                        <a href="car-details.html">Audi A7 TDI</a>
-                                    </div>
-                                    <div class="price pull-right">
-                                        $178,000
-                                    </div>
-                                </div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</p>
-                                <ul class="facilities-list clearfix">
-                                    <li class="bordered-right">
-                                        <i class="flaticon-transport-4"></i> Sport
-                                    </li>
-                                    <li class="bordered-right">
-                                        <i class="flaticon-road"></i> 17,000
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i> Diesel
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slick-slide-item">
-                        <div class="car-box">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <img src="assets/img/car-6.jpg" alt="car" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="detail">
-                                <div class="heading clearfix">
-                                    <div class="title pull-left">
-                                        <a href="car-details.html">2016 Audi R8</a>
-                                    </div>
-                                    <div class="price pull-right">
-                                        $178,000
-                                    </div>
-                                </div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</p>
-                                <ul class="facilities-list clearfix">
-                                    <li class="bordered-right">
-                                        <i class="flaticon-transport-4"></i> Sport
-                                    </li>
-                                    <li class="bordered-right">
-                                        <i class="flaticon-road"></i> 17,000
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i> Diesel
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slick-slide-item">
-                        <div class="car-box">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <img src="assets/img/car-4.jpg" alt="car" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="detail">
-                                <div class="heading clearfix">
-                                    <div class="title pull-left">
-                                        <a href="car-details.html">2016 Audi R8</a>
-                                    </div>
-                                    <div class="price pull-right">
-                                        $178,000
-                                    </div>
-                                </div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</p>
-                                <ul class="facilities-list clearfix">
-                                    <li class="bordered-right">
-                                        <i class="flaticon-transport-4"></i> Sport
-                                    </li>
-                                    <li class="bordered-right">
-                                        <i class="flaticon-road"></i> 17,000
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i> Diesel
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slick-slide-item">
-                        <div class="car-box">
-                            <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
-                                    <div class="listing-time opening">For Sale</div>
-                                    <img src="assets/img/car-5.jpg" alt="car" class="img-fluid">
-                                </a>
-                                <div class="car-overlay">
-                                    <a href="car-details.html" class="overlay-link">
-                                        <i class="fa fa-link"></i>
-                                    </a>
-                                    <a class="overlay-link car-video" title="Test Title">
-                                        <i class="fa fa-video-camera"></i>
-                                    </a>
-                                    <div class="car-magnify-gallery">
-                                        <a href="assets/img/car-5.jpg" class="overlay-link">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                        <a href="assets/img/car-1.jpg" class="hidden"></a>
-                                        <a href="assets/img/car-3.jpg" class="hidden"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <div class="heading clearfix">
-                                    <div class="title pull-left">
-                                        <a href="car-details.html">Audi A1 Sportback</a>
-                                    </div>
-                                    <div class="price pull-right">
-                                        $178,000
-                                    </div>
-                                </div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the</p>
-                                <ul class="facilities-list clearfix">
-                                    <li class="bordered-right">
-                                        <i class="flaticon-transport-4"></i> Sport
-                                    </li>
-                                    <li class="bordered-right">
-                                        <i class="flaticon-road"></i> 17,000
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-petrol"></i> Diesel
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-prev slick-arrow-buton">
-                    <i class="fa fa-angle-left"></i>
-                </div>
-                <div class="slick-next slick-arrow-buton">
-                    <i class="fa fa-angle-right"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Car details page end -->
 
 <!-- Footer start -->
 <footer class="footer">
@@ -1092,7 +530,6 @@ include "dataconnection.php";
 
 <!-- External JS libraries -->
 <script src="assets/js/jquery-2.2.0.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.selectBox.js"></script>
 <script src="assets/js/rangeslider.js"></script>

@@ -1,7 +1,23 @@
+<?php
+
+include "dataconnection.php";
+session_start();
+
+if (isset($_SESSION["sess_id"]))
+{
+    $sess_id = $_SESSION["sess_id"]; 
+
+    // find from the admintbl the record related to this Primary key
+    $get_cust = mysqli_query($conn, "select * from customer where cust_id = '$sess_id'");
+
+    // Retrieve the record
+    $cust_rec = mysqli_fetch_assoc($get_cust);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
-
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/contact-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:34 GMT -->
+<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/about-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:29 GMT -->
 <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -49,19 +65,51 @@
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light rounded">
-                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
-                        <img src="assets/img/logos/logo.png" alt="logo">
-                    </a>
+                    <?php
+                        if (isset($_SESSION["sess_id"])) 
+                        {
+                            ?>
+                            <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
+                                <img src="assets/img/logos/logo.png" alt="logo">
+                            </a>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
+                                <img src="assets/img/logos/logo.png" alt="logo">
+                            </a>
+                            <?php
+                        }
+                    ?>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="fa fa-bars"></span>
                     </button>
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="register.php" id="navbarDropdownMenuLink">
-                                    Home
-                                </a>
-                            </li>
+                            <?php
+                                if (isset($_SESSION["sess_id"])) 
+                                {
+                                    ?>
+                                    <li class="nav-item dropdown active">
+                                        <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                        <li class="nav-item dropdown active">
+                                        <a class="nav-link dropdown-toggle" href="index.php" id="navbarDropdownMenuLink">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                            ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="car-list.php" id="">
                                     Vehicle
@@ -91,13 +139,35 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Account
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="login.php">Login</a>
-                                    <a class="dropdown-item" href="register.php">Register</a>
-                                </div>
+
+                            <?php
+                                if (isset($_SESSION["sess_id"])) 
+                                {
+                                    ?>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo $cust_rec["cust_name"]; ?>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        <a class="dropdown-item" href="profile.php">Profile</a>
+                                        <a class="dropdown-item" href="logout.php">Log Out</a>
+                                    </div>
+                                        <?php
+                                } 
+                                else 
+                                {
+                                    // If the session does not exist
+                                    ?>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Account
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        <a class="dropdown-item" href="login.php">Login</a>
+                                        <a class="dropdown-item" href="register.php">Register</a>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                
                             </li>
                             <li class="nav-item dropdown">
                                 <a href="#full-page-search" class="nav-link">

@@ -82,7 +82,7 @@ include "dataconnection.php";
                     <!-- Footer -->
                     <div class="footer">
                     <span>
-                        Don't have an account? <a href="register.html">Register here</a>
+                        Don't have an account? <a href="register.php">Register here</a>
                     </span>
                     </div>
                 </div>
