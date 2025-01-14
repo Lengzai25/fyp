@@ -414,22 +414,7 @@
                     </li>
 
                     <li class="side-nav-title">App</li>
-            
-                    <li class="side-nav-item">
-                        <a href="apps-calendar.html" class="side-nav-link">
-                            <i class="ri-calendar-line"></i>
-                            <span> Calendar</span>
-
-                        </a>
-                    </li>
-           
-                    <li class="side-nav-item">
-                        <a href="apps-kanban-board.html" class="side-nav-link">
-                            <i class="ri-artboard-line"></i>
-                            <span> Kanban Board</span>
-                        </a>
-                    </li>
-
+                    tgtgg
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPagesinvoice" aria-expanded="false" aria-controls="sidebarPagesinvoice" class="side-nav-link">
                             <i class="ri-article-line"></i>
@@ -652,28 +637,6 @@
                                     <a class="side-nav-link" href="ui-utilities.html">Utilities</a>
                                 </li>
 
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
-                            <i class="ri-compass-3-line"></i>
-                            <span> Extended UI </span>
-                            <span class="menu-arrow"></span>
-
-                        </a>
-                        <div class="collapse" id="sidebarExtendedUI">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="extended-portlets.html">Portlets</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="extended-scrollbar.html">Scrollbar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="extended-range-slider.html">Range Slider</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
