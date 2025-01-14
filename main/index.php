@@ -16,7 +16,7 @@ include "dataconnection.php";
         '../../../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TAGID');</script>
     <!-- End Google Tag Manager -->
-    <title>WAIN - Car Dealer HTML Template</title>
+    <title>CARWOW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
@@ -32,7 +32,7 @@ include "dataconnection.php";
     <link type="text/css" rel="stylesheet" href="assets/fonts/flaticon/font/flaticon.css">
 
     <!-- Favicon icon -->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" >
+    <link rel="shortcut icon" href="assets\img\logos\photo_logo.jpg" type="image/x-icon" >
 
     <!-- Google fonts -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
@@ -129,47 +129,12 @@ include "dataconnection.php";
                     <div class="carousel-content container">
                         <div class="text-left max-w">
                             <h3 data-animation="animated fadeInDown delay-05s">We love make things <br/>amazing and simple</h3>
-                            <a data-animation="animated fadeInUp delay-10s" href="#" class="btn btn-lg btn-round btn-theme">Get Started Now</a>
-                            <a data-animation="animated fadeInUp delay-12s" href="#" class="btn btn-lg btn-round btn-white-lg-outline">Free Download</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="carousel-item item-bg">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-left">
-                    <div class="carousel-content container">
-                        <div class="text-left max-w">
-                            <h3 data-animation="animated fadeInDown delay-05s">We love make things <br/>amazing and simple</h3>
-                            <a data-animation="animated fadeInUp delay-10s" href="#" class="btn btn-lg btn-round btn-theme">Get Started Now</a>
-                            <a data-animation="animated fadeInUp delay-12s" href="#" class="btn btn-lg btn-round btn-white-lg-outline">Free Download</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="carousel-item item-bg">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-left">
-                    <div class="carousel-content container">
-                        <div class="text-left max-w">
-                            <h3 data-animation="animated fadeInDown delay-05s">We love make things <br/>amazing and simple</h3>
-                            <a data-animation="animated fadeInUp delay-10s" href="#" class="btn btn-lg btn-round btn-theme">Get Started Now</a>
-                            <a data-animation="animated fadeInUp delay-12s" href="#" class="btn btn-lg btn-round btn-white-lg-outline">Free Download</a>
+                            <a data-animation="animated fadeInUp delay-10s" href="car-list.php" class="btn btn-lg btn-round btn-theme">Get Started Now</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="slider-mover-left" aria-hidden="true">
-                <i class="fa fa-angle-left"></i>
-            </span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="slider-mover-right" aria-hidden="true">
-                <i class="fa fa-angle-right"></i>
-            </span>
-        </a>
     </div>
 </div>
 <!-- banner end -->
@@ -445,27 +410,6 @@ include "dataconnection.php";
 </div>
 <!-- Testimonial end -->
 
-
-<!-- intro section start -->
-<div class="intro-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                <img src="assets/img/logos/logo-white.png" alt="loo">
-            </div>
-            <div class="col-xl-8 col-lg-7 col-md-7 col-sm-12">
-                <div class="intro-text">
-                    <h3>have any queries? call us anytime</h3>
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
-                <a href="contact-1.html" class="btn btn-md">Contact Us</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- intro section end -->
-
 <!-- Footer start -->
 <footer class="footer">
     <div class="container footer-inner">
@@ -548,136 +492,6 @@ include "dataconnection.php";
     </div>
 </footer>
 <!-- Footer end -->
-
-<!-- Full Page Search -->
-<div id="full-page-search">
-    <button type="button" class="close">×</button>
-    <form action="#">
-        <input type="search" value="" placeholder="type keyword(s) here" />
-        <button type="button" class="btn btn-sm btn-color">Search</button>
-    </form>
-</div>
-
-<!-- Car Video Modal -->
-<div class="modal car-modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="carModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 modal-left">
-                        <div class="modal-left-content">
-                            <div id="modalCarousel" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <iframe class="modalIframe" src="https://www.youtube.com/embed/5e0LxrLSzok"  allowfullscreen></iframe>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="assets/img/car-1.jpg" alt="Test ALT">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="assets/img/car-1.jpg" alt="Test ALT">
-                                    </div>
-                                </div>
-                                <a class="control control-prev" href="#modalCarousel" role="button" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="control control-next" href="#modalCarousel" role="button" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                            <div class="description"><h3>Description</h3>
-                                <p>
-                                    Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque
-                                    massa, viverra interdum eros ut, imperdiet pellentesque mauris. Proin sit amet
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 modal-right">
-                        <div class="modal-right-content bg-white">
-                            <strong class="price">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </strong>
-                            <section>
-                                <h3>Audi A5</h3>
-                                <ul class="bullets">
-                                    <li><i class="fa fa-arrow-right"></i> Audio Interface</li>
-                                    <li><i class="fa fa-arrow-right"></i> CDR Audio</li>
-                                    <li><i class="fa fa-arrow-right"></i> Seat Heating</li>
-                                    <li><i class="fa fa-arrow-right"></i> ParkAssist</li>
-                                    <li><i class="fa fa-arrow-right"></i> Cruise Control</li>
-                                    <li><i class="fa fa-arrow-right"></i> Airbags</li>
-                                    <li><i class="fa fa-arrow-right"></i> Air Conditioning</li>
-                                    <li><i class="fa fa-arrow-right"></i> Alarm System</li>
-                                </ul>
-                            </section>
-                            <section>
-                                <h3>Overview</h3>
-                                <dl>
-                                    <dt>Model</dt>
-                                    <dd>BMW</dd>
-                                    <dt>Condition</dt>
-                                    <dd>Brand New</dd>
-                                    <dt>Year</dt>
-                                    <dd>2018</dd>
-                                    <dt>Mileage</dt>
-                                    <dd>37,000 mi</dd>
-                                    <dt>Price</dt>
-                                    <dd>$178,000</dd>
-                                </dl>
-                            </section>
-                            <a href="car-details.html" class="btn btn-theme">Show Detail</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Off-canvas sidebar -->
-<div class="off-canvas-sidebar">
-    <div class="off-canvas-sidebar-wrapper">
-        <div class="off-canvas-header">
-            <a class="close-offcanvas" href="#"><span class="fa fa-times"></span></a>
-        </div>
-        <div class="off-canvas-content">
-            <aside class="canvas-widget">
-                <div class="logo text-center">
-                    <img src="assets/img/logos/logo.png" alt="logo">
-                </div>
-            </aside>
-            <aside class="canvas-widget">
-                <ul class="menu">
-                    <li class="menu-item menu-item-has-children"><a href="index.html">Home</a></li>
-                    <li class="menu-item"><a href="car-grid-leftside.html">Car List</a></li>
-                    <li class="menu-item"><a href="car-details.html">Car Detail</a></li>
-                    <li class="menu-item"><a href="blog-single-sidebar-right.html">Blog</a></li>
-                    <li class="menu-item"><a href="about-1.html">About  US</a></li>
-                    <li class="menu-item"><a href="contact-1.html">Contact US</a></li>
-                </ul>
-            </aside>
-            <aside class="canvas-widget">
-                <ul class="social-icons">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#"><i class="fa fa-vk"></i></a></li>
-                </ul>
-            </aside>
-        </div>
-    </div>
-</div>
 
 <!-- External JS libraries -->
 <script src="assets/js/jquery-2.2.0.min.js"></script>
