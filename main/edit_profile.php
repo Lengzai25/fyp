@@ -25,7 +25,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
         '../../../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TAGID');</script>
     <!-- End Google Tag Manager -->
-    <title>WAIN - Car Dealer HTML Template</title>
+    <title>CARWOW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
@@ -41,7 +41,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
     <link type="text/css" rel="stylesheet" href="assets/fonts/flaticon/font/flaticon.css">
 
     <!-- Favicon icon -->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" >
+    <link rel="shortcut icon" href="assets\img\logos\photo_logo.jpg" type="image/x-icon" >
 
     <!-- Google fonts -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
