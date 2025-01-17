@@ -42,7 +42,6 @@ if (isset($_SESSION["sess_id"]))
     <link type="text/css" rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="assets/fonts/flaticon/font/flaticon.css">
 
-    
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="assets\img\logos\photo_logo.jpg" type="image/x-icon" >
 
@@ -204,10 +203,10 @@ if (isset($_SESSION["sess_id"]))
                         <div class="col-6 col-lg-3 col-md-3">
                             <div class="form-group">
                                 <select class="selectpicker search-fields" name="brand">
-                                    <option>Select Brand</option>
-                                    <option>Honda</option>
-                                    <option>Toyota</option>
-                                    <option>Mercedes</option>
+                                    <option value = "">Select Brand</option>
+                                    <option value = "Honda">Honda</option>
+                                    <option value = "Toyota">Toyota</option>
+                                    <option value = "Mercedes">Mercedes</option>
                                 </select>
                             </div>
                         </div>
@@ -215,10 +214,10 @@ if (isset($_SESSION["sess_id"]))
                             <div class="form-group">
                                 <select class="selectpicker search-fields" name="Year">
                                     <option>Select Year</option>
-                                    <option>2016</option>
-                                    <option>2017</option>
-                                    <option>2018</option>
-                                    <option>2019</option>
+                                    <option value = "2016">2016</option>
+                                    <option value = "2017">2017</option>
+                                    <option value = "2018">2018</option>
+                                    <option value = "2019">2019</option>
                                 </select>
                             </div>
                         </div>
@@ -249,17 +248,6 @@ if (isset($_SESSION["sess_id"]))
             <div class="row clearfix">
                 <div class="col-xl-4 col-lg-5 col-md-5 col-sm-5">
                     <h4 class="heading">30 Result Found</h4>
-                </div>
-                <div class="col-xl-8 col-lg-7 col-md-7 col-sm-7">
-                    <div class="sorting-options clearfix">
-                        <a href="car-list-fullwidth.php" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
-                    </div>
-                    <div class="search-area">
-                        <select class="selectpicker search-fields" name="location">
-                            <option>High to Low</option>
-                            <option>Low to High</option>
-                        </select>
-                    </div>
                 </div>
             </div>
         </div>
