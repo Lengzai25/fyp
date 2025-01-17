@@ -42,6 +42,7 @@ if (isset($_SESSION["sess_id"]))
     <link type="text/css" rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="assets/fonts/flaticon/font/flaticon.css">
 
+    
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="assets\img\logos\photo_logo.jpg" type="image/x-icon" >
 
