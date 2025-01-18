@@ -126,13 +126,9 @@ if (isset($_SESSION["sess_id"]))
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Shop
+                                <a class="nav-link dropdown-toggle" href="shop-cart.php" id="">
+                                            Cart
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="shop-cart.php">Shop Cart</a>
-                                    <a class="dropdown-item" href="shop-checkout.php">Shop Checkout</a>
-                                </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="contact.php" id="navbarDropdown3">

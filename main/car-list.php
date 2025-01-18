@@ -126,13 +126,9 @@ if (isset($_SESSION["sess_id"]))
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Shop
+                                <a class="nav-link dropdown-toggle" href="shop-cart.php" id="">
+                                    Cart
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="shop-cart.php">Shop Cart</a>
-                                    <a class="dropdown-item" href="shop-checkout.php">Shop Checkout</a>
-                                </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="contact.php" id="navbarDropdown3">
@@ -260,35 +256,39 @@ if (isset($_SESSION["sess_id"]))
 
                 // Retrieve the record
                 
-                while ($car_rec = mysqli_fetch_array($get_car)) {
+                while ($car_rec = mysqli_fetch_array($get_car)) 
+                {
                     $carid = $car_rec["car_id"];
-                ?>
-                    <div class="car-box-5 p-box">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-12 col-pad">
-                            <?php
-                                echo '<a href="car-details.php?carid=' . $carid . '" class="car-img">
-                                        <img src="assets/img/' . $car_rec["car_pic"] . '" alt="' . $car_rec["car_name"] . '">
-                                      </a>';
-                            ?>
-                            </div>
-                            <div class="col-lg-8 col-md-12">
-                                <div class="detail">
-                                    <h3 class="title">
-                                        <a href="car-details.php?carid=<?php echo $carid; ?>"> 
-                                            <?php echo $car_rec["car_name"]; ?> 
-                                        </a>
-                                    </h3>
-                                    <div class="listing-price">
-                                        <span class="new">RM <?php echo $car_rec["car_price"]; ?></span>
-                                    </div>
-                                    <p><?php echo $car_rec["car_des"]; ?></p>
+                    ?>
+                        <div class="car-box-5 p-box">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-12 col-pad">
+                                <?php
+                                    echo '<a href="car-details.php?carid=' . $carid . '" class="car-img">
+                                            <img src="assets/img/' . $car_rec["car_pic"] . '" alt="' . $car_rec["car_name"] . '">
+                                        </a>';
+                                ?>
                                 </div>
-                                <a href="shop-cart.php" class="btn btn-theme">Add to Cart</a>
-                            </div>
-                        </div>    
-                    </div>
-                <?php
+                                <div class="col-lg-8 col-md-12">
+                                    <div class="detail">
+                                        <h3 class="title">
+                                            <a href="car-details.php?carid=<?php echo $carid; ?>"> 
+                                                <?php echo $car_rec["car_name"]; ?> 
+                                            </a>
+                                        </h3>
+                                        <div class="listing-price">
+                                            <span class="new">RM <?php echo $car_rec["car_price"]; ?></span>
+                                        </div>
+                                        <p><?php echo $car_rec["car_des"]; ?></p>
+                                    </div>
+                                    <form method="GET" action="car-list.php">
+                                        <input type="hidden" name="cid" value="<?php echo $car_rec['car_id']; ?>">
+                                        <input type="submit" name="add_cart" class="btn btn-theme" value="Add to Cart">
+                                    </form> 
+                                </div>
+                            </div>    
+                        </div>
+                    <?php
                 }
                 ?>
                 
@@ -391,160 +391,47 @@ if (isset($_SESSION["sess_id"]))
     </div>
 </footer>
 <!-- Footer end -->
-
-<!-- Full Page Search -->
-<div id="full-page-search">
-    <button type="button" class="close">×</button>
-    <form action="#">
-        <input type="search" value="" placeholder="type keyword(s) here" />
-        <button type="button" class="btn btn-sm btn-color">Search</button>
-    </form>
-</div>
-
-<!-- Car Video Modal -->
-<div class="modal car-modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="carModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 modal-left">
-                        <div class="modal-left-content">
-                            <div id="modalCarousel" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <iframe class="modalIframe" src="https://www.youtube.com/embed/5e0LxrLSzok"  allowfullscreen></iframe>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="assets/img/car-1.jpg" alt="Test ALT">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="assets/img/car-1.jpg" alt="Test ALT">
-                                    </div>
-                                </div>
-                                <a class="control control-prev" href="#modalCarousel" role="button" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="control control-next" href="#modalCarousel" role="button" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                            <div class="description"><h3>Description</h3>
-                                <p>
-                                    Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque
-                                    massa, viverra interdum eros ut, imperdiet pellentesque mauris. Proin sit amet
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 modal-right">
-                        <div class="modal-right-content bg-white">
-                            <strong class="price">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </strong>
-                            <section>
-                                <h3>Audi A5</h3>
-                                <ul class="bullets">
-                                    <li><i class="fa fa-arrow-right"></i> Audio Interface</li>
-                                    <li><i class="fa fa-arrow-right"></i> CDR Audio</li>
-                                    <li><i class="fa fa-arrow-right"></i> Seat Heating</li>
-                                    <li><i class="fa fa-arrow-right"></i> ParkAssist</li>
-                                    <li><i class="fa fa-arrow-right"></i> Cruise Control</li>
-                                    <li><i class="fa fa-arrow-right"></i> Airbags</li>
-                                    <li><i class="fa fa-arrow-right"></i> Air Conditioning</li>
-                                    <li><i class="fa fa-arrow-right"></i> Alarm System</li>
-                                </ul>
-                            </section>
-                            <section>
-                                <h3>Overview</h3>
-                                <dl>
-                                    <dt>Model</dt>
-                                    <dd>BMW</dd>
-                                    <dt>Condition</dt>
-                                    <dd>Brand New</dd>
-                                    <dt>Year</dt>
-                                    <dd>2018</dd>
-                                    <dt>Mileage</dt>
-                                    <dd>37,000 mi</dd>
-                                    <dt>Price</dt>
-                                    <dd>$178,000</dd>
-                                </dl>
-                            </section>
-                            <a href="car-details.html" class="btn btn-theme">Show Detail</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Off-canvas sidebar -->
-<div class="off-canvas-sidebar">
-    <div class="off-canvas-sidebar-wrapper">
-        <div class="off-canvas-header">
-            <a class="close-offcanvas" href="#"><span class="fa fa-times"></span></a>
-        </div>
-        <div class="off-canvas-content">
-            <aside class="canvas-widget">
-                <div class="logo text-center">
-                    <img src="assets/img/logos/logo.png" alt="logo">
-                </div>
-            </aside>
-            <aside class="canvas-widget">
-                <ul class="menu">
-                    <li class="menu-item menu-item-has-children"><a href="index.html">Home</a></li>
-                    <li class="menu-item"><a href="car-grid-leftside.html">Car List</a></li>
-                    <li class="menu-item"><a href="car-details.html">Car Detail</a></li>
-                    <li class="menu-item"><a href="blog-single-sidebar-right.html">Blog</a></li>
-                    <li class="menu-item"><a href="about-1.html">About  US</a></li>
-                    <li class="menu-item"><a href="contact-1.html">Contact US</a></li>
-                </ul>
-            </aside>
-            <aside class="canvas-widget">
-                <ul class="social-icons">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#"><i class="fa fa-vk"></i></a></li>
-                </ul>
-            </aside>
-        </div>
-    </div>
-</div>
-
 <!-- External JS libraries -->
 <script src="assets/js/jquery-2.2.0.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.selectBox.js"></script>
-<script src="assets/js/rangeslider.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/jquery.filterizr.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/backstretch.js"></script>
-<script src="assets/js/jquery.countdown.js"></script>
-<script src="assets/js/jquery.scrollUp.js"></script>
-<script src="assets/js/particles.min.js"></script>
-<script src="assets/js/typed.min.js"></script>
-<script src="assets/js/dropzone.js"></script>
-<script src="assets/js/jquery.mb.YTPlayer.js"></script>
-<script src="assets/js/slick.min.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0N5pbJN10Y1oYFRd0MJ_v2g8W2QT74JE"></script>
-<script src="assets/js/ie-emulation-modes-warning.js"></script>
 <!-- Custom JS Script -->
 <script  src="assets/js/app.js"></script>
 </body>
 
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/car-list-fullwidth.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:28 GMT -->
 </html>
+
+<?php
+
+if (isset($_GET["add_cart"])) 
+{
+    if (isset($_GET["cid"])) 
+    {
+        $car_id = $_GET["cid"];
+        $userid = $cust_rec["cust_id"]; 
+        $quantity = 1;
+        
+        $check_cart = mysqli_query($conn, "SELECT * FROM cart WHERE user_id = '$userid' AND car_id = '$car_id'");
+
+        if (mysqli_num_rows($check_cart) > 0) 
+        {
+            echo "<script>
+                    alert('This item is already in the cart.');
+                    window.location.href='car-list.php';
+                  </script>";
+        } else {
+            // Insert the new item into the cart
+            $insert_cart = mysqli_query($conn, "INSERT INTO cart (user_id, car_id, quantity) VALUES ('$userid', '$car_id', '$quantity')");
+
+            if ($insert_cart) 
+            {
+                echo "<script>
+                        alert('Item has been added successfully.');
+                        window.location.href='car-list.php';
+                      </script>";
+            } 
+        }
+    }
+}
+
+?>
