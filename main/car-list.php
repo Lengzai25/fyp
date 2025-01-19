@@ -253,12 +253,20 @@ if (isset($_SESSION["sess_id"]))
             <?php
                 // find from the admintbl the record related to this Primary key
                 $get_car = mysqli_query($conn, "select * from car");
-
+                
                 // Retrieve the record
                 
                 while ($car_rec = mysqli_fetch_array($get_car)) 
                 {
-                    $carid = $car_rec["car_id"];
+                    $show = $car_rec['show'];
+                    if ($show == 1)
+                    {
+                        $carid = $car_rec["car_id"];
+                    }
+                    else
+                    {
+                        continue;
+                    }
                     ?>
                         <div class="car-box-5 p-box">
                             <div class="row">

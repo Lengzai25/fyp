@@ -1,6 +1,16 @@
 <?php
 
 include "dataconnection.php";
+session_start();
+
+// get the session that keeps the Primary key
+$sess_id = $_SESSION["sess_id"]; 
+
+// find from the admintbl the record related to this Primary key
+$get_cust = mysqli_query($conn, "select * from customer where cust_id = '$sess_id'");
+
+// Retrieve the record
+$cust_rec = mysqli_fetch_assoc($get_cust);
 
 ?>
 
@@ -9,6 +19,92 @@ include "dataconnection.php";
 
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/shop-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:34 GMT -->
 <head>
+
+<script>
+    function display() 
+    {
+        // Validation flags
+        var name_check = 0,
+            cardnum_check = 0,
+            date_check = 0,
+            cvv_check = 0;
+
+        // Retrieve input values
+        var name = document.checkout.card_name.value;
+        var cardnum = document.checkout.card_num.value;
+        var date = document.checkout.card_date.value;
+        var cvv = document.checkout.card_cvv.value;
+
+        // Validation patterns
+        var name_pattern = /^[a-zA-Z\s]+$/; // Only letters and spaces
+        var cardnum_pattern = /^\d{16}$/; // Matches 16 digits
+        var cvv_pattern = /^\d{3}$/; // Matches 3 digits
+
+        // Validate name
+        if (!name.match(name_pattern)) 
+        {
+            alert("Error: Invalid name format. Only letters and spaces are allowed.");
+            return false;
+        } 
+        else 
+        {
+            name_check = 1;
+        }
+
+        // Validate card number
+        if (!cardnum.match(cardnum_pattern)) 
+        {
+            alert("Error: Invalid card number format. Please enter a valid 16-digit card number.");
+            return false;
+        } 
+        else 
+        {
+            cardnum_check = 1;
+        }
+
+        // Validate expiration date
+        if (date === "") 
+        {
+            alert("Error: Expiration date cannot be empty!");
+            return false;
+        } 
+        else 
+        {
+            var currentDate = new Date();
+            var inputDate = new Date(date + "-01"); // Add "-01" to create a valid date object
+            if (inputDate < currentDate) 
+            {
+                alert("Error: The card has expired!");
+                return false;
+            }
+            date_check = 1;
+        }
+
+        // Validate CVV
+        if (!cvv.match(cvv_pattern)) 
+        {
+            alert("Error: Invalid security code. CVV must be 3 digits.");
+            return false;
+        } 
+        else 
+        {
+            cvv_check = 1;
+        }
+
+        // Final check
+        if (name_check === 1 && cardnum_check === 1 && date_check === 1 && cvv_check === 1) 
+        {
+            return true;
+
+        } 
+        else 
+        {
+            return false;
+        }
+    }
+</script>
+
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -55,19 +151,51 @@ include "dataconnection.php";
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light rounded">
-                    <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
-                        <img src="assets/img/logos/logo.png" alt="logo">
-                    </a>
+                    <?php
+                        if (isset($_SESSION["sess_id"])) 
+                        {
+                            ?>
+                            <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="landing.php">
+                                <img src="assets/img/logos/logo.png" alt="logo">
+                            </a>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <a class="navbar-brand logo navbar-brand d-flex mr-auto" href="index.php">
+                                <img src="assets/img/logos/logo.png" alt="logo">
+                            </a>
+                            <?php
+                        }
+                    ?>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="fa fa-bars"></span>
                     </button>
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
-                                    Home
-                                </a>
-                            </li>
+                            <?php
+                                if (isset($_SESSION["sess_id"])) 
+                                {
+                                    ?>
+                                    <li class="nav-item dropdown active">
+                                        <a class="nav-link dropdown-toggle" href="landing.php" id="navbarDropdownMenuLink">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                        <li class="nav-item dropdown active">
+                                        <a class="nav-link dropdown-toggle" href="index.php" id="navbarDropdownMenuLink">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                            ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="car-list.php" id="">
                                     Vehicle
@@ -83,13 +211,9 @@ include "dataconnection.php";
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Shop
+                                <a class="nav-link dropdown-toggle" href="shop-cart.php" id="">
+                                            Cart
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="shop-cart.php">Shop Cart</a>
-                                    <a class="dropdown-item" href="shop-checkout.php">Shop Checkout</a>
-                                </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="contact.php" id="navbarDropdown3">
@@ -97,13 +221,35 @@ include "dataconnection.php";
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Account
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="login.php">Login</a>
-                                    <a class="dropdown-item" href="register.php">Register</a>
-                                </div>
+
+                            <?php
+                                if (isset($_SESSION["sess_id"])) 
+                                {
+                                    ?>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?php echo $cust_rec["cust_name"]; ?>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        <a class="dropdown-item" href="profile.php">Profile</a>
+                                        <a class="dropdown-item" href="logout.php">Log Out</a>
+                                    </div>
+                                        <?php
+                                } 
+                                else 
+                                {
+                                    // If the session does not exist
+                                    ?>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Account
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                        <a class="dropdown-item" href="login.php">Login</a>
+                                        <a class="dropdown-item" href="register.php">Register</a>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                
                             </li>
                             <li class="nav-item dropdown">
                                 <a href="#full-page-search" class="nav-link">
@@ -129,22 +275,6 @@ include "dataconnection.php";
     <div class="page-info">
         <div class="container">
             <div class="row">
-                <div class="col-md-5">
-                    <div class="breadcrumb-area">
-                        <ul>
-                            <li><a href="index.html">Index</a></li>
-                            <li><span>/</span>Shop Checkout</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="contact-info">
-                        <ul>
-                            <li><i class="fa fa-phone"></i> +60185754753 / +60197784913</li>
-                            <li><a href="contact-1.html" class="btn btn-md btn-theme">Contact us</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -158,157 +288,121 @@ include "dataconnection.php";
             <div class="row mb-30">
                 <div class="col-lg-6">
                     <div class="heading-2">
-                        <h4>Billing Address</h4>
+                        <h4>Personal Info</h4>
                     </div>
-                    <form action="#" method="GET" enctype="multipart/form-data">
+                    <form name="checkout" method="POST" onsubmit="return display()">
                         <div class="row">
                             <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First Name">
+                                    <input type="text" class="form-control" name="cust_name" placeholder="Name" value="<?php echo $cust_rec['cust_name']?>" required>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last Name">
+                                    <input type="text" class="form-control" name="cust_email" placeholder="Email" value="<?php echo $cust_rec['cust_email']?>" required>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Company Name">
+                                    <input type="text" class="form-control" name="cust_tel" placeholder="Phone" value="<?php echo $cust_rec['cust_tel']?>" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="heading-2">
+                            <h4>Card</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <input type="text" name="card_name" class="form-control" placeholder="Name on card">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Address">
+                                    <input type="text" name="card_num" class="form-control" placeholder="Card Number" maxlength="16">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Town / City">
+                                    <input type="month" name="card_date" class="form-control" placeholder="Expired date">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="State / Country">
+                                    <input type="text" name="card_cvv" class="form-control" placeholder="Security Code(CVV)" maxlength="3">
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Post Code">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Phone">
-                                </div>
-                            </div>
+                        </div>
+                        <div>
+                            <input class="btn btn-color btn-block btn-md" name='checkout' type="submit" value="Proceed To Checkout">
                         </div>
                     </form>
                 </div>
                 <div class="col-lg-6">
-                    <div class="heading-2">
-                        <h4>Shipping Address</h4>
-                    </div>
-                    <form action="#" method="GET" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First Name">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last Name">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Company Name">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Address">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Town / City">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="State / Country">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Post Code">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Phone">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="our-payment">
-                        <div class="payment-box">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input">
-                                Direct Bank Transfer
-                            </label>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-                        </div>
-                        <div class="payment-box">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input">
-                                Direct Bank Transfer
-                            </label>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-                        </div>
-                        <div class="payment-box">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input">
-                                Direct Bank Transfer
-                            </label>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="cart-total-box bg-light">
-                        <h5>Cart Totals</h5>
-                        <hr>
+                <div class="cart-total-box bg-light">
+                        <?php
+                            // find from the admintbl the record related to this Primary key
+                            $get_cart = mysqli_query($conn, "select * from cart where user_id=$sess_id");
+
+                            $total = 0;
+                            
+                            while ($cart_rec = mysqli_fetch_array($get_cart)) 
+                            {
+                                $carid = $cart_rec['car_id'];
+
+                                $get_car = mysqli_query($conn, "select * from car where car_id=$carid");
+                                $car_rec = mysqli_fetch_array($get_car);
+                                
+                                $total = $total + $car_rec['car_price'];
+                        ?>
+
                         <ul>
                             <li>
-                                Subtotal<span class="pull-right">$170.00</span>
+                                <b><?php echo $car_rec['car_name']; ?></b><span class="pull-right">RM <?php echo $car_rec['car_price']; ?></span>
                             </li>
                             <li>
-                                Shipping Charge<span class="pull-right">$234.00</span>
+                                Quantity : <?php echo $cart_rec['quantity']; ?><span class="pull-right"></span>
                             </li>
                             <li>
-                                Local Delivery <span class="pull-right">$334</span>
+                                &nbsp; <span class="pull-right">RM <?php echo $car_rec['car_price'] * $cart_rec["quantity"]; ?></span>
+                            </li>
+                        </ul>
+                            <hr>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                            // find from the admintbl the record related to this Primary key
+                            $get_cart = mysqli_query($conn, "select * from cart where user_id=$sess_id");
+
+                            $subtotal = 0;
+                            
+                            while ($cart_rec = mysqli_fetch_array($get_cart)) 
+                            {
+                                $carid = $cart_rec['car_id'];
+
+                                $get_car = mysqli_query($conn, "select * from car where car_id=$carid");
+                                $car_rec = mysqli_fetch_array($get_car);
+                                
+                                $subtotal = $subtotal + $car_rec['car_price'] * $cart_rec['quantity'];
+                            }
+                        ?>
+                        <ul>
+                            <li>
+                                Subtotal<span class="pull-right">RM <?php echo $subtotal ;?></span>
                             </li>
                             <li>
-                                Flat Rate<span class="pull-right">$1234</span>
-                            </li>
-                            <li>
-                                International<span class="pull-right">$652</span>
+                                Processing Fee 10%<span class="pull-right">RM <?php echo $subtotal * 0.1;?></span>
                             </li>
                         </ul>
                         <hr>
                         <p class="mar-b-50">
-                            Grand Total<span class="pull-right">$9531</span>
+                            Grand Total<span class="pull-right">RM <?php echo $subtotal + ($subtotal * 0.1);?></span>
                         </p>
                         <br>
-                        <button class="btn btn-dark btn-block btn-md" type="submit">Update Cart</button>
-                        <button class="btn btn-color btn-block btn-md" type="submit">Proceed To Checkout</button>
+                        <form>
+                            <a class="btn btn-dark btn-block btn-md" type="submit" href="shop-cart.php">Edit Cart</a>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -411,27 +505,45 @@ include "dataconnection.php";
 
 <!-- External JS libraries -->
 <script src="assets/js/jquery-2.2.0.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.selectBox.js"></script>
-<script src="assets/js/rangeslider.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/jquery.filterizr.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/backstretch.js"></script>
-<script src="assets/js/jquery.countdown.js"></script>
-<script src="assets/js/jquery.scrollUp.js"></script>
-<script src="assets/js/particles.min.js"></script>
-<script src="assets/js/typed.min.js"></script>
-<script src="assets/js/dropzone.js"></script>
-<script src="assets/js/jquery.mb.YTPlayer.js"></script>
-<script src="assets/js/slick.min.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0N5pbJN10Y1oYFRd0MJ_v2g8W2QT74JE"></script>
-<script src="assets/js/ie-emulation-modes-warning.js"></script>
 <!-- Custom JS Script -->
 <script  src="assets/js/app.js"></script>
 </body>
-
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/shop-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:34 GMT -->
 </html>
+
+<?php
+if (isset($_POST["checkout"])) 
+{
+    $username = $_POST["cust_name"];
+    $useremail = $_POST["cust_email"];
+    $usertel = $_POST["cust_tel"];
+    $userid = $sess_id;
+
+    $get_cart = mysqli_query($conn, "select * from cart where user_id=$sess_id");
+    while ($cart_rec = mysqli_fetch_array($get_cart)) 
+    {
+        $cartid = $cart_rec['cart_id'];
+        $carid = $cart_rec['car_id'];
+        $qty = $cart_rec['quantity'];
+        $get_car = mysqli_query($conn, "select * from car where car_id=$carid");
+        $car_rec = mysqli_fetch_array($get_car);
+
+        $carname = $car_rec['car_name'];
+        $price = $car_rec['car_price'];
+
+        $insert_user = mysqli_query($conn, "INSERT INTO checkout (user_name, user_email, user_tel, car_name, car_price, user_id, quantity)
+        VALUES ('$username', '$useremail', '$usertel', '$carname', '$price', '$userid', '$qty')");
+        
+        $show = $car_rec['show'] - 1;
+        mysqli_query($conn, "UPDATE car SET `show` = '$show' WHERE car_id = '$carid'");
+
+        mysqli_query($conn, "DELETE FROM cart WHERE cart_id = $cartid");
+        
+    }
+    echo "<script type='text/javascript'>
+                alert('Record has been saved successfully.');
+                window.location.href='index.php';
+                </script>";
+}
+
+?>
