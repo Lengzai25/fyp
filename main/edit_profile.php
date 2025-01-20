@@ -435,7 +435,7 @@ if (isset($_POST["signup"])) {
                 </script>";
             }
         } 
-        else 
+        else  
         {
             $update_user = mysqli_query($conn, "UPDATE customer SET 
                                                     cust_name = '$username', 
