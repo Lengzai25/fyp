@@ -181,7 +181,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                         </div>
                         <div class="col-6 col-lg-3 col-md-3">
                             <div class="form-group">
-                                <button class="search-button btn-md btn-color" type="submit">Search</button>
+                                <button class="search-button btn-md btn-color" href="car-list.php" type="submit">Search</button>
                             </div>
                         </div>
                     </div>

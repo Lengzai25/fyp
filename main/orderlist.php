@@ -200,7 +200,6 @@ if (isset($_SESSION["sess_id"]))
 </div>
 <!-- Sub banner end -->
 
-
 <div class="shop-cart content-area-2">
     <div class="col-lg-8">
         <div class="heading-2">
