@@ -212,7 +212,12 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="shop-cart.php" id="">
-                                            Cart
+                                    Cart
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="orderlist.php" id="">
+                                    Order
                                 </a>
                             </li>
                             <li class="nav-item dropdown">

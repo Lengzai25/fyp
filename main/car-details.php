@@ -144,6 +144,11 @@ $car_rec = mysqli_fetch_assoc($get_car);
                             </a>
                             </li>
                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="orderlist.php" id="">
+                                     Order
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="contact.php" id="navbarDropdown3">
                                     Contact
                                 </a>
@@ -280,6 +285,7 @@ $car_rec = mysqli_fetch_assoc($get_car);
                     </div>
                 </div>
             </div>
+                 
             <div class="col-lg-4 col-md-12">
                 <div class="sidebar mbl">
                     <!-- Specifications start -->
@@ -305,11 +311,15 @@ $car_rec = mysqli_fetch_assoc($get_car);
                             <span>Engine</span><?php echo $car_rec["car_eng"];?>
                         </li>
                     </ul>
-                    </div>
                 </div>
             </div>
+            <form method="GET" action="car-list.php">
+                <input type="hidden" name="cid" value="<?php echo $car_rec['car_id']; ?>">
+                <input type="submit" name="add_cart" class="btn btn-theme" value="Add to Cart">
+            </form> 
         </div>
     </div>
+ </div>
 
 <!-- Footer start -->
 <footer class="footer">
@@ -403,92 +413,6 @@ $car_rec = mysqli_fetch_assoc($get_car);
     </form>
 </div>
 
-<!-- Car Video Modal -->
-<div class="modal car-modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="carModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 modal-left">
-                        <div class="modal-left-content">
-                            <div id="modalCarousel" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <iframe class="modalIframe" src="https://www.youtube.com/embed/5e0LxrLSzok"  allowfullscreen></iframe>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="assets/img/car-1.jpg" alt="Test ALT">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="assets/img/car-1.jpg" alt="Test ALT">
-                                    </div>
-                                </div>
-                                <a class="control control-prev" href="#modalCarousel" role="button" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="control control-next" href="#modalCarousel" role="button" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                            <div class="description"><h3>Description</h3>
-                                <p>
-                                    Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque
-                                    massa, viverra interdum eros ut, imperdiet pellentesque mauris. Proin sit amet
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 modal-right">
-                        <div class="modal-right-content bg-white">
-                            <strong class="price">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </strong>
-                            <section>
-                                <h3>Audi A5</h3>
-                                <ul class="bullets">
-                                    <li><i class="fa fa-arrow-right"></i> Audio Interface</li>
-                                    <li><i class="fa fa-arrow-right"></i> CDR Audio</li>
-                                    <li><i class="fa fa-arrow-right"></i> Seat Heating</li>
-                                    <li><i class="fa fa-arrow-right"></i> ParkAssist</li>
-                                    <li><i class="fa fa-arrow-right"></i> Cruise Control</li>
-                                    <li><i class="fa fa-arrow-right"></i> Airbags</li>
-                                    <li><i class="fa fa-arrow-right"></i> Air Conditioning</li>
-                                    <li><i class="fa fa-arrow-right"></i> Alarm System</li>
-                                </ul>
-                            </section>
-                            <section>
-                                <h3>Overview</h3>
-                                <dl>
-                                    <dt>Model</dt>
-                                    <dd>BMW</dd>
-                                    <dt>Condition</dt>
-                                    <dd>Brand New</dd>
-                                    <dt>Year</dt>
-                                    <dd>2018</dd>
-                                    <dt>Mileage</dt>
-                                    <dd>37,000 mi</dd>
-                                    <dt>Price</dt>
-                                    <dd>$178,000</dd>
-                                </dl>
-                            </section>
-                            <a href="car-details.html" class="btn btn-theme">Show Detail</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Off-canvas sidebar -->
 <div class="off-canvas-sidebar">
     <div class="off-canvas-sidebar-wrapper">
@@ -527,25 +451,44 @@ $car_rec = mysqli_fetch_assoc($get_car);
 <!-- External JS libraries -->
 <script src="assets/js/jquery-2.2.0.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.selectBox.js"></script>
-<script src="assets/js/rangeslider.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/jquery.filterizr.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/backstretch.js"></script>
-<script src="assets/js/jquery.countdown.js"></script>
-<script src="assets/js/jquery.scrollUp.js"></script>
-<script src="assets/js/particles.min.js"></script>
-<script src="assets/js/typed.min.js"></script>
-<script src="assets/js/dropzone.js"></script>
-<script src="assets/js/jquery.mb.YTPlayer.js"></script>
-<script src="assets/js/slick.min.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0N5pbJN10Y1oYFRd0MJ_v2g8W2QT74JE"></script>
-<script src="assets/js/ie-emulation-modes-warning.js"></script>
 <!-- Custom JS Script -->
 <script  src="assets/js/app.js"></script>
 </body>
 
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/car-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:28 GMT -->
 </html>
+
+<?php
+
+if (isset($_GET["add_cart"])) 
+{
+    if (isset($_GET["cid"])) 
+    {
+        $car_id = $_GET["cid"];
+        $userid = $cust_rec["cust_id"]; 
+        $quantity = 1;
+        
+        $check_cart = mysqli_query($conn, "SELECT * FROM cart WHERE user_id = '$userid' AND car_id = '$car_id'");
+
+        if (mysqli_num_rows($check_cart) > 0) 
+        {
+            echo "<script>
+                    alert('This item is already in the cart.');
+                    window.location.href='car-list.php';
+                  </script>";
+        } else {
+            // Insert the new item into the cart
+            $insert_cart = mysqli_query($conn, "INSERT INTO cart (user_id, car_id, quantity) VALUES ('$userid', '$car_id', '$quantity')");
+
+            if ($insert_cart) 
+            {
+                echo "<script>
+                        alert('Item has been added successfully.');
+                        window.location.href='car-list.php';
+                      </script>";
+            } 
+        }
+    }
+}
+
+?>

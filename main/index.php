@@ -83,9 +83,16 @@ include "dataconnection.php";
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="shop-cart.php" id="">
-                                            Cart
+                                <a class="nav-link dropdown-toggle" href="login.php" id="">
+                                    Cart
                                 </a>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="login.php" id="">
+                                     Order
+                                </a>
+                            </li>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="contact.php" id="navbarDropdown3">
@@ -134,55 +141,6 @@ include "dataconnection.php";
     </div>
 </div>
 <!-- banner end -->
-
-<!-- Search area start -->
-<div class="search-area" id="search-area-1">
-    <div class="container">
-        <div class="search-area-inner">
-            <div class="search-contents ">
-                <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/index.html" method="GET">
-                    <div class="row">
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="brand">
-                                    <option>Select Brand</option>
-                                    <option>Honda</option>
-                                    <option>Toyota</option>
-                                    <option>Mercedes</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="Year">
-                                    <option>Select Year</option>
-                                    <option>2016</option>
-                                    <option>2017</option>
-                                    <option>2018</option>
-                                    <option>2019</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <div class="range-slider">
-                                    <div data-min="0" data-max="150000" data-unit="MYR" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <button class="search-button btn-md btn-color" type="submit">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Search area start -->
 
 <!-- Selcome section start -->
 <div class="welcome-section content-area-7">

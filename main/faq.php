@@ -131,6 +131,11 @@ if (isset($_SESSION["sess_id"]))
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="orderlist.php" id="">
+                                            Order
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="contact.php" id="navbarDropdown3">
                                     Contact
                                 </a>
