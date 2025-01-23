@@ -179,7 +179,7 @@ if (isset($_SESSION["sess_id"]))
                                 
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#full-page-search" class="nav-link">
+                                <a href="car-list.php#search" class="nav-link">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </li>
@@ -226,6 +226,7 @@ if (isset($_SESSION["sess_id"]))
                         <th class="product-quantity">Qty</th>
                         <th class="product-subtotal">Total</th>
                         <th class="product-subtotal">Time</th>
+                        <th class="product-subtotal">Status</th>
                         <th class="product-remove">&nbsp;</th>
                     </tr>
                 </thead>
@@ -238,12 +239,10 @@ if (isset($_SESSION["sess_id"]))
                         
                         while ($order_rec = mysqli_fetch_array($get_cart)) 
                         {
-                            
                     ?>
                             <tr>
-
                                 <td class="product-name">
-                                    <a href="#"><?php echo $order_rec['car_name']; ?></a>
+                                    <?php echo $order_rec['car_name']; ?>
                                 </td>
                                 <td>RM <?php echo $order_rec['car_price']; ?></td>
                                 <td>
@@ -253,6 +252,7 @@ if (isset($_SESSION["sess_id"]))
                                 </td>
                                 <td>RM <?php echo $order_rec['car_price'] * $order_rec["quantity"]; ?></td>
                                 <td><?php echo $order_rec['ordertime']; ?></td>
+                                <td><?php echo $order_rec['stat']; ?></td>
                             </tr>
                             <?php 
                             

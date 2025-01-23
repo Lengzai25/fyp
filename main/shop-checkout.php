@@ -257,7 +257,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                                 
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#full-page-search" class="nav-link">
+                                <a href="car-list.php#search" class="nav-link">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </li>
@@ -314,30 +314,15 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                             </div>
                         </div>
                         <div class="heading-2">
-                            <h4>Card</h4>
+                            <h4>Payment</h4>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" name="card_name" class="form-control" placeholder="Name on card">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" name="card_num" class="form-control" placeholder="Card Number" maxlength="16">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="month" name="card_date" class="form-control" placeholder="Expired date">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" name="card_cvv" class="form-control" placeholder="Security Code(CVV)" maxlength="3">
-                                </div>
-                            </div>
-                        </div>
+                            <p>Please select your Payment Method:</p>
+                                <input type="radio" id="card" name="card" value="CARD">
+                                <label for="card">CARD</label><br>
+                                <input type="radio" id="cash" name="cash" value="CASH">
+                                <label for="cash">CASH</label><br>
+                                <input type="radio" id="loan" name="card" value="LOAN">
+                                <label for="cash">Loan Payment</label><br>
                         <div>
                             <input class="btn btn-color btn-block btn-md" name='checkout' type="submit" value="Proceed To Checkout">
                         </div>
@@ -535,9 +520,10 @@ if (isset($_POST["checkout"]))
 
         $carname = $car_rec['car_name'];
         $price = $car_rec['car_price'];
+        $stat = "in progress";
 
-        $insert_user = mysqli_query($conn, "INSERT INTO checkout (user_name, user_email, user_tel, car_name, car_price, user_id, quantity)
-        VALUES ('$username', '$useremail', '$usertel', '$carname', '$price', '$userid', '$qty')");
+        $insert_user = mysqli_query($conn, "INSERT INTO checkout (user_name, user_email, user_tel, car_name, car_price, user_id, quantity, stat)
+        VALUES ('$username', '$useremail', '$usertel', '$carname', '$price', '$userid', '$qty','$stat')");
         
         $show = $car_rec['show'] - 1;
         mysqli_query($conn, "UPDATE car SET `show` = '$show' WHERE car_id = '$carid'");
@@ -547,7 +533,7 @@ if (isset($_POST["checkout"]))
     }
     echo "<script type='text/javascript'>
                 alert('Record has been saved successfully.');
-                window.location.href='index.php';
+                window.location.href='landing.php';
                 </script>";
 }
 

@@ -172,7 +172,7 @@ if (isset($_SESSION["sess_id"]))
                                 
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#full-page-search" class="nav-link">
+                                <a href="car-list.php#search" class="nav-link">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </li>
@@ -200,7 +200,7 @@ if (isset($_SESSION["sess_id"]))
         <div class="search-area-inner">
             <div class="search-contents ">
                 <form method="POST">
-                    <div class="row">
+                    <div class="row" id="search">
                         <div class="col-6 col-lg-3 col-md-3">
                             <div class="form-group">
                                 <select class="selectpicker search-fields" name="brand">
@@ -224,7 +224,7 @@ if (isset($_SESSION["sess_id"]))
                         </div>
                         <div class="col-6 col-lg-3 col-md-3">
                             <div class="form-group">
-                                <input class="search-button btn-md btn-color" type="submit" value="Submit" name="search"></input>
+                                <input class="search-button btn-md btn-color" type="submit" value="Search" name="search"></input>
                             </div>
                         </div>
                     </div>

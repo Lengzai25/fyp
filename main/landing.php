@@ -116,7 +116,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#full-page-search" class="nav-link">
+                                <a href="car-list.php#search" class="nav-link">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </li>
@@ -234,7 +234,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                     <div class="row agent-5">
                         <div class="col-xl-5 col-lg-5 col-md-12 col-pad ">
                             <div class="photo">
-                                <img src="assets/img/avatar/avatar-9.jpg" alt="agent-list-2" class="img-fluid">
+                                <img src="assets/img/avatar/jiaheng.jpeg" alt="agent-list-2" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-xl-7 col-lg-7 col-md-12 col-pad align-self-center">
@@ -272,7 +272,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                     <div class="row agent-5">
                         <div class="col-xl-5 col-lg-5 col-md-12 col-pad ">
                             <div class="photo">
-                                <img src="assets/img/avatar/avatar-10.jpg" alt="agent-list-10" class="img-fluid">
+                                <img src="assets/img/avatar/beaven.jpeg" alt="agent-list-10" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-xl-7 col-lg-7 col-md-12 col-pad align-self-center">
