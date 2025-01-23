@@ -67,7 +67,7 @@ include "dataconnection.php";
                                 <a class="nav-link dropdown-toggle" href="index.php" id="navbarDropdownMenuLink">
                                     Home
                                 </a>
-                            </li>
+                            </li> 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="car-list.php" id="">
                                     Vehicle
