@@ -28,7 +28,7 @@ include "dataconnection.php";
 
         // Validation patterns
         name_pattern = /^[a-zA-Z\s]+$/;
-        //password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         email_pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
         cont_num_pattern = /^01[0-9]{8,9}$/; // Example: 0123456789
 
@@ -187,7 +187,6 @@ include "dataconnection.php";
     </div>
 </div>
 <!-- Contact section end -->
-
 
 <!-- External JS libraries -->
 <script src="assets/js/jquery-2.2.0.min.js"></script>

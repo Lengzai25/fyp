@@ -5,7 +5,14 @@ session_start();
 
 if (isset($_SESSION["sess_id"]))
 {
-    $sess_id = $_SESSION["sess_id"]; 
+    $sess_id = $_SESSION["sess_id"];
+    if (!isset($_SESSION["sess_id"])) 
+{
+    echo
+    "<script type='text/JavaScript'>
+    window.location.href='login.php';
+    </script>";
+} 
 
     // find from the admintbl the record related to this Primary key
     $get_cust = mysqli_query($conn, "select * from customer where cust_id = '$sess_id'");
@@ -127,7 +134,12 @@ if (isset($_SESSION["sess_id"]))
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="shop-cart.php" id="">
-                                            Cart
+                                   Cart
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="orderlist.php" id="">
+                                    Order
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
@@ -167,7 +179,7 @@ if (isset($_SESSION["sess_id"]))
                                 
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#full-page-search" class="nav-link">
+                                <a href="car-list.php#search" class="nav-link">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </li>
@@ -200,7 +212,6 @@ if (isset($_SESSION["sess_id"]))
 </div>
 <!-- Sub banner end -->
 
-
 <div class="shop-cart content-area-2">
     <div class="col-lg-8">
         <div class="heading-2">
@@ -211,15 +222,44 @@ if (isset($_SESSION["sess_id"]))
                 <thead>
                     <tr>
                         <th class="product-name">Product</th>
-                        <th class="product-price">Name</th>
                         <th class="product-price">Price</th>
                         <th class="product-quantity">Qty</th>
                         <th class="product-subtotal">Total</th>
+                        <th class="product-subtotal">Time</th>
+                        <th class="product-subtotal">Status</th>
                         <th class="product-remove">&nbsp;</th>
                     </tr>
                 </thead>
-            </tbody>
-        </table>
+                <tbody>
+                <?php
+                        // find from the admintbl the record related to this Primary key
+                        $get_cart = mysqli_query($conn, "select * from checkout where user_id=$sess_id");
+
+                        $total = 0;
+                        
+                        while ($order_rec = mysqli_fetch_array($get_cart)) 
+                        {
+                    ?>
+                            <tr>
+                                <td class="product-name">
+                                    <?php echo $order_rec['car_name']; ?>
+                                </td>
+                                <td>RM <?php echo $order_rec['car_price']; ?></td>
+                                <td>
+                                    <form method="POST">
+                                        <input class="qty" name="quantity" type="text" min="1" value="<?php echo $order_rec['quantity']; ?>" disabled>
+                                    </form>
+                                </td>
+                                <td>RM <?php echo $order_rec['car_price'] * $order_rec["quantity"]; ?></td>
+                                <td><?php echo $order_rec['ordertime']; ?></td>
+                                <td><?php echo $order_rec['stat']; ?></td>
+                            </tr>
+                            <?php 
+                            
+                        }
+                            ?>
+                </tbody>
+            </table>
     </div>
 </div>
 

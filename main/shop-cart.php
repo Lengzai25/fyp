@@ -4,7 +4,15 @@ include "dataconnection.php";
 session_start();
 
 // get the session that keeps the Primary key
-$sess_id = $_SESSION["sess_id"]; 
+$sess_id = $_SESSION["sess_id"];
+
+if (!isset($_SESSION["sess_id"])) 
+{
+    echo
+    "<script type='text/JavaScript'>
+    window.location.href='login.php';
+    </script>";
+}
 
 // find from the admintbl the record related to this Primary key
 $get_cust = mysqli_query($conn, "select * from customer where cust_id = '$sess_id'");
@@ -126,7 +134,12 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="shop-cart.php" id="">
-                                            Cart
+                                     Cart
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="orderlist.php" id="">
+                                    Order
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
@@ -166,7 +179,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                                 
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#full-page-search" class="nav-link">
+                                <a href="car-list.php#search" class="nav-link">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </li>
@@ -201,64 +214,72 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
         <div class="row">
             <div class="col-lg-8">
                 <div class="heading-2">
-                    <h4>Shopping Cart</h4>
-                    <p>View your shopping cart here!</p>
-                </div>
-                <table class="shop-table cart mb-20">
-                    <thead>
-                    <tr>
-                        <th class="product-name">Product</th>
-                        <th class="product-price">Name</th>
-                        <th class="product-price">Price</th>
-                        <th class="product-quantity">Qty</th>
-                        <th class="product-subtotal">Total</th>
-                        <th class="product-remove">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                        // find from the admintbl the record related to this Primary key
-                        $get_cart = mysqli_query($conn, "select * from cart where user_id=$sess_id");
-
-                        $total = 0;
-                        
-                        while ($cart_rec = mysqli_fetch_array($get_cart)) 
-                        {
-                            $carid = $cart_rec['car_id'];
-
-                            $get_car = mysqli_query($conn, "select * from car where car_id=$carid");
-                            $car_rec = mysqli_fetch_array($get_car);
-                            
-                            $total = $total + $car_rec['car_price'];
-                    ?>
+                    <form method="POST">
+                        <h4>Shopping Cart</h4>
+                        <p>View your shopping cart here!</p>
+                        </div>
+                        <table class="shop-table cart mb-20">
+                            <thead>
                             <tr>
-                                <td class="product-thumbnail"><img src="assets/img/<?php echo $car_rec["car_pic"];?>"></td>
-
-                                <td class="product-name">
-                                    <a href="#"><?php echo $car_rec['car_name']; ?></a>
-                                </td>
-                                <td>RM <?php echo $car_rec['car_price']; ?></td>
-                                <td>
-                                    <form method="POST">
-                                        <input class="qty" name="quantity" type="number" min="1" value="<?php echo $cart_rec['quantity']; ?>" >
-                                    </form>
-                                </td>
-                                <td>RM <?php echo $car_rec['car_price'] * $cart_rec["quantity"]; ?></td>
-                                
-                                <td class="product-remove">
-                                    <a href="shop-cart.php?deleteid=<?php echo $car_rec['car_id']; ?>">
-                                        <i class="fa fa-close"></i>
-                                    </a>
-                                </td>
+                                <th class="product-name">Product</th>
+                                <th class="product-price">Name</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Qty</th>
+                                <th class="product-subtotal">Total</th>
+                                <th class="product-remove">&nbsp;</th>
                             </tr>
-                            <?php 
+                            </thead>
+                            <tbody>
                             
-                        }
-                            ?>
-                    </tbody>
+                                <?php
+                                    // find from the admintbl the record related to this Primary key
+                                    $get_cart = mysqli_query($conn, "select * from cart where user_id=$sess_id");
 
-                </table>
+                                    $total = 0;
+                                    
+                                    while ($cart_rec = mysqli_fetch_array($get_cart)) 
+                                    {
+                                        $carid = $cart_rec['car_id'];
+
+                                        $get_car = mysqli_query($conn, "select * from car where car_id=$carid");
+                                        $car_rec = mysqli_fetch_array($get_car);
+                                        
+                                        $total = $total + $car_rec['car_price'];
+                                ?>
+                                    <tr>
+                                    
+                                        <td class="product-thumbnail"><img src="assets/img/<?php echo $car_rec["car_pic"];?>"></td>
+
+                                        <td class="product-name">
+                                            <a href="#"><?php echo $car_rec['car_name']; ?></a>
+                                        </td>
+                                        <td>RM <?php echo $car_rec['car_price']; ?></td>
+                                        <td>
+                                            <input class="qty" name="quantity" type="number" min="1" value="<?php echo $cart_rec['quantity']; ?>" >
+                                        </td>
+                                        <td>RM <?php echo $car_rec['car_price'] * $cart_rec["quantity"]; ?></td>
+                                        <td class="product-remove">
+                                            <a href="shop-cart.php?deleteid=<?php echo $car_rec['car_id']; ?>">
+                                                <i class="fa fa-close"></i>
+                                            </a>
+                                            
+                                        </td>
+                                        
+                                    
+                                    </tr>
+                                    
+                                    <?php 
+                                    
+                                }
+                                    ?>
+                                    
+                            </tbody>
+
+                        </table>
+                        <input class="btn btn-dark btn-block btn-md" name="update" type="submit" value="Update Cart">
+                    </form>
             </div>
+            
             <div class="col-lg-4">
                 <div class="cart-total-box bg-light hdn-mb-30 mb-30">
                 
@@ -295,11 +316,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                         Grand Total<span class="pull-right">RM <?php echo $subtotal + ($subtotal * 0.1);?></span>
                     </p>
                     <br>
-                    <form method="POST" action="shop-cart.php">
-                        <input type="hidden" name="cartid" value="<?php echo $cart_rec['cart_id']; ?>">
-                        <input type="hidden" name="quantity" id="hidden_quantity_<?php echo $cart_rec['cart_id']; ?>" 
-                            value="<?php echo $cart_rec['quantity']; ?>">
-                        <input class="btn btn-dark btn-block btn-md" name="update" type="submit" value="Update Cart">
+                    <form>
                         <input class="btn btn-color btn-block btn-md" type="submit" value="Proceed to Checkout" formaction="shop-checkout.php">
                     </form>
                 </div>
@@ -413,22 +430,6 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
 
 <?php
 
-if(isset($_POST['update']) && isset($_POST['cartid'])) 
-{
-    $cart_id = $_POST['cartid'];
-    $new_quantity = $_POST['quantity'];
-    
-    //$update_query = mysqli_query($conn, "UPDATE cart SET quantity = $new_quantity WHERE cart_id = $cart_id");
-    //echo "
-    //    <script>
-    //        alert('Quantity updated successfully');
-    //        window.location.href = 'shop-cart.php';
-    //    </script>";
-}
-?>
-
-<?php
-
 if (isset($_GET["deleteid"])) 
 {
     // delete the selected record
@@ -441,6 +442,30 @@ if (isset($_GET["deleteid"]))
         alert('The record has been deleted.'); // user message
         window.location.href = 'shop-cart.php';
     </script>";
+}
+
+?>
+
+<?php
+
+if(isset($_POST["update"])) 
+{
+    $get_cart = mysqli_query($conn, "select * from cart where user_id=$sess_id");
+    
+    while ($cart_rec = mysqli_fetch_array($get_cart))
+    {
+        $cartid = $cart_rec["cart_id"];
+        $new_quantity = $_POST["quantity"];
+        
+    }
+    $update_user = mysqli_query($conn, "UPDATE cart SET quantity = '$new_quantity' WHERE cart_id = '$cartid'"); 
+    if ($update_user) 
+    { // Changed variable name to match the updated query
+        echo "<script type='text/javascript'>
+                alert('Record has been updated successfully.');
+                window.location.href='shop-cart.php';
+                </script>";
+    } 
 }
 
 ?>

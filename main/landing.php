@@ -97,6 +97,11 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="orderlist.php" id="">
+                                            Order
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="contact.php" id="navbarDropdown3">
                                     Contact
                                 </a>
@@ -111,7 +116,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#full-page-search" class="nav-link">
+                                <a href="car-list.php#search" class="nav-link">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </li>
@@ -142,55 +147,6 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
     </div>
 </div>
 <!-- banner end -->
-
-<!-- Search area start -->
-<div class="search-area" id="search-area-1">
-    <div class="container">
-        <div class="search-area-inner">
-            <div class="search-contents ">
-                <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/index.html" method="GET">
-                    <div class="row">
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="brand">
-                                    <option>Select Brand</option>
-                                    <option>Honda</option>
-                                    <option>Toyota</option>
-                                    <option>Mercedes</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="Year">
-                                    <option>Select Year</option>
-                                    <option>2016</option>
-                                    <option>2017</option>
-                                    <option>2018</option>
-                                    <option>2019</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <div class="range-slider">
-                                    <div data-min="0" data-max="150000" data-unit="MYR" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <button class="search-button btn-md btn-color" type="submit">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Search area start -->
 
 <!-- Selcome section start -->
 <div class="welcome-section content-area-7">
@@ -278,7 +234,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                     <div class="row agent-5">
                         <div class="col-xl-5 col-lg-5 col-md-12 col-pad ">
                             <div class="photo">
-                                <img src="assets/img/avatar/avatar-9.jpg" alt="agent-list-2" class="img-fluid">
+                                <img src="assets/img/avatar/jiaheng.jpeg" alt="agent-list-2" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-xl-7 col-lg-7 col-md-12 col-pad align-self-center">
@@ -316,7 +272,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                     <div class="row agent-5">
                         <div class="col-xl-5 col-lg-5 col-md-12 col-pad ">
                             <div class="photo">
-                                <img src="assets/img/avatar/avatar-10.jpg" alt="agent-list-10" class="img-fluid">
+                                <img src="assets/img/avatar/beaven.jpeg" alt="agent-list-10" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-xl-7 col-lg-7 col-md-12 col-pad align-self-center">
@@ -504,92 +460,6 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
         <input type="search" value="" placeholder="type keyword(s) here" />
         <button type="button" class="btn btn-sm btn-color">Search</button>
     </form>
-</div>
-
-<!-- Car Video Modal -->
-<div class="modal car-modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="carModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6 modal-left">
-                        <div class="modal-left-content">
-                            <div id="modalCarousel" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <iframe class="modalIframe" src="https://www.youtube.com/embed/5e0LxrLSzok"  allowfullscreen></iframe>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="assets/img/car-1.jpg" alt="Test ALT">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="assets/img/car-1.jpg" alt="Test ALT">
-                                    </div>
-                                </div>
-                                <a class="control control-prev" href="#modalCarousel" role="button" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="control control-next" href="#modalCarousel" role="button" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                            <div class="description"><h3>Description</h3>
-                                <p>
-                                    Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque
-                                    massa, viverra interdum eros ut, imperdiet pellentesque mauris. Proin sit amet
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 modal-right">
-                        <div class="modal-right-content bg-white">
-                            <strong class="price">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </strong>
-                            <section>
-                                <h3>Audi A5</h3>
-                                <ul class="bullets">
-                                    <li><i class="fa fa-arrow-right"></i> Audio Interface</li>
-                                    <li><i class="fa fa-arrow-right"></i> CDR Audio</li>
-                                    <li><i class="fa fa-arrow-right"></i> Seat Heating</li>
-                                    <li><i class="fa fa-arrow-right"></i> ParkAssist</li>
-                                    <li><i class="fa fa-arrow-right"></i> Cruise Control</li>
-                                    <li><i class="fa fa-arrow-right"></i> Airbags</li>
-                                    <li><i class="fa fa-arrow-right"></i> Air Conditioning</li>
-                                    <li><i class="fa fa-arrow-right"></i> Alarm System</li>
-                                </ul>
-                            </section>
-                            <section>
-                                <h3>Overview</h3>
-                                <dl>
-                                    <dt>Model</dt>
-                                    <dd>BMW</dd>
-                                    <dt>Condition</dt>
-                                    <dd>Brand New</dd>
-                                    <dt>Year</dt>
-                                    <dd>2018</dd>
-                                    <dt>Mileage</dt>
-                                    <dd>37,000 mi</dd>
-                                    <dt>Price</dt>
-                                    <dd>$178,000</dd>
-                                </dl>
-                            </section>
-                            <a href="car-details.html" class="btn btn-theme">Show Detail</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Off-canvas sidebar -->

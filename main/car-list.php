@@ -131,6 +131,11 @@ if (isset($_SESSION["sess_id"]))
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="orderlist.php" id="">
+                                    Order
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="contact.php" id="navbarDropdown3">
                                     Contact
                                 </a>
@@ -167,7 +172,7 @@ if (isset($_SESSION["sess_id"]))
                                 
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#full-page-search" class="nav-link">
+                                <a href="car-list.php#search" class="nav-link">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </li>
@@ -194,8 +199,8 @@ if (isset($_SESSION["sess_id"]))
     <div class="container">
         <div class="search-area-inner">
             <div class="search-contents ">
-                <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/index.html" method="GET">
-                    <div class="row">
+                <form method="POST">
+                    <div class="row" id="search">
                         <div class="col-6 col-lg-3 col-md-3">
                             <div class="form-group">
                                 <select class="selectpicker search-fields" name="brand">
@@ -208,7 +213,7 @@ if (isset($_SESSION["sess_id"]))
                         </div>
                         <div class="col-6 col-lg-3 col-md-3">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="Year">
+                                <select class="selectpicker search-fields" name="year">
                                     <option>Select Year</option>
                                     <option value = "2016">2016</option>
                                     <option value = "2017">2017</option>
@@ -219,15 +224,7 @@ if (isset($_SESSION["sess_id"]))
                         </div>
                         <div class="col-6 col-lg-3 col-md-3">
                             <div class="form-group">
-                                <div class="range-slider">
-                                    <div data-min="0" data-max="150000" data-unit="MYR" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <button class="search-button btn-md btn-color" type="submit">Search</button>
+                                <input class="search-button btn-md btn-color" type="submit" value="Search" name="search"></input>
                             </div>
                         </div>
                     </div>
@@ -252,10 +249,30 @@ if (isset($_SESSION["sess_id"]))
             <div class="col-lg-12">
             <?php
                 // find from the admintbl the record related to this Primary key
-                $get_car = mysqli_query($conn, "select * from car");
+                
                 
                 // Retrieve the record
                 
+                    if (isset($_POST["search"]))
+                    {
+
+                        // Retrieve and sanitize input data
+                        $carbrand = $_POST["brand"];
+                        $caryear = $_POST["year"];
+
+                        // Check car
+                        $get_car = mysqli_query($conn, "SELECT * FROM car WHERE car_brand = '$carbrand'or car_year = '$caryear'" );
+                        //$search_rec = mysqli_fetch_assoc($searchcar);
+
+                        
+                    }
+                    else
+                    {
+                        $get_car = mysqli_query($conn, "select * from car");
+
+                    }
+
+
                 while ($car_rec = mysqli_fetch_array($get_car)) 
                 {
                     $show = $car_rec['show'];
@@ -294,7 +311,7 @@ if (isset($_SESSION["sess_id"]))
                                         <input type="submit" name="add_cart" class="btn btn-theme" value="Add to Cart">
                                     </form> 
                                 </div>
-                            </div>    
+                            </div>
                         </div>
                     <?php
                 }
@@ -443,3 +460,4 @@ if (isset($_GET["add_cart"]))
 }
 
 ?>
+
