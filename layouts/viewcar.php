@@ -2,14 +2,7 @@
 
 include "dataconnection.php";
 
-// get the session that keeps the Primary key
-$sess_id = $_SESSION["sess_id"]; 
 
-// find from the admintbl the record related to this Primary key
-$get_admin = mysqli_query($conn, "select * from admin where admin_id=$sess_id");
-
-// Retrieve the record
-$admin_rec = mysqli_fetch_assoc($get_admin);
 
 ?>
 
@@ -19,7 +12,7 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
 
 <head>
     <meta charset="utf-8" />
-    <title>Addcar | Admin Dashboard CARWOW</title>
+    <title>View Car | Admin Dashboard CARWOW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
@@ -87,7 +80,7 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Add Car Form</h4>
+            <h4 class="page-title d-none d-sm-block">View Car</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -571,7 +564,7 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class=".card-title">View Car</h4>
+                                    <h4 class=".card-title">Car Details</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">

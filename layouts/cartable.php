@@ -2,14 +2,7 @@
 
 include "dataconnection.php";
 
-// get the session that keeps the Primary key
-$sess_id = $_SESSION["sess_id"]; 
 
-// find from the admintbl the record related to this Primary key
-$get_admin = mysqli_query($conn, "select * from admin where admin_id=$sess_id");
-
-// Retrieve the record
-$admin_rec = mysqli_fetch_assoc($get_admin);
 
 ?>
 
@@ -44,16 +37,6 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript">
-
-        // confirm delete function
-        function confirm_delete()
-        {
-            answer = confirm("Do you want to delete this record?");
-            return answer;
-        }
-
-    </script>
     
 </head>
 
@@ -571,90 +554,76 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
                 <!-- Start Content-->
                 <div class="container-fluid">
 
-                <div class="row">
+                    <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class=".card-title">Car List</h4>
-                                    
                                 </div>
                                 <div class="card-body">
-
-                                    <table id="scroll-horizontal-datatable" class="table table-striped w-100 nowrap">
+                                    <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th>Car Name</th>
                                                 <th>Brand</th>
-                                                <th>Description</th>
                                                 <th>Price</th>
                                                 <th>Year</th>
-                                                <th>Colour</th>
-                                                <th>Engine</th>
-                                                <th>Mileage</th>
+                                                <th></th>
                                                 <th></th>
                                             </tr>
                                         </thead>
+
+
                                         <tbody>
-                                            <?php
-
-                                                if (isset($_POST["searchbtn"])) 
-                                                {
-                                                    // Get the search term from the form
-                                                    $search = $_POST["search"];
-
-                                                    // Sanitize the search term to prevent SQL injection
-                                                    $search = mysqli_real_escape_string($conn, $search);
-
-                                                    // Query the database for the product name
-                                                    $check_search = mysqli_query($conn, "SELECT * FROM car WHERE car_name = '$search'");
-
-                                                    if (mysqli_num_rows($check_search) > 0) {
-                                                        // Fetch the associated row
-                                                        $row2 = mysqli_fetch_assoc($check_search);
-
-                                                        // Redirect to the product details page with the product ID
-                                                        $car = mysqli_query($conn, "SELECT * FROM car WHERE car_id = " . $row2['car_id']);
-
-                                                    }
-                                                    else 
-                                                    {
-                                                        // Handle case where no matching product is found
-                                                        echo "<script>alert('No matching product found.');</script>";
-                                                        $product = mysqli_query($conn, "select * from car");
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                $car = mysqli_query($conn, "select * from car");
-                                                }
-
-                                                while($row = mysqli_fetch_assoc($car))
-                                                {
-                                            ?>
                                             <tr>
-                                                <td class="table-user">
-                                                    <div>
-                                                        <?php
-                                                            echo '<img src="../assets/img/' . $row['car_pic'] . '" alt="car">';
-                                                        ?>
-                                                    </div>
-                                                    <div>
-                                                        <?php
-                                                            echo $row['car_name'];
-                                                        ?>
-                                                    </div>
-                                                </td>
-                                                <td>
                                                 <?php
-                                                    echo $row['car_brand'];
-                                                ?>
-                                                </td>
+
+                                                    if (isset($_POST["searchbtn"])) 
+                                                    {
+                                                        // Get the search term from the form
+                                                        $search = $_POST["search"];
+
+                                                        // Sanitize the search term to prevent SQL injection
+                                                        $search = mysqli_real_escape_string($conn, $search);
+
+                                                        // Query the database for the product name
+                                                        $check_search = mysqli_query($conn, "SELECT * FROM car WHERE car_name = '$search'");
+
+                                                        if (mysqli_num_rows($check_search) > 0) {
+                                                            // Fetch the associated row
+                                                            $row2 = mysqli_fetch_assoc($check_search);
+
+                                                            // Redirect to the product details page with the product ID
+                                                            $car = mysqli_query($conn, "SELECT * FROM car WHERE car_id = " . $row2['car_id']);
+
+                                                        }
+                                                        else 
+                                                        {
+                                                            // Handle case where no matching product is found
+                                                            echo "<script>alert('No matching product found.');</script>";
+                                                            $product = mysqli_query($conn, "select * from car");
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                    $car = mysqli_query($conn, "select * from car");
+                                                    }
+
+                                                    while($row = mysqli_fetch_assoc($car))
+                                                    {
+                                                    ?>
                                                 <td>
                                                     <?php
-                                                        echo $row['car_des'];
+                                                        echo $row['car_name'];
                                                     ?>
                                                 </td>
                                                 <td>
+                                                    <?php
+                                                        echo $row['car_brand'];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    RM 
                                                     <?php
                                                         echo $row['car_price'];
                                                     ?>
@@ -665,23 +634,11 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
                                                     ?>
                                                 </td>
                                                 <td>
-                                                    <?php
-                                                        echo $row['car_col'];
-                                                    ?>
+                                                    <a href="viewcar.php" type="button" class="btn btn-link" style="color:black;"><u>View more</u></a>
+
+                                                    
                                                 </td>
-                                                <td>
-                                                    <?php
-                                                        echo $row['car_eng'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                        echo $row['car_mil'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-link" style="color:black;"><u>View more</u></button>
-                                                </td>
+                                                <td></td>
                                                 
                                             </tr>
                                             <?php
@@ -689,15 +646,17 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
                                             ?>
                                         </tbody>
                                     </table>
-                                    
+
                                 </div> <!-- end card body-->
-                                
+                                <div class="d-flex justify-content-end me-3">
+                                    <a href="addcar.php" type="button" class="btn btn-info rounded-pill" style="margin-bottom: 25px;">Add New Car</a>
+                                </div>
                             </div> <!-- end card -->
-                            <div >
-                                <a href="addcar.php" type="button" class="btn btn-info" class="justify-content-end row" href="addcar.php" style="text-align: right;">Add New Car</a>
-                            </div>
+                            
                         </div><!-- end col-->
+                        
                     </div> <!-- end row-->
+                    
                 </div> <!-- end container-->
             </div> <!-- content -->
 
