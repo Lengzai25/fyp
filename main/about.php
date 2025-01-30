@@ -195,20 +195,8 @@ if (isset($_SESSION["sess_id"]))
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="breadcrumb-area">
-                        <ul>
-                            <li><a href="index.html">Index</a></li>
-                            <li><span>/</span>About Us</li>
-                        </ul>
-                    </div>
                 </div>
                 <div class="col-md-7">
-                    <div class="contact-info">
-                        <ul>
-                            <li><i class="fa fa-phone"></i>+60185754753 / +60197784913</li>
-                            <li><a href="contact-1.html" class="btn btn-md btn-theme">Contact us</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -333,7 +321,7 @@ if (isset($_SESSION["sess_id"]))
                                     “There's nothing I can't find, only what you can't think of”
                                 </p>
                                 <div class="avatar">
-                                    <img src="assets/img/avatar/avatar-2.jpg" alt="avatar-2" class="img-fluid rounded">
+                                    <img src="assets/img/avatar/jiaheng.jpeg" alt="avatar-2" class="img-fluid rounded">
                                 </div>
                                 <div class="author-name">
                                     Jia Heng
@@ -344,7 +332,7 @@ if (isset($_SESSION["sess_id"]))
                                     “Any issues? Just contact me!”
                                 </p>
                                 <div class="avatar">
-                                    <img src="assets/img/avatar/avatar.jpg" alt="avatar" class="img-fluid rounded">
+                                    <img src="assets/img/avatar/beaven.jpeg" alt="avatar" class="img-fluid rounded">
                                 </div>
                                 <div class="author-name">
                                     Beaven Lee
@@ -433,7 +421,7 @@ if (isset($_SESSION["sess_id"]))
                                     “Thank god all the process going so smooth and very fast recommended to buy new car from carmart”
                                 </p>
                                 <div class="avatar">
-                                    <img src="assets/img/avatar/avatar-2.jpg" alt="avatar-2" class="img-fluid rounded">
+                                    <img src="assets/img/avatar/chenze.jpg" alt="avatar-2" class="img-fluid rounded">
                                 </div>
                                 <ul class="rating">
                                     <li>
@@ -461,7 +449,7 @@ if (isset($_SESSION["sess_id"]))
                                     “Put more option, model of car and more voucher for buyer”
                                 </p>
                                 <div class="avatar">
-                                    <img src="assets/img/avatar/avatar.jpg" alt="avatar" class="img-fluid rounded">
+                                    <img src="assets/img/avatar/tong.jpeg" alt="avatar" class="img-fluid rounded">
                                 </div>
                                 <ul class="rating">
                                     <li>
@@ -489,7 +477,7 @@ if (isset($_SESSION["sess_id"]))
                                     "The ordering process was so simple, and the product arrived quickly! The quality is excellent, and it looks even better than the photos. I’ll definitely be shopping here again!"
                                 </p>
                                 <div class="avatar">
-                                    <img src="assets/img/avatar/avatar-3.jpg" alt="avatar-3" class="img-fluid rounded">
+                                    <img src="assets/img/avatar/aiman.jpg" alt="avatar-3" class="img-fluid rounded">
                                 </div>
                                 <ul class="rating">
                                     <li>
