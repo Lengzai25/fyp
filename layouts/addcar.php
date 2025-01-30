@@ -1,10 +1,16 @@
+<?php
+
+include "dataconnection.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 
 <head>
     <meta charset="utf-8" />
-    <title>Admin CARWOW</title>
+    <title>Addcar | Admin Dashboard CARWOW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
@@ -20,6 +26,87 @@
 
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+
+	// JS form validation
+
+	function check_form()
+	{
+		var no_error = true;
+		var productname = document.addfrm.product_name.value;
+		var productdesc = document.addfrm.product_description.value;
+		var productprc = document.addfrm.product_price.value;
+		var productstk = document.addfrm.product_stock_level.value;
+		var productdate = document.addfrm.product_date_created.value;
+		
+		if (productname == "")
+		{
+			no_error = false;
+			document.getElementById("err_product_name").innerHTML = "Please key-in Product name.";
+		}
+		else 
+		{
+			document.getElementById("err_product_name").innerHTML = "";
+		}
+		
+		if (productdesc == "")
+		{
+			no_error = false;
+			document.getElementById("err_product_description").innerHTML = "Please key-in Product Description.";
+		}
+		else
+		{
+			document.getElementById("err_product_description").innerHTML = "";
+		}
+		
+		if (productprc == "")
+		{
+			no_error = false;
+			document.getElementById("err_product_price").innerHTML = "Price tag cannot be empty.";
+		}
+		else 
+			if (productprc < 1 )
+			{
+				no_error = false;
+				document.getElementById("err_product_price").innerHTML = "Cannot be less than RM 1.00.";
+			}	
+			else
+			{
+				document.getElementById("err_product_price").innerHTML = "";
+			}
+		
+		if (productstk == "")
+		{
+			no_error = false;
+			document.getElementById("err_product_stock_level").innerHTML = "Stock Level cannot be empty.";
+		}
+		else
+			if (productstk < 10 )
+			{
+				no_error = false;
+				document.getElementById("err_product_stock_level").innerHTML = "Stock Level cannot be less than 10 units.";
+			}
+			else
+			{
+				document.getElementById("err_product_stock_level").innerHTML = "";
+			}
+		
+		if (productdate == "")
+		{
+			no_error = false;
+			document.getElementById("err_product_date_created").innerHTML = "Date created cannot be empty.";
+		}
+		else
+		{
+			document.getElementById("err_product_date_created").innerHTML = "";
+		}
+		
+		return no_error;
+	}
+
+	</script>
+
 </head>
 
 <body>
@@ -60,7 +147,7 @@
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Form Elements</h4>
+            <h4 class="page-title d-none d-sm-block">Add Car Form</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -341,7 +428,7 @@
                     </div>
 
                     <!-- item-->
-                    <a href="pages-profile.html" class="dropdown-item">
+                    <a href="profile.php" class="dropdown-item">
                         <i class="ri-account-pin-circle-line fs-16 align-middle me-1 "></i>
                         <span>My Account</span>
                     </a>
@@ -361,33 +448,33 @@
         <!-- Left Sidebar Start -->
         <div class="leftside-menu">
 
-            <!-- Logo Light -->
-            <a href="index.html" class="logo logo-light">
-                <span class="logo-lg">
-                    <img src="assets/images/logo.png" alt="logo">
-                </span>
-                <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="small logo">
-                </span>
-            </a>
+		    <!-- Logo Light -->
+		    <a href="index.php" class="logo logo-light">
+		        <span class="logo-lg">
+		            <img src="assets/images/logo.png" alt="logo">
+		        </span>
+		        <span class="logo-sm">
+		            <img src="assets/images/logo-sm.png" alt="small logo">
+		        </span>
+		    </a>
 
-            <!-- Logo Dark -->
-            <a href="index.html" class="logo logo-dark">
-                <span class="logo-lg">
-                    <img src="assets/images/logo-dark.png" alt="dark logo">
-                </span>
-                <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="small logo">
-                </span>
-            </a>
+		    <!-- Logo Dark -->
+		    <a href="index.php" class="logo logo-dark">
+		        <span class="logo-lg">
+		            <img src="assets/images/logo-dark.png" alt="dark logo">
+		        </span>
+		        <span class="logo-sm">
+		            <img src="assets/images/logo-sm.png" alt="small logo">
+		        </span>
+		    </a>
 
-            <!-- Sidebar -->
-            <div data-simplebar>
+		    <!-- Sidebar -->
+		    <div data-simplebar>
                 <ul class="side-nav">
                     <li class="side-nav-title">Main</li>
 
                     <li class="side-nav-item">
-                        <a href="index.html" class="side-nav-link">
+                        <a href="index.php" class="side-nav-link">
                             <i class="ri-dashboard-2-line"></i>
                             <span> Dashboard </span>
                             <span class="badge bg-success float-end">9+</span>
@@ -405,16 +492,16 @@
                         <div class="collapse" id="sidebarPagesinvoice">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="apps-invoice-report.html">Invoice Report</a>
+                                    <a class="side-nav-link" href="invoice-report.php">Invoice Report</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="apps-invoice.html">Invoice</a>
+                                    <a class="side-nav-link" href="invoice.php">Invoice</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                    <li class="side-nav-title">Extra Pages</li>
+                    <li class="side-nav-title">Pages</li>
 
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
@@ -426,34 +513,7 @@
                         <div class="collapse" id="sidebarPages">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-starter.html">Starter Page</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-contact-list.html">Contact List</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-profile.html">Profile</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-timeline.html">Timeline</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-faq.html">FAQ</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-pricing.html">Pricing</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-maintenance.html">Maintenance</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="error-404.html">Error 404</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="error-404-alt.html">Error 404-alt</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="error-500.html">Error 500</a>
+                                    <a class="side-nav-link" href="profile.php">Profile</a>
                                 </li>
                             </ul>
                         </div>
@@ -469,48 +529,18 @@
                         <div class="collapse" id="sidebarPagesAuth">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-login.html">Login</a>
+                                    <a class="side-nav-link" href="login.php">Login</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-register.html">Register</a>
+                                    <a class="side-nav-link" href="register.php">Register</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-logout.html">Logout</a>
+                                    <a class="side-nav-link" href="logout.php">Logout</a>
                                 </li>
                                 <li class="side-nav-item">
                                     <a class="side-nav-link" href="auth-forgotpw.html">Forgot Password</a>
                                 </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-lock-screen.html">Lock Screen</a>
-                                </li>
 
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarLayouts" aria-expanded="false" aria-controls="sidebarLayouts" class="side-nav-link">
-                            <i class="ri-layout-line"></i>
-                            <span class="badge bg-warning float-end">New</span>
-                            <span> Layouts </span>
-                        </a>
-                        <div class="collapse" id="sidebarLayouts">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-light-sidebar.html" target="_blank">Light Sidebar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-sm-sidebar.html" target="_blank">Small Sidebar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-collapsed-sidebar.html" target="_blank">Collapsed Sidebar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-unsticky-layout.html" target="_blank">Unsticky Layout</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-boxed.html" target="_blank">Boxed Layout</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
@@ -527,96 +557,8 @@
                         <div class="collapse" id="sidebarBaseUI">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-accordions.html">Accordions</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-alerts.html">Alerts</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-avatars.html">Avatars</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-buttons.html">Buttons</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-button-group.html">Button group</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-badges.html">Badges</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-breadcrumb.html">Breadcrumb</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-cards.html">Cards</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-carousel.html">Carousel</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-collapse.html">Collapse</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-close-button.html">Close Button</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-dropdowns.html">Dropdowns</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-embed-video.html">Embed Video</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-grid.html">Grid</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-links.html">Links</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-list-group.html">List Group</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-modals.html">Modals</a>
-                                </li>
-                                <li class="side-nav-item">
                                     <a class="side-nav-link" href="ui-navbar.html">Navbar</a>
                                 </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-offcanvas.html">Offcanvas</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-placeholders.html">Placeholders</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-pagination.html">Pagination</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-popovers.html">Popovers</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-progress.html">Progress</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-scrollspy.html">Scrollspy</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-spinners.html">Spinners</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-toasts.html">Toasts</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-tabs.html">Tabs</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-tooltips.html">Tooltips</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-typography.html">Typography</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-utilities.html">Utilities</a>
-                                </li>
-
                             </ul>
                         </div>
                     </li>
@@ -628,43 +570,6 @@
                             <span class="menu-arrow"></span>
 
                         </a>
-                        <div class="collapse" id="sidebarIcons">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="icons-lucide.html">Lucide Icons</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="icons-remixicons.html">Remix Icons</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="icons-bootstrap.html">Bootstrap Icons</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="icons-mdi.html">Material Design Icons</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarCharts" aria-expanded="false" aria-controls="sidebarCharts" class="side-nav-link">
-                            <i class="ri-pie-chart-2-line"></i>
-                            <span> Charts </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarCharts">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="charts-apex.html">Apex Charts</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="charts-chartjs.html">Chartjs</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="charts-sparklines.html">Sparkline Charts</a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
 
                     <li class="side-nav-item">
@@ -677,19 +582,7 @@
                         <div class="collapse" id="sidebarForms">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-elements.html">Basic Elements</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-advanced.html">Form Advanced</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-validation.html">Form Validation</a>
-                                </li>
-                                <li class="side-nav-item">
                                     <a class="side-nav-link" href="form-wizard.html">Form Wizard</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-x-editable.html">X Editable</a>
                                 </li>
                             </ul>
                         </div>
@@ -720,7 +613,7 @@
                     
                 </ul>
             </div>
-        </div>
+		</div>
         <!-- Left Sidebar End -->
         
 
@@ -858,7 +751,7 @@
                                                 <div class="justify-content-end row" style="text-align: right; margin-top: 80px;">
                                                     <div class="col-9">
                                                         <input type="submit" name="savebtn" value="Save Product" class="btn btn-info"/>
-                                                        <input type="button" class="btn btn-info" style="margin-left: 5px;" name="cancelbtn" value="Cancel" onclick="window.location.href='#';"/>
+                                                        <input type="button" class="btn btn-info" style="margin-left: 5px;" name="cancelbtn" value="Cancel" onclick="window.location.href='cartable.php';"/>
                                                     </div>
                                                 </div>
 
@@ -1039,14 +932,6 @@
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
 
-
-
-
-
-
-
-
-
     <script src="assets/vendor/lucide/umd/lucide.min.js"></script>
 
     <!-- App js -->
@@ -1054,6 +939,62 @@
 
 </body>
 
-
-<!-- Mirrored from techzaa.in/techmin/layouts/form-elements.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:33:57 GMT -->
 </html>
+
+<?php
+
+if (isset($_POST["savebtn"]))
+{
+	// get all date from the form
+	$productname = $_POST["product_name"];
+	$productdesc = $_POST["product_description"];
+	$productprice = $_POST["product_price"];
+	$productstocklvl = $_POST["product_stock_level"];
+	$productcat = $_POST["product_category"];
+	$filename = $_POST["product_image"];
+	
+	// check for duplicate product name
+	$check_duplicate_productname = mysqli_query($conn, "select * from product where product_name = '$productname'");
+
+	$catid_result = mysqli_query($conn, "SELECT category_id FROM category WHERE category_name = '$productcat'");
+	while ($catid_row = mysqli_fetch_assoc($catid_result)) 
+	{
+		$catid = $catid_row['category_id'];
+	}
+	
+	if (mysqli_num_rows($check_duplicate_productname) > 0 )
+	{
+	echo
+	"<script type='text/javascript'>
+		alert('This Product Name already exists.');
+		history.go(-1);
+		window.location.href='addproduct.php';
+	</script>";
+	}
+	else // insert data into the product table
+	{	
+		if ($filename != "") 
+		{
+			$path = "../assets/img/".$filename;
+
+			mysqli_query($conn, "insert into product (product_name,product_desc,product_price,product_stock,category_id,product_image) values ('$productname','$productdesc','$productprice','$productstocklvl','$catid','$filename')");
+		}
+		else
+		{
+			echo "<script type='text/javascript'>
+						alert('Failed to upload image.');
+						window.location.href='viewproduct.php';
+					</script>";
+		}
+	}
+
+	echo
+		"<script type='text/javascript'>
+			alert('Record has been saved sucessfully.');
+			window.location.href='viewproduct.php';
+		</script>";
+	
+}
+
+
+?>
