@@ -59,6 +59,28 @@ if (isset($_SESSION["sess_id"]))
     <link type="text/css" rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="assets/css/skins/default.css">
 
+    <style>
+        .stars {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+        }
+        .stars input {
+            display: none;
+        }
+        .stars label {
+            font-size: 30px;
+            color: gray;
+            cursor: pointer;
+        }
+        .stars input:checked ~ label,
+        .stars label:hover,
+        .stars label:hover ~ label {
+            color: gold;
+        }
+    </style>
+
+
 </head>
 <body id="top">
 <!-- Google Tag Manager (noscript) -->
@@ -178,11 +200,6 @@ if (isset($_SESSION["sess_id"]))
                                 ?>
                                 
                             </li>
-                            <li class="nav-item dropdown">
-                                <a href="car-list.php#search" class="nav-link">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -227,6 +244,7 @@ if (isset($_SESSION["sess_id"]))
                         <th class="product-subtotal">Total</th>
                         <th class="product-subtotal">Time</th>
                         <th class="product-subtotal">Status</th>
+                        <th class="product-subtotal">Rating</th>
                         <th class="product-remove">&nbsp;</th>
                     </tr>
                 </thead>
@@ -253,6 +271,27 @@ if (isset($_SESSION["sess_id"]))
                                 <td>RM <?php echo $order_rec['car_price'] * $order_rec["quantity"]; ?></td>
                                 <td><?php echo $order_rec['ordertime']; ?></td>
                                 <td><?php echo $order_rec['stat']; ?></td>
+                                <td>
+                                    <form method="POST" action="">
+                                        <div class="stars">
+                                            <input type="hidden" name="order_id" value="<?php echo $order_rec['order_id']; ?>">
+                                            <input type="radio" id="star1_<?php echo $order_rec['order_id']; ?>" name="rating" value="5" <?php if($order_rec['rating'] == 5) echo "checked"; ?> onclick="this.form.submit()">
+                                            <label for="star1_<?php echo $order_rec['order_id']; ?>">&#9733;</label>
+                                            
+                                            <input type="radio" id="star2_<?php echo $order_rec['order_id']; ?>" name="rating" value="4" <?php if($order_rec['rating'] == 4) echo "checked"; ?> onclick="this.form.submit()">
+                                            <label for="star2_<?php echo $order_rec['order_id']; ?>">&#9733;</label>
+                                            
+                                            <input type="radio" id="star3_<?php echo $order_rec['order_id']; ?>" name="rating" value="3" <?php if($order_rec['rating'] == 3) echo "checked"; ?> onclick="this.form.submit()">
+                                            <label for="star3_<?php echo $order_rec['order_id']; ?>">&#9733;</label>
+                                            
+                                            <input type="radio" id="star4_<?php echo $order_rec['order_id']; ?>" name="rating" value="2" <?php if($order_rec['rating'] == 2) echo "checked"; ?> onclick="this.form.submit()">
+                                            <label for="star4_<?php echo $order_rec['order_id']; ?>">&#9733;</label>
+                                            
+                                            <input type="radio" id="star5_<?php echo $order_rec['order_id']; ?>" name="rating" value="1" <?php if($order_rec['rating'] == 1) echo "checked"; ?> onclick="this.form.submit()">
+                                            <label for="star5_<?php echo $order_rec['order_id']; ?>">&#9733;</label>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                             <?php 
                             
@@ -379,7 +418,27 @@ if (isset($_SESSION["sess_id"]))
 <script src="assets/js/ie-emulation-modes-warning.js"></script>
 <!-- Custom JS Script -->
 <script  src="assets/js/app.js"></script>
+
 </body>
 
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/faq-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:31 GMT -->
 </html>
+
+<?php
+
+    if (isset($_POST['rating'])) {
+        $order_id = $_POST['order_id'];
+        $rating = $_POST['rating'];
+        
+        $update_rating = mysqli_query($conn, "UPDATE checkout SET rating = '$rating' WHERE order_id = '$order_id' AND user_id = '$sess_id'");
+
+        if ($update_rating) 
+        {
+            echo "<script>alert('Thank you for your rating!'); window.location.href='orderlist.php';</script>";
+        } 
+        else 
+        {
+            echo "<script>alert('Failed to save rating. Please try again.');</script>";
+        }
+    }
+?>

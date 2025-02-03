@@ -171,11 +171,6 @@ if (isset($_SESSION["sess_id"]))
                                 ?>
                                 
                             </li>
-                            <li class="nav-item dropdown">
-                                <a href="car-list.php#search" class="nav-link">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -306,6 +301,15 @@ if (isset($_SESSION["sess_id"]))
                                         </div>
                                         <p><?php echo $car_rec["car_des"]; ?></p>
                                     </div>
+                                <ul class="rating">
+                                    <li>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-full"></i>
+                                    </li>
+                                </ul>
                                     <form method="GET" action="car-list.php">
                                         <input type="hidden" name="cid" value="<?php echo $car_rec['car_id']; ?>">
                                         <input type="submit" name="add_cart" class="btn btn-theme" value="Add to Cart">
