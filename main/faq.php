@@ -183,6 +183,7 @@ if (isset($_SESSION["sess_id"]))
         </div>
     </div>
 </header>
+
 <!-- main header end -->
 
 <!-- Sub banner start -->
