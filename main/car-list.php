@@ -301,15 +301,6 @@ if (isset($_SESSION["sess_id"]))
                                         </div>
                                         <p><?php echo $car_rec["car_des"]; ?></p>
                                     </div>
-                                <ul class="rating">
-                                    <li>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-full"></i>
-                                    </li>
-                                </ul>
                                     <form method="GET" action="car-list.php">
                                         <input type="hidden" name="cid" value="<?php echo $car_rec['car_id']; ?>">
                                         <input type="submit" name="add_cart" class="btn btn-theme" value="Add to Cart">
@@ -321,17 +312,6 @@ if (isset($_SESSION["sess_id"]))
                 }
                 ?>
                 
-                <div class="pagination-box">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="car-list-leftside.html"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item"><a class="page-link" href="car-list-rightside.html">1</a></li>
-                            <li class="page-item"><a class="page-link" href="car-list-leftside.html">2</a></li>
-                            <li class="page-item"><a class="page-link  active" href="car-list-fullwidth.html">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">»</span></a></li>
-                        </ul>
-                    </nav>
-                </div>
             </div>
         </div>
     </div>
