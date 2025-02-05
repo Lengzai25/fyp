@@ -147,7 +147,7 @@ include "dataconnection.php";
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Add Car Form</h4>
+            <h4 class="page-title d-none d-sm-block">Add Car</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -631,7 +631,7 @@ include "dataconnection.php";
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class=".card-title">Add New Car</h4>
+                                    <h4 class=".card-title">Car Details</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -679,7 +679,7 @@ include "dataconnection.php";
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Car Price</label>
+                                                    <label for="example-number" class="form-label">Car Price (RM)</label>
                                                     <input class="form-control" id="example-number" type="number"
                                                         name="number" min="0">
                                                 </div>
@@ -692,18 +692,16 @@ include "dataconnection.php";
 
                                                 <div class="mb-3">
                                                     <label for="example-textarea" class="form-label">Car Description</label>
-                                                    <textarea class="form-control" id="example-textarea"
-                                                        rows="5"></textarea>
+                                                    <textarea class="form-control" id="example-textarea" placeholder="Enter the car description...." rows="5"></textarea>
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="example-month" class="form-label">Year</label>
-                                                    <input class="form-control" id="example-month" type="month"
-                                                        name="month">
+                                                    <label for="example-number" class="form-label">Year</label>
+                                                    <input  type="number" id="example-number" class="form-control" name="number" min="1970">
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Mileage</label>
+                                                    <label for="example-number" class="form-label">Mileage (km)</label>
                                                     <input class="form-control" id="example-number" type="number"
                                                         name="number" min="0">
                                                 </div>
@@ -748,17 +746,17 @@ include "dataconnection.php";
                                                         placeholder="Enter the car engine">
                                                 </div>
 
-                                                <div class="justify-content-end row" style="text-align: right; margin-top: 80px;">
-                                                    <div class="col-9">
-                                                        <input type="submit" name="savebtn" value="Save Product" class="btn btn-info"/>
-                                                        <input type="button" class="btn btn-info" style="margin-left: 5px;" name="cancelbtn" value="Cancel" onclick="window.location.href='cartable.php';"/>
-                                                    </div>
-                                                </div>
-
                                             </form>
+                                            
                                         </div> <!-- end col -->
+                                        <!-- Button Section -->
+                                        <div class="d-flex justify-content-end mt-auto">
+                                            <input type="submit" name="savebtn" value="Save Product" class="btn btn-info"/>
+                                            <input type="button" class="btn btn-secondary ms-2" name="cancelbtn" value="Cancel" onclick="window.location.href='cartable.php';"/>
+                                        </div>
                                     </div>
                                     <!-- end row-->
+                                    
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->
                         </div><!-- end col -->

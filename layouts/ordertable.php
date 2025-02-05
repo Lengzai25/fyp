@@ -1,11 +1,16 @@
+<?php
+
+include "dataconnection.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 
-<!-- Mirrored from techzaa.in/techmin/layouts/apps-invoice-report.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:33:41 GMT -->
 <head>
     <meta charset="utf-8" />
-    <title>Invoice Report | Techmin - Bootstrap 5 Admin & Dashboard Template</title>
+    <title>Order Table | Admin Dashboard CARWOW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
@@ -35,7 +40,7 @@
             <!-- Topbar Brand Logo -->
             <div class="logo-topbar">
                 <!-- Logo light -->
-                <a href="index.html" class="logo-light">
+                <a href="index.php" class="logo-light">
                     <span class="logo-lg">
                         <img src="assets/images/logo.png" alt="logo">
                     </span>
@@ -45,7 +50,7 @@
                 </a>
 
                 <!-- Logo Dark -->
-                <a href="index.html" class="logo-dark">
+                <a href="index.php" class="logo-dark">
                     <span class="logo-lg">
                         <img src="assets/images/logo-dark.png" alt="dark logo">
                     </span>
@@ -61,7 +66,7 @@
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Invoice Report</h4>
+            <h4 class="page-title d-none d-sm-block">Customer Orders</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -342,27 +347,9 @@
                     </div>
 
                     <!-- item-->
-                    <a href="pages-profile.html" class="dropdown-item">
+                    <a href="profile.php" class="dropdown-item">
                         <i class="ri-account-pin-circle-line fs-16 align-middle me-1 "></i>
                         <span>My Account</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="pages-profile.html" class="dropdown-item">
-                        <i class="ri-settings-4-line fs-16 align-middle me-1"></i>
-                        <span>Settings</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="pages-faq.html" class="dropdown-item">
-                        <i class="ri-customer-service-2-line fs-16 align-middle me-1"></i>
-                        <span>Support</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="auth-lock-screen.html" class="dropdown-item">                
-                        <i class="ri-lock-line fs-16 align-middle me-1"></i>
-                        <span>Lock Screen</span>
                     </a>
 
                     <!-- item-->
@@ -380,33 +367,33 @@
         <!-- Left Sidebar Start -->
         <div class="leftside-menu">
 
-            <!-- Logo Light -->
-            <a href="index.html" class="logo logo-light">
-                <span class="logo-lg">
-                    <img src="assets/images/logo.png" alt="logo">
-                </span>
-                <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="small logo">
-                </span>
-            </a>
+		    <!-- Logo Light -->
+		    <a href="index.php" class="logo logo-light">
+		        <span class="logo-lg">
+		            <img src="assets/images/logo.png" alt="logo">
+		        </span>
+		        <span class="logo-sm">
+		            <img src="assets/images/logo-sm.png" alt="small logo">
+		        </span>
+		    </a>
 
-            <!-- Logo Dark -->
-            <a href="index.html" class="logo logo-dark">
-                <span class="logo-lg">
-                    <img src="assets/images/logo-dark.png" alt="dark logo">
-                </span>
-                <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="small logo">
-                </span>
-            </a>
+		    <!-- Logo Dark -->
+		    <a href="index.php" class="logo logo-dark">
+		        <span class="logo-lg">
+		            <img src="assets/images/logo-dark.png" alt="dark logo">
+		        </span>
+		        <span class="logo-sm">
+		            <img src="assets/images/logo-sm.png" alt="small logo">
+		        </span>
+		    </a>
 
-            <!-- Sidebar -->
-            <div data-simplebar>
+		    <!-- Sidebar -->
+		    <div data-simplebar>
                 <ul class="side-nav">
                     <li class="side-nav-title">Main</li>
 
                     <li class="side-nav-item">
-                        <a href="index.html" class="side-nav-link">
+                        <a href="index.php" class="side-nav-link">
                             <i class="ri-dashboard-2-line"></i>
                             <span> Dashboard </span>
                             <span class="badge bg-success float-end">9+</span>
@@ -414,22 +401,6 @@
                     </li>
 
                     <li class="side-nav-title">App</li>
-            
-                    <li class="side-nav-item">
-                        <a href="apps-calendar.html" class="side-nav-link">
-                            <i class="ri-calendar-line"></i>
-                            <span> Calendar</span>
-
-                        </a>
-                    </li>
-           
-                    <li class="side-nav-item">
-                        <a href="apps-kanban-board.html" class="side-nav-link">
-                            <i class="ri-artboard-line"></i>
-                            <span> Kanban Board</span>
-                        </a>
-                    </li>
-
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPagesinvoice" aria-expanded="false" aria-controls="sidebarPagesinvoice" class="side-nav-link">
                             <i class="ri-article-line"></i>
@@ -440,16 +411,16 @@
                         <div class="collapse" id="sidebarPagesinvoice">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="apps-invoice-report.html">Invoice Report</a>
+                                    <a class="side-nav-link" href="invoice-report.php">Invoice Report</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="apps-invoice.html">Invoice</a>
+                                    <a class="side-nav-link" href="invoice.php">Invoice</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                    <li class="side-nav-title">Extra Pages</li>
+                    <li class="side-nav-title">Pages</li>
 
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
@@ -461,34 +432,7 @@
                         <div class="collapse" id="sidebarPages">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-starter.html">Starter Page</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-contact-list.html">Contact List</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-profile.html">Profile</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-timeline.html">Timeline</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-faq.html">FAQ</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-pricing.html">Pricing</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-maintenance.html">Maintenance</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="error-404.html">Error 404</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="error-404-alt.html">Error 404-alt</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="error-500.html">Error 500</a>
+                                    <a class="side-nav-link" href="profile.php">Profile</a>
                                 </li>
                             </ul>
                         </div>
@@ -504,48 +448,18 @@
                         <div class="collapse" id="sidebarPagesAuth">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-login.html">Login</a>
+                                    <a class="side-nav-link" href="login.php">Login</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-register.html">Register</a>
+                                    <a class="side-nav-link" href="register.php">Register</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-logout.html">Logout</a>
+                                    <a class="side-nav-link" href="logout.php">Logout</a>
                                 </li>
                                 <li class="side-nav-item">
                                     <a class="side-nav-link" href="auth-forgotpw.html">Forgot Password</a>
                                 </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-lock-screen.html">Lock Screen</a>
-                                </li>
 
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarLayouts" aria-expanded="false" aria-controls="sidebarLayouts" class="side-nav-link">
-                            <i class="ri-layout-line"></i>
-                            <span class="badge bg-warning float-end">New</span>
-                            <span> Layouts </span>
-                        </a>
-                        <div class="collapse" id="sidebarLayouts">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-light-sidebar.html" target="_blank">Light Sidebar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-sm-sidebar.html" target="_blank">Small Sidebar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-collapsed-sidebar.html" target="_blank">Collapsed Sidebar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-unsticky-layout.html" target="_blank">Unsticky Layout</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="layouts-boxed.html" target="_blank">Boxed Layout</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
@@ -562,117 +476,7 @@
                         <div class="collapse" id="sidebarBaseUI">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-accordions.html">Accordions</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-alerts.html">Alerts</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-avatars.html">Avatars</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-buttons.html">Buttons</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-button-group.html">Button group</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-badges.html">Badges</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-breadcrumb.html">Breadcrumb</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-cards.html">Cards</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-carousel.html">Carousel</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-collapse.html">Collapse</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-close-button.html">Close Button</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-dropdowns.html">Dropdowns</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-embed-video.html">Embed Video</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-grid.html">Grid</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-links.html">Links</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-list-group.html">List Group</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-modals.html">Modals</a>
-                                </li>
-                                <li class="side-nav-item">
                                     <a class="side-nav-link" href="ui-navbar.html">Navbar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-offcanvas.html">Offcanvas</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-placeholders.html">Placeholders</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-pagination.html">Pagination</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-popovers.html">Popovers</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-progress.html">Progress</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-scrollspy.html">Scrollspy</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-spinners.html">Spinners</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-toasts.html">Toasts</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-tabs.html">Tabs</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-tooltips.html">Tooltips</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-typography.html">Typography</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="ui-utilities.html">Utilities</a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
-                            <i class="ri-compass-3-line"></i>
-                            <span> Extended UI </span>
-                            <span class="menu-arrow"></span>
-
-                        </a>
-                        <div class="collapse" id="sidebarExtendedUI">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="extended-portlets.html">Portlets</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="extended-scrollbar.html">Scrollbar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="extended-range-slider.html">Range Slider</a>
                                 </li>
                             </ul>
                         </div>
@@ -685,43 +489,6 @@
                             <span class="menu-arrow"></span>
 
                         </a>
-                        <div class="collapse" id="sidebarIcons">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="icons-lucide.html">Lucide Icons</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="icons-remixicons.html">Remix Icons</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="icons-bootstrap.html">Bootstrap Icons</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="icons-mdi.html">Material Design Icons</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarCharts" aria-expanded="false" aria-controls="sidebarCharts" class="side-nav-link">
-                            <i class="ri-pie-chart-2-line"></i>
-                            <span> Charts </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarCharts">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="charts-apex.html">Apex Charts</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="charts-chartjs.html">Chartjs</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="charts-sparklines.html">Sparkline Charts</a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
 
                     <li class="side-nav-item">
@@ -734,28 +501,7 @@
                         <div class="collapse" id="sidebarForms">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-elements.html">Basic Elements</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-advanced.html">Form Advanced</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-validation.html">Form Validation</a>
-                                </li>
-                                <li class="side-nav-item">
                                     <a class="side-nav-link" href="form-wizard.html">Form Wizard</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-fileuploads.html">File Uploads</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-editors.html">Form Editors</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-image-crop.html">Image Crop</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="form-x-editable.html">X Editable</a>
                                 </li>
                             </ul>
                         </div>
@@ -772,103 +518,21 @@
                         <div class="collapse" id="sidebarTables">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="tables-basic.html">Basic Tables</a>
-                                </li>
-                                <li class="side-nav-item">
                                     <a class="side-nav-link" href="tables-datatable.html">Data Tables</a>
                                 </li>
                                 <li class="side-nav-item">
                                     <a class="side-nav-link" href="tables-editable.html">Editable Tables</a>
                                 </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="tables-responsive.html">Responsive Table</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
 
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarMaps" aria-expanded="false" aria-controls="sidebarMaps" class="side-nav-link">
-                            <i class="ri-map-pin-line"></i>
-                            <span> Maps </span>
-                            <span class="menu-arrow"></span>
+                    
 
-                        </a>
-                        <div class="collapse" id="sidebarMaps">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="maps-google.html">Google Maps</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="maps-vector.html">Vector Maps</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarMultiLevel" aria-expanded="false" aria-controls="sidebarMultiLevel" class="side-nav-link">
-                            <i class="ri-share-line"></i>
-                            <span> Multi Level </span>
-                            <span class="menu-arrow"></span>
-
-                        </a>
-                        <div class="collapse" id="sidebarMultiLevel">
-                            <ul class="side-nav-second-level">
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="javascript: void(0);">Level 1.1</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a data-bs-toggle="collapse" href="#sidebarSecondLevel" aria-expanded="false" aria-controls="sidebarSecondLevel">
-                                        <span> Level 1.2 </span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <div class="collapse" id="sidebarSecondLevel">
-                                        <ul class="side-nav-third-level">
-                                            <li class="side-nav-item">
-                                                <a class="side-nav-link" href="javascript: void(0);">Item 1</a>
-                                            </li>
-                                            <li class="side-nav-item">
-                                                <a class="side-nav-link" href="javascript: void(0);">Item 2</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a data-bs-toggle="collapse" href="#sidebarThirdLevel" aria-expanded="false" aria-controls="sidebarThirdLevel">
-                                        <span> Level 1.3 </span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <div class="collapse" id="sidebarThirdLevel">
-                                        <ul class="side-nav-third-level">
-                                            <li class="side-nav-item">
-                                                <a class="side-nav-link" href="javascript: void(0);">Item 1</a>
-                                            </li>
-                                            <li class="side-nav-item">
-                                                <a data-bs-toggle="collapse" href="#sidebarFourthLevel" aria-expanded="false" aria-controls="sidebarFourthLevel">
-                                                    <span> Item 2 </span>
-                                                    <span class="menu-arrow"></span>
-                                                </a>
-                                                <div class="collapse" id="sidebarFourthLevel">
-                                                    <ul class="side-nav-forth-level">
-                                                        <li class="side-nav-item">
-                                                            <a class="side-nav-link" href="javascript: void(0);">Item 2.1</a>
-                                                        </li>
-                                                        <li class="side-nav-item">
-                                                            <a class="side-nav-link" href="javascript: void(0);">Item 2.2</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                    
                 </ul>
             </div>
-        </div>
+		</div>
         <!-- Left Sidebar End -->
         
 
@@ -888,22 +552,11 @@
                                     <div class="d-flex justify-content-between">
                                         <div>
                                             <h5 class="card-title mb-1">
-                                                All Invoices
+                                                All Orders
                                             </h5>
                                         </div>
     
-                                        <ul class="nav nav-pills nav-justified " role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                                <a href="#home1" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0  active" aria-selected="true" role="tab" >
-                                                    Invoices
-                                                </a>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <a href="#profile1" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0" aria-selected="false" role="tab" tabindex="-1">
-                                                    Referrals
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        
     
                                     </div>
                                 </div>
@@ -922,7 +575,7 @@
                                                         </th>
 
                                                         <th>
-                                                            Product
+                                                            Car
                                                         </th>
                                                         <th>
                                                             Date
@@ -1323,218 +976,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="profile1" role="tabpanel">
-                                        <div class="table-responsive">
-                                            <table class="table align-middle mb-0">
-                                                <thead>
-                                                    <tr class="bg-light">
-                                                        <th>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </th>
-                                                        <th>
-                                                            Source
-                                                        </th>
-
-                                                        <th>
-                                                            View
-                                                        </th>
-                                                        <th>
-                                                            Sales
-                                                        </th>
-                                                        <th>
-                                                            Convertion
-                                                        </th>
-                                                        <th>
-                                                            Total
-                                                        </th>
-                                                        <th>
-                                                            Rate
-                                                        </th>
-                                                        <th>
-                                                            <div>
-                                                                <span>Action</span>
-                                                            </div>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm ">
-                                                                    <img src="assets/images/brands/Facebook-logo.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Facebook</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>38,512</td>
-
-                                                        <td>608</td>
-
-                                                        <td>11.08% </td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$10,000.00</h5>
-                                                        </td>
-
-                                                        <td>4.9</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/twitter.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Twitter</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>32,192</td>
-                                                        <td>436</td>
-                                                        <td>9.12%</td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$1000.00</h5>
-                                                        </td>
-                                                        <td>3.0</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/pinterest.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Pinterest</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>48,242</td>
-                                                        <td>496</td>
-                                                        <td>9.14%</td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$1200.00</h5>
-                                                        </td>
-
-                                                        <td>3.2</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/dribbble.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Dribble</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>16,518</td>
-                                                        <td>189</td>
-
-                                                        <td>4.56%</td>
-
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$800.12</h5>
-                                                        </td>
-
-                                                        <td>
-                                                            1.8
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/website.html" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Website</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>26,141</td>
-                                                        <td>592</td>
-                                                        <td>6.5%</td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$688.14</h5>
-                                                        </td>
-
-                                                        <td>2.2</td>
-
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/email.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Email</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>86,120</td>
-                                                        <td>1006</td>
-                                                        <td>12.89%</td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$15000.86</h5>
-                                                        </td>
-                                                        <td>5.0</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1543,18 +985,6 @@
                 </div> <!-- container -->
 
             </div> <!-- content -->
-
-            <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <script>document.write(new Date().getFullYear())</script> © Techmin - Theme by <b>Techzaa</b>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
 
         </div>
 
@@ -1714,23 +1144,12 @@
                 <div class="col-6">
                     <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
                 </div>
-                <div class="col-6">
-                    <a href="#" role="button" class="btn btn-primary w-100">Buy Now</a>
-                </div>
             </div>
         </div>
     </div>
 
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
-
-
-
-
-
-
-
-
 
     <script src="assets/vendor/lucide/umd/lucide.min.js"></script>
 
@@ -1740,5 +1159,4 @@
 </body>
 
 
-<!-- Mirrored from techzaa.in/techmin/layouts/apps-invoice-report.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:33:43 GMT -->
 </html>

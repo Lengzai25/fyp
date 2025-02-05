@@ -669,9 +669,9 @@
                                                                     <label class="form-label" for="RePassword">Re-Password</label>
                                                                     <input type="password" placeholder="6 - 15 Characters" id="RePassword" class="form-control">
                                                                 </div>
-                                                                <div class="col-sm-12 mb-3">
-                                                                    <label class="form-label" for="AboutMe">About Me</label>
-                                                                    <textarea style="height: 125px;" id="AboutMe" class="form-control">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</textarea>
+                                                                <div class="mb-3">
+                                                                    <label for="example-fileinput" class="form-label">Image</label>
+                                                                    <input type="file" id="example-fileinput" class="form-control">
                                                                 </div>
                                                             </div>
                                                             <button class="btn btn-primary" type="submit"><i class="mdi mdi-content-save-outline me-1 fs-16 lh-1"></i> Save</button>
@@ -769,18 +769,6 @@
 
             </div>
             <!-- content -->
-
-            <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <script>document.write(new Date().getFullYear())</script> © Techmin - Theme by <b>Techzaa</b>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
 
         </div>
 
@@ -940,9 +928,6 @@
                 <div class="col-6">
                     <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
                 </div>
-                <div class="col-6">
-                    <a href="#" role="button" class="btn btn-primary w-100">Buy Now</a>
-                </div>
             </div>
         </div>
     </div>
@@ -971,5 +956,4 @@
 </body>
 
 
-<!-- Mirrored from techzaa.in/techmin/layouts/pages-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:33:38 GMT -->
 </html>

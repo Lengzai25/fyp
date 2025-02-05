@@ -578,72 +578,41 @@ include "dataconnection.php";
                                             <tr>
                                                 <?php
 
-                                                    if (isset($_POST["searchbtn"])) 
-                                                    {
-                                                        // Get the search term from the form
-                                                        $search = $_POST["search"];
-
-                                                        // Sanitize the search term to prevent SQL injection
-                                                        $search = mysqli_real_escape_string($conn, $search);
-
-                                                        // Query the database for the product name
-                                                        $check_search = mysqli_query($conn, "SELECT * FROM car WHERE car_name = '$search'");
-
-                                                        if (mysqli_num_rows($check_search) > 0) {
-                                                            // Fetch the associated row
-                                                            $row2 = mysqli_fetch_assoc($check_search);
-
-                                                            // Redirect to the product details page with the product ID
-                                                            $car = mysqli_query($conn, "SELECT * FROM car WHERE car_id = " . $row2['car_id']);
-
-                                                        }
-                                                        else 
-                                                        {
-                                                            // Handle case where no matching product is found
-                                                            echo "<script>alert('No matching product found.');</script>";
-                                                            $product = mysqli_query($conn, "select * from car");
-                                                        }
-                                                    }
-                                                    else
-                                                    {
                                                     $car = mysqli_query($conn, "select * from car");
-                                                    }
-
                                                     while($row = mysqli_fetch_assoc($car))
                                                     {
-                                                    ?>
-                                                <td>
+                                                        ?>
+                                                        <td>
+                                                            <?php
+                                                                echo $row['car_name'];
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                                echo $row['car_brand'];
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            RM 
+                                                            <?php
+                                                                echo $row['car_price'];
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                                echo $row['car_year'];
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <a href="viewcar.php?car_id=<?php echo $row['car_id']; ?>" type="button" class="btn btn-link" style="color:black;"><u>View more</u></a>
+                                                            
+                                                        </td>
+                                                        <td></td>
+                                                        
+                                                    </tr>
                                                     <?php
-                                                        echo $row['car_name'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                        echo $row['car_brand'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    RM 
-                                                    <?php
-                                                        echo $row['car_price'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                        echo $row['car_year'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <a href="viewcar.php" type="button" class="btn btn-link" style="color:black;"><u>View more</u></a>
-
-                                                    
-                                                </td>
-                                                <td></td>
-                                                
-                                            </tr>
-                                            <?php
-                                                }
-                                            ?>
+                                                    }
+                                                ?>
                                         </tbody>
                                     </table>
 
