@@ -170,11 +170,6 @@ if (isset($_SESSION["sess_id"]))
                                 ?>
                                 
                             </li>
-                            <li class="nav-item dropdown">
-                                <a href="car-list.php#search" class="nav-link">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -196,18 +191,12 @@ if (isset($_SESSION["sess_id"]))
             <div class="row">
                 <div class="col-md-5">
                     <div class="breadcrumb-area">
-                        <ul>
-                            <li><a href="index.html">Index</a></li>
-                            <li><span>/</span>Contact Us</li>
-                        </ul>
+                        
                     </div>
                 </div>
                 <div class="col-md-7">
                     <div class="contact-info">
-                        <ul>
-                            <li><i class="fa fa-phone"></i> +60185754753 / +60197784913</li>
-                            <li><a href="contact-1.html" class="btn btn-md btn-theme">Contact us</a></li>
-                        </ul>
+                        
                     </div>
                 </div>
             </div>
@@ -221,7 +210,7 @@ if (isset($_SESSION["sess_id"]))
     <div class="container">
         <div class="main-title">
             <h1><span>Contact</span> Us</h1>
-            <p>Any question just us</p>
+            <p>Any question just contact us</p>
         </div>
 
         <div class="row">
@@ -244,26 +233,22 @@ if (isset($_SESSION["sess_id"]))
                 </div>
             </div>
             <div class="col-lg-8 col-md-7">
-                <form action="#" method="GET" enctype="multipart/form-data">
+                <form name="send" method="POST">
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group name">
-                                <input type="text" name="name" class="form-control" placeholder="Name">
+                                <input type="text" name="name" class="form-control" placeholder="Name"  required>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group email">
-                                <input type="email" name="email" class="form-control" placeholder="Email">
+                                <input type="email" name="email" class="form-control" placeholder="Email" required>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group subject">
-                                <input type="text" name="subject" class="form-control" placeholder="Subject">
-                            </div>
-                        </div>
+                        
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group number">
-                                <input type="text" name="phone" class="form-control" placeholder="Number">
+                                <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -274,7 +259,7 @@ if (isset($_SESSION["sess_id"]))
                         <div class="col-lg-12">
                             <div class="send-btn text-center">
                                 <br>
-                                <button type="submit" class="btn btn-border btn-md">Send Message</button>
+                                <input type="submit" class="btn-md btn-theme btn-block" name="sendmes" value="Send Message">
                             </div>
                         </div>
                     </div>
@@ -284,14 +269,6 @@ if (isset($_SESSION["sess_id"]))
     </div>
 </div>
 <!-- Contact 3 end -->
-
-<!-- Google map start -->
-<div class="section">
-    <div class="map">
-        <div id="contactMap" class="contact-map"></div>
-    </div>
-</div>
-<!-- Google map end -->
 
 <!-- Footer start -->
 <footer class="footer">
@@ -387,27 +364,44 @@ if (isset($_SESSION["sess_id"]))
 
 <!-- External JS libraries -->
 <script src="assets/js/jquery-2.2.0.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.selectBox.js"></script>
-<script src="assets/js/rangeslider.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/jquery.filterizr.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/backstretch.js"></script>
-<script src="assets/js/jquery.countdown.js"></script>
-<script src="assets/js/jquery.scrollUp.js"></script>
-<script src="assets/js/particles.min.js"></script>
-<script src="assets/js/typed.min.js"></script>
-<script src="assets/js/dropzone.js"></script>
-<script src="assets/js/jquery.mb.YTPlayer.js"></script>
-<script src="assets/js/slick.min.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0N5pbJN10Y1oYFRd0MJ_v2g8W2QT74JE"></script>
-<script src="assets/js/ie-emulation-modes-warning.js"></script>
 <!-- Custom JS Script -->
 <script  src="assets/js/app.js"></script>
 </body>
 
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites-2/wain-html/HTML/main/contact-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 12:34:34 GMT -->
 </html>
+
+<?php
+if (isset($_POST["sendmes"])) {
+
+    // Retrieve and sanitize input data
+    $username = $_POST["name"];
+    $useremail = $_POST["email"];
+    $usertel = $_POST["phone"];
+    $usermes = $_POST["message"];
+
+        // Insert new user into the database
+        $insert_user = mysqli_query($conn, "INSERT INTO contact (cust_name, cust_email, cust_num, cust_mes) VALUES ('$username', '$useremail', '$usertel', '$usermes')");
+
+        if ($insert_user) 
+        {
+            if (isset($_SESSION["user_id"]))
+            {
+                echo "<script type='text/javascript'>
+                        alert('Record has been saved successfully.');
+                        window.location.href='landing.php';
+                    </script>";
+            }
+            else
+            {
+                echo "<script type='text/javascript'>
+                        alert('Record has been saved successfully.');
+                        window.location.href='index.php';
+                    </script>";
+            }
+        }
+
+    mysqli_close($conn);
+}
+?>

@@ -171,11 +171,6 @@ if (isset($_SESSION["sess_id"]))
                                 ?>
                                 
                             </li>
-                            <li class="nav-item dropdown">
-                                <a href="car-list.php#search" class="nav-link">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -183,6 +178,7 @@ if (isset($_SESSION["sess_id"]))
         </div>
     </div>
 </header>
+
 <!-- main header end -->
 
 <!-- Sub banner start -->
@@ -196,20 +192,8 @@ if (isset($_SESSION["sess_id"]))
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="breadcrumb-area">
-                        <ul>
-                            <li><a href="index.html">Index</a></li>
-                            <li><span>/</span>Faq</li>
-                        </ul>
-                    </div>
                 </div>
                 <div class="col-md-7">
-                    <div class="contact-info">
-                        <ul>
-                            <li><i class="fa fa-phone"></i>+60185754753 / +60197784913</li>
-                            <li><a href="contact-1.html" class="btn btn-md btn-theme">Contact us</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>

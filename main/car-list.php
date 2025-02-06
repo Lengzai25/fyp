@@ -171,11 +171,6 @@ if (isset($_SESSION["sess_id"]))
                                 ?>
                                 
                             </li>
-                            <li class="nav-item dropdown">
-                                <a href="car-list.php#search" class="nav-link">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -317,17 +312,6 @@ if (isset($_SESSION["sess_id"]))
                 }
                 ?>
                 
-                <div class="pagination-box">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="car-list-leftside.html"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item"><a class="page-link" href="car-list-rightside.html">1</a></li>
-                            <li class="page-item"><a class="page-link" href="car-list-leftside.html">2</a></li>
-                            <li class="page-item"><a class="page-link  active" href="car-list-fullwidth.html">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><span aria-hidden="true">»</span></a></li>
-                        </ul>
-                    </nav>
-                </div>
             </div>
         </div>
     </div>

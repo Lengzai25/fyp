@@ -184,11 +184,6 @@ $car_rec = mysqli_fetch_assoc($get_car);
                                 ?>
                                 
                             </li>
-                            <li class="nav-item dropdown">
-                                <a href="car-list.php#search" class="nav-link">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -302,7 +297,7 @@ $car_rec = mysqli_fetch_assoc($get_car);
                             <span>Year</span><?php echo $car_rec["car_year"];?>
                         </li>
                         <li>
-                            <span>Mileage</span><?php echo $car_rec["car_mil"];?>
+                            <span>Mileage (km)</span><?php echo $car_rec["car_mil"];?>
                         </li>
                         <li>
                             <span>Color</span><?php echo $car_rec["car_col"];?>
