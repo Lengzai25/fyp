@@ -1,3 +1,18 @@
+<?php
+
+include "dataconnection.php";
+
+// get the session that keeps the Primary key
+$sess_id = $_SESSION["sess_id"]; 
+
+// find from the admintbl the record related to this Primary key
+$get_admin = mysqli_query($conn, "select * from admin where admin_id=$sess_id");
+
+// Retrieve the record
+$admin_rec = mysqli_fetch_assoc($get_admin);
+
+?>  
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +35,7 @@
 
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -328,10 +344,12 @@
             <li class="dropdown">
                 <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="account-user-avatar">
-                        <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
+                        <?php
+                            echo '<img src="assets/images/users/' . $admin_rec['admin_image'] . '"alt="user-image" width="32" class="rounded-circle">';
+                        ?>
                     </span>
                     <span class="d-lg-block d-none">
-                        <h5 class="my-0 fw-normal">Adams<i class="ri-arrow-down-s-line fs-22 d-none d-sm-inline-block align-middle"></i></h5>
+                        <h5 class="my-0 fw-normal"><?php echo $admin_rec["admin_name"] ?><i class="ri-arrow-down-s-line fs-22 d-none d-sm-inline-block align-middle"></i></h5>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
@@ -548,33 +566,32 @@
                                 <div class="row g-2">
                                     <div class="col-lg-3  d-none d-lg-block">
                                         <div class="profile-user-img p-2 text-start">
-                                            <img src="assets/images/users/avatar-1.jpg" alt="" class="img-thumbnail avatar-lg rounded">
+                                            <?php
+                                                echo '<img src="assets/images/users/' . $admin_rec['admin_image'] . '"class="img-thumbnail avatar-lg rounded" >';
+                                            ?>
                                         </div>
                                         <div class="text-start p-1 pt-2">
-                                            <h4 class=" fs-17 ellipsis">Adams A. Franklin</h4>
-                                            <p class="font-13"> User Experience Specialist</p>
+                                            <h4 class=" fs-17 ellipsis">
+                                                <?php
+                                                echo $admin_rec['admin_name'];
+                                                ?>
+                                            </h4>
                                             <p class="text-muted mb-0"><small>Malacca, Malaysia</small></p>
 
-                                            <div class="d-flex pt-3 align-items-center justify-content-center flex-xl-nowrap flex-lg-wrap justify-content-md-start">
-                                                <button type="button" class="btn btn-soft-danger me-sm-2 mt-1">
-                                                    <i class="mdi mdi-cog align-text-bottom me-1 fs-16 lh-1"></i>
-                                                    Edit Profile
-                                                </button>
-                                                <button class="btn btn-soft-info mt-1" href="#"> <i class="mdi mdi-check-all fs-18 me-1 lh-1"></i>Following</button>
-                                            </div>
+                                           
 
 
                                         </div>
                                         <div class="pt-3 ps-2">
-                                            <p class="text-muted mb-2 font-13"><strong>UserName :</strong> <span class="ms-2">Adams A. Franklin</span></p>
+                                            <p class="text-muted mb-2 font-13"><strong>UserName :</strong> <span class="ms-2"><?php echo $admin_rec['admin_name']; ?></span></p>
 
-                                            <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span class="ms-2">user@email.domain</span></p>
+                                            <p class="text-muted mb-12 font-13"><strong>Email :</strong> <span class="ms-0"><?php echo $admin_rec['admin_email']; ?></span></p>
 
                                             <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ms-2">Malaysia</span></p>
                                         </div>
 
                                         <div class="text-start mt-4">
-                                            <h4 class="">Fllow On:</h4>
+                                            <h4 class="">Follow On:</h4>
                                             <div class="d-flex gap-2 mt-3">
                                                 <a href="javascript: void(0);" class="btn px-2 py-1 btn-soft-primary"><i class="mdi mdi-facebook"></i></a>
                                                 <a href="javascript: void(0);" class="btn px-2 py-1 btn-soft-danger"><i class="mdi mdi-google-plus"></i></a>
@@ -588,60 +605,39 @@
                                         <div class="profile-content">
                                             <div class="nav nav-pills nav-justified gap-0 p-3 text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                                 </li>
-                                                <li class="nav-item mt-2"><a class="nav-link fs-5 p-2 active" data-bs-toggle="tab" data-bs-target="#aboutme" type="button" role="tab" aria-controls="home" aria-selected="true" href="#aboutme">About</a>
+                                                <li class="nav-item mt-2"><a class="nav-link fs-5 p-2 active" data-bs-toggle="tab" data-bs-target="#aboutme" type="button" role="tab" aria-controls="home" aria-selected="true" href="profile.php">About</a>
                                                 </li>
-                                                <li class="nav-item mt-2"><a class="nav-link fs-5 p-2" data-bs-toggle="tab" data-bs-target="#edit-profile" type="button" role="tab" aria-controls="home" aria-selected="true" href="#edit-profile">Settings</a></li>
-                                                <li class="nav-item mt-2"><a class="nav-link fs-5 p-2" data-bs-toggle="tab" data-bs-target="#projects" type="button" role="tab" aria-controls="home" aria-selected="true" href="#projects">Projects</a></li>
-
+                                                <li class="nav-item mt-2"><a class="nav-link fs-5 p-2" data-bs-toggle="tab" data-bs-target="#edit-profile" type="button" role="tab" aria-controls="home" aria-selected="true" href="editprofile.php">Settings</a></li>
                                             </div>
 
                                             <div class="tab-content m-0 p-2 p-sm-4 " id="v-pills-tabContent">
 
                                                 <div class="tab-pane active" id="aboutme" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                                                     <div class="profile-desk">
-                                                        <h5 class="text-uppercase fs-17 text-dark">Johnathan Deo</h5>
-                                                        <div class="designation mb-3">PRODUCT DESIGNER (UX / UI / Visual
-                                                            Interaction)</div>
-                                                        <p class="text-muted fs-16">
-                                                            I have 10 years of experience designing for the web, and
-                                                            specialize
-                                                            in the areas of user interface design, interaction design,
-                                                            visual
-                                                            design and prototyping. I’ve worked with notable startups
-                                                            including
-                                                            Pearl Street Software.
-                                                        </p>
-
                                                         <h5 class="mt-4 fs-17 text-dark">Contact Information</h5>
                                                         <table class="table table-condensed table-bordered mb-0 border-top table-striped">
                                                             <tbody>
                                                                 <tr>
-                                                                    <th scope="row">Url</th>
+                                                                    <th scope="row">UserName</th>
                                                                     <td>
-                                                                        <a href="#" class="ng-binding">
-                                                                            www.example.com
-                                                                        </a>
+                                                                        <div class="text-primary-emphasis">
+                                                                            <?php echo $admin_rec['admin_name']; ?>
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">Email</th>
                                                                     <td>
-                                                                        <a href="#" class="ng-binding">
-                                                                            jonathandeo@example.com
-                                                                        </a>
+                                                                        <div class="text-primary-emphasis">
+                                                                            <?php echo $admin_rec['admin_email']; ?>
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
 
                                                                 <tr>
-                                                                    <th scope="row">Phone</th>
-                                                                    <td class="ng-binding">(123)-456-7890</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Skype</th>
-                                                                    <td>
-                                                                        <a href="#" class="ng-binding">
-                                                                            jonathandeo123
-                                                                        </a>
+                                                                    <th scope="row">Password</th>
+                                                                    <td class="text-primary-emphasis">
+                                                                        <?php echo $admin_rec['admin_password']; ?>
                                                                     </td>
                                                                 </tr>
 
@@ -651,11 +647,13 @@
                                                 </div> <!-- about-me -->
                                                 <div id="edit-profile" class="tab-pane">
                                                     <div class="user-profile-content">
+                                                        
                                                         <form>
+
                                                             <div class="row row-cols-sm-2 row-cols-1">
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="Username">Username</label>
-                                                                    <input type="text" value="john" id="Username" class="form-control">
+                                                                    <input type="text" value="<?php echo $admin_rec['admin_name']; ?>" id="Username" class="form-control">
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="Email">Email</label>
@@ -663,87 +661,19 @@
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="Password">Password</label>
-                                                                    <input type="password" placeholder="6 - 15 Characters" id="Password" class="form-control">
+                                                                    <input type="text" placeholder="6 - 15 Characters" id="Password" class="form-control">
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="RePassword">Re-Password</label>
-                                                                    <input type="password" placeholder="6 - 15 Characters" id="RePassword" class="form-control">
+                                                                    <input type="text" placeholder="6 - 15 Characters" id="RePassword" class="form-control">
                                                                 </div>
-                                                                <div class="col-sm-12 mb-3">
-                                                                    <label class="form-label" for="AboutMe">About Me</label>
-                                                                    <textarea style="height: 125px;" id="AboutMe" class="form-control">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</textarea>
+                                                                <div class="mb-3">
+                                                                    <label for="example-fileinput" class="form-label">Image</label>
+                                                                    <input type="file" id="example-fileinput" class="form-control">
                                                                 </div>
                                                             </div>
-                                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-content-save-outline me-1 fs-16 lh-1"></i> Save</button>
+                                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-content-save-outline me-1 fs-16 lh-1"></i>Update</button>
                                                         </form>
-                                                    </div>
-                                                </div>
-                                                <div id="projects" class="tab-pane">
-                                                    <div class="row m-t-10">
-                                                        <div class="col-md-12">
-                                                            <div class="table-responsive ">
-                                                                <table class="table table-bordered mb-0 table-striped table-hover">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>#</th>
-                                                                            <th>Project Name</th>
-                                                                            <th>Start Date</th>
-                                                                            <th>Due Date</th>
-                                                                            <th>Status</th>
-                                                                            <th>Assign</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody class="table-group-divider">
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Techmin Admin</td>
-                                                                            <td>01/01/2015</td>
-                                                                            <td>07/05/2015</td>
-                                                                            <td><span class="badge bg-info">Work
-                                                                                    in Progress</span></td>
-                                                                            <td>Techzaa</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2</td>
-                                                                            <td>Techmin Frontend</td>
-                                                                            <td>01/01/2015</td>
-                                                                            <td>07/05/2015</td>
-                                                                            <td><span class="badge bg-success">Pending</span>
-                                                                            </td>
-                                                                            <td>Techzaa</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>3</td>
-                                                                            <td>Techmin Admin</td>
-                                                                            <td>01/01/2015</td>
-                                                                            <td>07/05/2015</td>
-                                                                            <td><span class="badge bg-pink">Done</span>
-                                                                            </td>
-                                                                            <td>Techzaa</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>4</td>
-                                                                            <td>Techmin Frontend</td>
-                                                                            <td>01/01/2015</td>
-                                                                            <td>07/05/2015</td>
-                                                                            <td><span class="badge bg-purple">Work
-                                                                                    in Progress</span></td>
-                                                                            <td>Techzaa</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>5</td>
-                                                                            <td>Techmin Admin</td>
-                                                                            <td>01/01/2015</td>
-                                                                            <td>07/05/2015</td>
-                                                                            <td><span class="badge bg-warning">Coming
-                                                                                    soon</span></td>
-                                                                            <td>Techzaa</td>
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <!-- profile -->
@@ -769,18 +699,6 @@
 
             </div>
             <!-- content -->
-
-            <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <script>document.write(new Date().getFullYear())</script> © Techmin - Theme by <b>Techzaa</b>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
 
         </div>
 
@@ -940,9 +858,6 @@
                 <div class="col-6">
                     <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
                 </div>
-                <div class="col-6">
-                    <a href="#" role="button" class="btn btn-primary w-100">Buy Now</a>
-                </div>
             </div>
         </div>
     </div>
@@ -971,5 +886,4 @@
 </body>
 
 
-<!-- Mirrored from techzaa.in/techmin/layouts/pages-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:33:38 GMT -->
 </html>

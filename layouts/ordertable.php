@@ -10,7 +10,7 @@ include "dataconnection.php";
 
 <head>
     <meta charset="utf-8" />
-    <title>Add Car | Admin Dashboard CARWOW</title>
+    <title>Order Table | Admin Dashboard CARWOW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
@@ -27,86 +27,34 @@ include "dataconnection.php";
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Toggle dropdown when clicking the "more options" icon
+    $(".more-options").click(function(event) {
+        event.stopPropagation(); // Prevent closing immediately
+        var id = $(this).data("id");
+        $(".dropdown-menu").hide(); // Hide other dropdowns
+        $("#dropdown-" + id).toggle(); // Show current dropdown
+    });
 
-	// JS form validation
+    // Hide dropdown when clicking anywhere else
+    $(document).click(function() {
+        $(".dropdown-menu").hide();
+    });
 
-	function check_form()
-	{
-		var no_error = true;
-		var productname = document.addfrm.product_name.value;
-		var productdesc = document.addfrm.product_description.value;
-		var productprc = document.addfrm.product_price.value;
-		var productstk = document.addfrm.product_stock_level.value;
-		var productdate = document.addfrm.product_date_created.value;
-		
-		if (productname == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_name").innerHTML = "Please key-in Product name.";
-		}
-		else 
-		{
-			document.getElementById("err_product_name").innerHTML = "";
-		}
-		
-		if (productdesc == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_description").innerHTML = "Please key-in Product Description.";
-		}
-		else
-		{
-			document.getElementById("err_product_description").innerHTML = "";
-		}
-		
-		if (productprc == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_price").innerHTML = "Price tag cannot be empty.";
-		}
-		else 
-			if (productprc < 1 )
-			{
-				no_error = false;
-				document.getElementById("err_product_price").innerHTML = "Cannot be less than RM 1.00.";
-			}	
-			else
-			{
-				document.getElementById("err_product_price").innerHTML = "";
-			}
-		
-		if (productstk == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_stock_level").innerHTML = "Stock Level cannot be empty.";
-		}
-		else
-			if (productstk < 10 )
-			{
-				no_error = false;
-				document.getElementById("err_product_stock_level").innerHTML = "Stock Level cannot be less than 10 units.";
-			}
-			else
-			{
-				document.getElementById("err_product_stock_level").innerHTML = "";
-			}
-		
-		if (productdate == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_date_created").innerHTML = "Date created cannot be empty.";
-		}
-		else
-		{
-			document.getElementById("err_product_date_created").innerHTML = "";
-		}
-		
-		return no_error;
-	}
+    // Edit function (Placeholder - You can add your edit logic)
+    $(".edit-status").click(function() {
+        alert("Edit function clicked for ID: " + $(this).data("id"));
+    });
 
-	</script>
-
+    // Update function (Placeholder - You can replace this with AJAX)
+    $(".update-status").click(function() {
+        var id = $(this).data("id");
+        alert("Update function clicked for ID: " + id);
+    });
+});
+</script>
 </head>
 
 <body>
@@ -147,7 +95,7 @@ include "dataconnection.php";
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Add Car</h4>
+            <h4 class="page-title d-none d-sm-block">Customer Orders</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -626,151 +574,169 @@ include "dataconnection.php";
 
                 <!-- Start Content-->
                 <div class="container-fluid">
-
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-xl-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class=".card-title">Car Details</h4>
-                                </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <form>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h5 class="card-title mb-1">
+                                                All Orders
+                                            </h5>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+    
+                                <div class="tab-content">
+                                    <div class="tab-pane show active" id="home1" role="tabpanel">
+                                        <div class="table-responsive">
+                                            <table class="table align-middle mb-0">
+                                                <thead>
+                                                    <tr class="bg-light">
+                                                        <th>
+                                                            Customer
+                                                        </th>
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                                        <th>
+                                                            Car
+                                                        </th>
+                                                        <th>
+                                                            Ordertime
+                                                        </th>
+                                                        <th>
+                                                            Amount
+                                                        </th>
+                                                        <th>
+                                                            Telephone
+                                                        </th>
+                                                        <th>
+                                                            Status
+                                                        </th>
+                                                        <th>
+                                                            Rate
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 2</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                                        if (isset($_POST["searchbtn"])) 
+                                                        {
+                                                            // Get the search term from the form
+                                                            $search = $_POST["search"];
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 3</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                                            // Sanitize the search term to prevent SQL injection
+                                                            $search = mysqli_real_escape_string($conn, $search);
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 4</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                                            // Query the database for the product name
+                                                            $check_search = mysqli_query($conn, "SELECT * FROM checkout WHERE user_name = '$search'");
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 5</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                                            if (mysqli_num_rows($check_search) > 0) {
+                                                                // Fetch the associated row
+                                                                $row2 = mysqli_fetch_assoc($check_search);
 
-                                                <div class="mb-3">
-                                                    <label for="example-select" class="form-label">Car Brand</label>
-                                                    <select class="form-select" id="example-select">
-                                                        <option selected>Select car brand</option>
-                                                        <option value="1">Toyota</option>
-                                                        <option value="2">Honda</option>
-                                                        <option value="3">Mercedes-Benz</option>
-                                                    </select>
-                                                </div>
+                                                                // Redirect to the product details page with the product ID
+                                                                $customer = mysqli_query($conn, "SELECT * FROM customer WHERE cust_id = " . $row2['cust_id']);
 
-                                                <div class="mb-3">
-                                                    <label for="simpleinput" class="form-label">Car Model</label>
-                                                    <input type="text" id="simpleinput" class="form-control" placeholder="Enter the car model">
-                                                </div>
+                                                            }
+                                                            else 
+                                                            {
+                                                                // Handle case where no matching product is found
+                                                                echo "<script>alert('No matching user found.');</script>";
+                                                                $customer = mysqli_query($conn, "select * from customer");
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                        $checkout = mysqli_query($conn, "select * from checkout");
+                                                        }
 
-                                                <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Car Price (RM)</label>
-                                                    <input class="form-control" id="example-number" type="number"
-                                                        name="number" min="0">
-                                                </div>
+                                                        while($row = mysqli_fetch_assoc($checkout))
+                                                        {
+                                                    ?>
+                                                    <tr>
+                                                        
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="avatar-sm rounded-circle">
+                                                                    <img src="assets/images/users/avatar-1.jpg" alt="" class="img-fluid rounded-circle">
+                                                                </div>
+                                                                <div class="ps-2">
+                                                                    <h5 class="mb-1">
+                                                                        <?php
+                                                                            echo $row['user_name'];
+                                                                        ?>
+                                                                    </h5>
+                                                                    <p class="text-muted fs-6 mb-0">
+                                                                        <?php
+                                                                            echo $row['user_email'];
+                                                                        ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
 
-                                            </form>
-                                        </div> <!-- end col -->
+                                                        <td>
+                                                            <?php
+                                                                echo $row['car_name'];
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                                echo $row['ordertime'];
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-success fw-bold">
+                                                                RM<?php
+                                                                    echo $row['car_price'];
+                                                                ?>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                                echo $row['user_tel'];
+                                                            ?>
+                                                        </td>
 
-                                        <div class="col-lg-6">
-                                            <form>
+                                                        
 
-                                                <div class="mb-3">
-                                                    <label for="example-textarea" class="form-label">Car Description</label>
-                                                    <textarea class="form-control" id="example-textarea" placeholder="Enter the car description...." rows="5"></textarea>
-                                                </div>
+                                                        <td>
+                                                            <select class="form-select status-dropdown" data-id="<?php echo $row['order_id']; ?>">
+                                                                <option value="Done" class="badge bg-success-subtle text-success " <?php if ($row['stat'] == 'Done') echo 'selected'; ?>>Done</option>
+                                                                <option value="Work in Progress" class="badge bg-info-subtle text-info " <?php if ($row['stat'] == 'Work in Progress') echo 'selected'; ?>>Work in Progress</option>
+                                                            </select>
+                                                        </td>
 
-                                                <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Year</label>
-                                                    <input  type="number" id="example-number" class="form-control" name="number" min="1970">
-                                                </div>
+                                                        <td>
+                                                            <h5 class="mb-0">4.0 <span class="fs-12 text-muted">(199 Votes)</span></h5>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-outline-dark"><span class="ri-check-fill"></span></button>
+                                                        </td>
+                                                    </tr>
 
-                                                <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Mileage (km)</label>
-                                                    <input class="form-control" id="example-number" type="number"
-                                                        name="number" min="0">
-                                                </div>
-
-                                                <h6 class="fs-15 mt-3" >Body Color</h6>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio1" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio1">Grey</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio2" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio2">White</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio3" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio3">Blue</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio4" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio4">Red</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio5" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio5">Black</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio6" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio6">Dark Grey</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio7" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio7">Others</label>
-                                                    </div>
-                                                    <br>
-
-                                                <div class="mb-3">
-                                                    <label for="example-palaceholder"
-                                                        class="form-label">Car Engine</label>
-                                                    <input type="text" id="example-palaceholder" class="form-control"
-                                                        placeholder="Enter the car engine">
-                                                </div>
-
-                                            </form>
-                                            
-                                        </div> <!-- end col -->
-                                        <!-- Button Section -->
-                                        <div class="d-flex justify-content-end mt-auto">
-                                            <input type="submit" name="savebtn" value="Save Product" class="btn btn-info"/>
-                                            <input type="button" class="btn btn-secondary ms-2" name="cancelbtn" value="Cancel" onclick="window.location.href='cartable.php';"/>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                    <!-- end row-->
                                     
-                                </div> <!-- end card-body -->
-                            </div> <!-- end card -->
-                        </div><!-- end col -->
-                    </div><!-- end row -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div> <!-- container -->
 
             </div> <!-- content -->
 
         </div>
+        
 
         <!-- ============================================================== -->
         <!-- End Page content -->
@@ -942,62 +908,5 @@ include "dataconnection.php";
 
 </body>
 
+
 </html>
-
-<?php
-
-if (isset($_POST["savebtn"]))
-{
-	// get all date from the form
-	$productname = $_POST["product_name"];
-	$productdesc = $_POST["product_description"];
-	$productprice = $_POST["product_price"];
-	$productstocklvl = $_POST["product_stock_level"];
-	$productcat = $_POST["product_category"];
-	$filename = $_POST["product_image"];
-	
-	// check for duplicate product name
-	$check_duplicate_productname = mysqli_query($conn, "select * from product where product_name = '$productname'");
-
-	$catid_result = mysqli_query($conn, "SELECT category_id FROM category WHERE category_name = '$productcat'");
-	while ($catid_row = mysqli_fetch_assoc($catid_result)) 
-	{
-		$catid = $catid_row['category_id'];
-	}
-	
-	if (mysqli_num_rows($check_duplicate_productname) > 0 )
-	{
-	echo
-	"<script type='text/javascript'>
-		alert('This Product Name already exists.');
-		history.go(-1);
-		window.location.href='addproduct.php';
-	</script>";
-	}
-	else // insert data into the product table
-	{	
-		if ($filename != "") 
-		{
-			$path = "../assets/img/".$filename;
-
-			mysqli_query($conn, "insert into product (product_name,product_desc,product_price,product_stock,category_id,product_image) values ('$productname','$productdesc','$productprice','$productstocklvl','$catid','$filename')");
-		}
-		else
-		{
-			echo "<script type='text/javascript'>
-						alert('Failed to upload image.');
-						window.location.href='viewproduct.php';
-					</script>";
-		}
-	}
-
-	echo
-		"<script type='text/javascript'>
-			alert('Record has been saved sucessfully.');
-			window.location.href='viewproduct.php';
-		</script>";
-	
-}
-
-
-?>

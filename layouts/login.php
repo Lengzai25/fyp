@@ -2,10 +2,9 @@
 <html lang="en">
 
 
-<!-- Mirrored from techzaa.in/techmin/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:33:45 GMT -->
 <head>
     <meta charset="utf-8" />
-    <title>Log In | Techmin - Bootstrap 5 Admin & Dashboard Template</title>
+    <title>Log In | Admin Dashboard CARWOW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
@@ -21,6 +20,7 @@
 
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body class="authentication-bg position-relative" style="height: 100vh;">
@@ -33,10 +33,10 @@
                             <div class="col-lg-6">
                                 <div class="d-flex flex-column h-100">
                                     <div class="auth-brand p-4 text-center">
-                                        <a href="index.html" class="logo-light">
+                                        <a href="index.php" class="logo-light">
                                             <img src="assets/images/logo.png" alt="logo" height="28">
                                         </a>
-                                        <a href="index.html" class="logo-dark">
+                                        <a href="index.php" class="logo-dark">
                                             <img src="assets/images/logo-dark.png" alt="dark logo" height="28">
                                         </a>
                                     </div>
@@ -45,6 +45,7 @@
                                         <p class="text-muted mb-4">Enter your email address and password to <br> access
                                             account.
                                         </p>
+                                        
 
                                         <!-- form -->
                                         <form action="#" class="text-start">
@@ -93,8 +94,9 @@
                                     </div>
                                 </div>
                             </div> <!-- end col -->
-                            <div class="col-lg-6 d-none d-lg-block">
-                                <img src="assets/images/auth-img.jpg" alt="" class="img-fluid rounded h-100">
+                            <div class="col-lg-6">
+                                <img src="assets/images/wpcar1.jpg" alt="Auth Image" class="img-fluid w-100"
+                            style="height: 670px; object-fit: cover; border-radius: 0 0.25rem 0.25rem 0;">
                             </div>
                         </div>
                     </div>
@@ -114,11 +116,7 @@
     </div>
     <!-- end page -->
 
-    <footer class="footer footer-alt fw-medium">
-        <span class="text-dark">
-            <script>document.write(new Date().getFullYear())</script> © Techmin - Theme by Techzaa
-        </span>
-    </footer>
+    
 
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
@@ -139,5 +137,4 @@
 </body>
 
 
-<!-- Mirrored from techzaa.in/techmin/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:33:45 GMT -->
 </html>

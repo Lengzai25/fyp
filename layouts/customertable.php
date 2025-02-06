@@ -2,14 +2,7 @@
 
 include "dataconnection.php";
 
-// get the session that keeps the Primary key
-$sess_id = $_SESSION["sess_id"]; 
 
-// find from the admintbl the record related to this Primary key
-$get_admin = mysqli_query($conn, "select * from admin where admin_id=$sess_id");
-
-// Retrieve the record
-$admin_rec = mysqli_fetch_assoc($get_admin);
 
 ?>
 

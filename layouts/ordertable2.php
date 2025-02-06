@@ -1,17 +1,30 @@
+<?php
+
+include "dataconnection.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 
-<!-- Mirrored from techzaa.in/techmin/layouts/apps-invoice-report.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:33:41 GMT -->
 <head>
     <meta charset="utf-8" />
-    <title>Invoice Report | Techmin - Bootstrap 5 Admin & Dashboard Template</title>
+    <title>Datatables | Techmin - Bootstrap 5 Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Datatables css -->
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Theme Config Js -->
     <script src="assets/js/config.js"></script>
@@ -61,7 +74,7 @@
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Invoice Report</h4>
+            <h4 class="page-title d-none d-sm-block">Data Tables</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -882,679 +895,102 @@
                 <!-- Start Content-->
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xl-12">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h5 class="card-title mb-1">
-                                                All Invoices
-                                            </h5>
-                                        </div>
-    
-                                        <ul class="nav nav-pills nav-justified " role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                                <a href="#home1" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0  active" aria-selected="true" role="tab" >
-                                                    Invoices
-                                                </a>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <a href="#profile1" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0" aria-selected="false" role="tab" tabindex="-1">
-                                                    Referrals
-                                                </a>
-                                            </li>
-                                        </ul>
-    
-                                    </div>
-                                </div>
-    
-                                <div class="tab-content">
-                                    <div class="tab-pane show active" id="home1" role="tabpanel">
-                                        <div class="table-responsive">
-                                            <table class="table align-middle mb-0">
-                                                <thead>
-                                                    <tr class="bg-light">
-                                                        <th>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </th>
-                                                        <th>
-                                                            Customer
-                                                        </th>
-
-                                                        <th>
-                                                            Product
-                                                        </th>
-                                                        <th>
-                                                            Date
-                                                        </th>
-                                                        <th>
-                                                            Amount
-                                                        </th>
-                                                        <th>
-                                                            Vendor
-                                                        </th>
-                                                        <th>
-                                                            Status
-                                                        </th>
-                                                        <th>
-                                                            Rate
-                                                        </th>
-                                                        <th>
-                                                            Action
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-1.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Constance Norton</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#349122</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            Dashboard
-                                                        </td>
-                                                        <td>
-                                                            12/02/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-success fw-bold">$111.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Company Lac.
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success ">Paid</span>
-                                                        </td>
-
-                                                        <td>
-                                                            <h5 class="mb-0">4.0 <span class="fs-12 text-muted">(199 Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-3.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Stacey Santiago</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#215212</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            Dashboard UI
-                                                        </td>
-                                                        <td>
-                                                            01/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-danger fw-semibold">$29.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Design
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-danger-subtle text-danger">Unpaid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">4.8 <span class="fs-12 text-muted">(1k Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-12.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Elizabeth Yanez</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#215402</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Techmin UL Kit
-                                                        </td>
-                                                        <td>
-                                                            02/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-success fw-semibold">$22.00</span>
-                                                        </td>
-                                                        <td>
-                                                            3D Artist
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">3.8<span class="fs-12 text-muted">(259 Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-5.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Erica Lagarde</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#223294</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            Glassmorphisam UL kit
-                                                        </td>
-                                                        <td>
-                                                            12/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-danger fw-semibold">$86.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Techzaa
-                                                        </td>
-
-                                                        <td>
-                                                            <sapn class="badge bg-danger-subtle text-danger">Unpaid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">4.0<span class="fs-12 text-muted">(4k Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-7.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Alfred Argo</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#224698</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Lugda UL Kit
-                                                        </td>
-                                                        <td>
-                                                            16/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-success fw-semibold">$32.00</span>
-                                                        </td>
-                                                        <td>
-                                                            IP Themes
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">3.7<span class="fs-12 text-muted">(220 Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-8.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Sean Kessler</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#21756</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Dashboard UI
-                                                        </td>
-                                                        <td>
-                                                            18/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-success fw-semibold">$98.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Techzaa
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">4.8<span class="fs-12 text-muted">(10K Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-10.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Byron Parkinson</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#568965</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Theme UI
-                                                        </td>
-                                                        <td>
-                                                            19/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-danger fw-semibold">$25.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Craft Inc.
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-danger-subtle text-danger">Unpaid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">3.6<span class="fs-12 text-muted">(1.2K Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-11.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Rebecca Wheeler</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#926082</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Megzi UI kit
-                                                        </td>
-                                                        <td>
-                                                            22/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-success fw-semibold">$55.00</span>
-                                                        </td>
-                                                        <td>
-                                                            3D Aritst
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">3.0<span class="fs-12 text-muted">(120 Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-9.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">James Royal</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#120963</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Zarko Dashboard UI
-                                                        </td>
-                                                        <td>
-                                                            25/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-danger fw-semibold">$119.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Craft Inc.
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">Paid</button>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">4.2<span class="fs-12 text-muted">(3.9k Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="profile1" role="tabpanel">
-                                        <div class="table-responsive">
-                                            <table class="table align-middle mb-0">
-                                                <thead>
-                                                    <tr class="bg-light">
-                                                        <th>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </th>
-                                                        <th>
-                                                            Source
-                                                        </th>
-
-                                                        <th>
-                                                            View
-                                                        </th>
-                                                        <th>
-                                                            Sales
-                                                        </th>
-                                                        <th>
-                                                            Convertion
-                                                        </th>
-                                                        <th>
-                                                            Total
-                                                        </th>
-                                                        <th>
-                                                            Rate
-                                                        </th>
-                                                        <th>
-                                                            <div>
-                                                                <span>Action</span>
-                                                            </div>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm ">
-                                                                    <img src="assets/images/brands/Facebook-logo.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Facebook</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>38,512</td>
-
-                                                        <td>608</td>
-
-                                                        <td>11.08% </td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$10,000.00</h5>
-                                                        </td>
-
-                                                        <td>4.9</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/twitter.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Twitter</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>32,192</td>
-                                                        <td>436</td>
-                                                        <td>9.12%</td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$1000.00</h5>
-                                                        </td>
-                                                        <td>3.0</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/pinterest.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Pinterest</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>48,242</td>
-                                                        <td>496</td>
-                                                        <td>9.14%</td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$1200.00</h5>
-                                                        </td>
-
-                                                        <td>3.2</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/dribbble.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Dribble</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>16,518</td>
-                                                        <td>189</td>
-
-                                                        <td>4.56%</td>
-
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$800.12</h5>
-                                                        </td>
-
-                                                        <td>
-                                                            1.8
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/website.html" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Website</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>26,141</td>
-                                                        <td>592</td>
-                                                        <td>6.5%</td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$688.14</h5>
-                                                        </td>
-
-                                                        <td>2.2</td>
-
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/brands/email.png" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Email</h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>86,120</td>
-                                                        <td>1006</td>
-                                                        <td>12.89%</td>
-                                                        <td>
-                                                            <h5 class="text-success mb-0">$15000.86</h5>
-                                                        </td>
-                                                        <td>5.0</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                                    <h4 class=".card-title mb-4">All orders</h4>
+                                    
+                                    <table id="fixed-columns-datatable" class="table table-centered nowrap row-border order-column w-100">
+                                        <thead>
+                                            <tr class="bg-light">
+                                                <th>Customer</th>
+                                                <th>Car</th>
+                                                <th>Ordertime</th>
+                                                <th>Amount</th>
+                                                <th>Telephone</th>
+                                                <th>Status</th>
+                                                <th>Rate</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                $order = mysqli_query($conn, "select * from checkout");
+                                                while($row = mysqli_fetch_assoc($order))
+                                                {
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar-sm rounded-circle">
+                                                            <img src="assets/images/users/avatar-1.jpg" alt="" class="img-fluid rounded-circle">
+                                                        </div>
+                                                        <div class="ps-2">
+                                                            <h5 class="mb-1">
+                                                                <?php
+                                                                    echo $row['user_name'];
+                                                                ?>
+                                                            </h5>
+                                                            <p class="text-muted fs-6 mb-0">
+                                                                <?php
+                                                                    echo $row['user_email'];
+                                                                ?>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        echo $row['car_name'];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        echo $row['ordertime'];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <span class="text-success fw-bold">
+                                                        RM<?php
+                                                            echo $row['car_price'];
+                                                        ?>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        echo $row['user_tel'];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info-subtle text-info ">Work in Progress</span>
+                                                    <span class="badge bg-success-subtle text-success ">Paid</span>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        echo $row['rating'];
+                                                    ?> / 5.0
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-dark"><span class="mdi mdi-pencil"></span></button>
+                                                </td>
+                                                <td>
+                                                    
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                            
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div> <!-- end row-->
                 </div> <!-- container -->
 
             </div> <!-- content -->
-
-            <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <script>document.write(new Date().getFullYear())</script> © Techmin - Theme by <b>Techzaa</b>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
 
         </div>
 
@@ -1734,11 +1170,29 @@
 
     <script src="assets/vendor/lucide/umd/lucide.min.js"></script>
 
+    <!-- Datatables js -->
+    <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+
+    <!-- Datatable Demo Aapp js -->
+    <script src="assets/js/pages/datatable.init.js"></script>
+
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
 
 </body>
 
 
-<!-- Mirrored from techzaa.in/techmin/layouts/apps-invoice-report.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:33:43 GMT -->
+<!-- Mirrored from techzaa.in/techmin/layouts/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:34:14 GMT -->
 </html>

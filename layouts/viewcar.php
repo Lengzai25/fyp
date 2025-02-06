@@ -2,14 +2,7 @@
 
 include "dataconnection.php";
 
-// get the session that keeps the Primary key
-$sess_id = $_SESSION["sess_id"]; 
 
-// find from the admintbl the record related to this Primary key
-$get_admin = mysqli_query($conn, "select * from admin where admin_id=$sess_id");
-
-// Retrieve the record
-$admin_rec = mysqli_fetch_assoc($get_admin);
 
 ?>
 
@@ -19,7 +12,7 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
 
 <head>
     <meta charset="utf-8" />
-    <title>Addcar | Admin Dashboard CARWOW</title>
+    <title>View Car | Admin Dashboard CARWOW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
@@ -87,7 +80,7 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Add Car Form</h4>
+            <h4 class="page-title d-none d-sm-block">View Car</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -571,14 +564,14 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class=".card-title">View Car</h4>
+                                    <h4 class=".card-title">Car Details</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <?php
                                                 // identify which record to be updated
-                                                $cid = $_REQUEST["edit_cid"]; 
+                                                $cid = $_REQUEST["car_id"]; 
                                             
                                                 $get_list = mysqli_query($conn, "select * from car where car_id = $cid");
                                                 $car_rec= mysqli_fetch_assoc($get_list);
@@ -587,125 +580,85 @@ $admin_rec = mysqli_fetch_assoc($get_admin);
 
                                                 <div class="mb-3">
                                                     <label for="example-fileinput" class="form-label">Car Image</label>
-                                                    
+                                                    <br>
                                                         <?php 
-                                                            echo '<img src="#' . $car_rec['car_pic'] . '";>';
+                                                            echo '<img src="assets/images/car/' . $car_rec['car_pic'] . '"height="150px" weight="350px";>';
+                                                        ?>
+                                                        <?php 
+                                                            echo '<img src="assets/images/car/' . $car_rec['car_pic2'] . '"height="150px" weight="350px";>';
+                                                        ?>
+                                                        <br>
+                                                        <?php 
+                                                            echo '<img src="assets/images/car/' . $car_rec['car_pic3'] . '"height="150px" weight="350px";>';
+                                                        ?>
+                                                        <?php 
+                                                            echo '<img src="assets/images/car/' . $car_rec['car_pic4'] . '"height="150px" weight="350px";>';
+                                                        ?>
+                                                        <br>
+                                                        <?php 
+                                                            echo '<img src="assets/images/car/' . $car_rec['car_pic5'] . '"height="150px" weight="350px";>';
                                                         ?>
                                                 </div>
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 2</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                                
+                                            </form>
+                                        </div> <!-- end col -->
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 3</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                        <div class="col-lg-6 d-flex flex-column" style="min-height: 100vh;">
+                                            <form class="flex-grow-1">
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 4</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 5</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-select" class="form-label">Car Brand</label>
-                                                    <select class="form-select" id="example-select">
-                                                        <option selected>Select car brand</option>
-                                                        <option value="1">Toyota</option>
-                                                        <option value="2">Honda</option>
-                                                        <option value="3">Mercedes-Benz</option>
-                                                    </select>
+                                            <div class="mb-3">
+                                                    <label for="simpleinput" class="form-label">Car Brand</label>
+                                                    <input value="<?php echo $car_rec['car_brand']; ?>" type="text" id="simpleinput" class="form-control" disabled />
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label for="simpleinput" class="form-label">Car Model</label>
-                                                    <input type="text" id="simpleinput" class="form-control" placeholder="Enter the car model">
+                                                    <input value="<?php echo $car_rec['car_name']; ?>" type="text" id="simpleinput" class="form-control" disabled />
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Car Price</label>
-                                                    <input class="form-control" id="example-number" type="number"
-                                                        name="number" min="0">
+                                                    <label for="example-number" class="form-label">Car Price (RM)</label>
+                                                    <input value="<?php echo $car_rec['car_price']; ?>" class="form-control" id="example-number" type="number" name="number" min="0" disabled />
                                                 </div>
 
-                                            </form>
-                                        </div> <!-- end col -->
-
-                                        <div class="col-lg-6">
-                                            <form>
 
                                                 <div class="mb-3">
                                                     <label for="example-textarea" class="form-label">Car Description</label>
-                                                    <textarea class="form-control" id="example-textarea"
-                                                        rows="5"></textarea>
+                                                    <textarea class="form-control" id="example-textarea" rows="5" disabled><?php echo $car_rec['car_des']; ?>"</textarea>
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="example-month" class="form-label">Year</label>
-                                                    <input class="form-control" id="example-month" type="month"
-                                                        name="month">
+                                                    <label for="example-number" class="form-label">Year</label>
+                                                    <input value="<?php echo $car_rec['car_year']; ?>" type="number" id="example-number" class="form-control" name="number" min="0" disabled />
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Mileage</label>
-                                                    <input class="form-control" id="example-number" type="number"
-                                                        name="number" min="0">
+                                                    <label for="example-number" class="form-label">Mileage (km)</label>
+                                                    <input value="<?php echo $car_rec['car_mil']; ?>" class="form-control" id="example-number" type="number" name="number" min="0" disabled />
                                                 </div>
-
-                                                <h6 class="fs-15 mt-3" >Body Color</h6>
-                                                    <div class="col-lg-6">
-                                                        <input type="radio" id="customRadio1" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio1">Grey</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio2" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio2">White</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio2" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio3">Red</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio2" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio4">Black</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio2" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio5">Dark Blue</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio2" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio6">Others</label>
-                                                    </div>
-                                                    <br>
 
                                                 <div class="mb-3">
-                                                    <label for="example-palaceholder"
-                                                        class="form-label">Car Engine</label>
-                                                    <input type="text" id="example-palaceholder" class="form-control"
-                                                        placeholder="Enter the car engine">
+                                                    <label for="simpleinput" class="form-label">Body Color</label>
+                                                    <input value="<?php echo $car_rec['car_col']; ?>" type="text" id="simpleinput" class="form-control" disabled />
                                                 </div>
 
-                                                <div class="justify-content-end row" style="text-align: right; margin-top: 80px;">
-                                                    <div class="col-9">
-                                                        <input type="submit" name="savebtn" value="Save Product" class="btn btn-info"/>
-                                                        <input type="button" class="btn btn-info" style="margin-left: 5px;" name="cancelbtn" value="Cancel" onclick="window.location.href='cartable.php';"/>
-                                                    </div>
+                                                <div class="mb-3">
+                                                    <label for="example-palaceholder" class="form-label">Car Engine</label>
+                                                    <input value="<?php echo $car_rec['car_eng']; ?>" type="text" id="example-palaceholder" class="form-control" placeholder="Enter the car engine" disabled />
                                                 </div>
 
                                             </form>
+                                            <div class="d-flex justify-content-end mt-auto">
+                                                
+                                                <?php
+                                                echo "<a href='editcar.php?edit_cid=".$car_rec['car_id']."' name='editbtn' class='btn btn-info'>Edit</a>";
+                                                ?>
+                                                <?php
+                                                    echo "<a href='cartable.php?del_cid=".$car_rec['car_id']."' onclick='return confirm_delete();' name='deletebtn' class='btn btn-danger ms-2'>Delete</a>";
+                                                ?>
+                                                <input type="button" name="cancelbtn" class="btn btn-secondary ms-2" value="Cancel" onclick="window.location.href='cartable.php';">
+                                            </div>
                                         </div> <!-- end col -->
                                     </div>
                                     <!-- end row-->
