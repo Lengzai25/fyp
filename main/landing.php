@@ -236,7 +236,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                             <div class="detail">
                                 <h5>Creative Director</h5>
                                 <h4>
-                                    <a href="agent-detail.html">Jia Heng</a>
+                                    <p>Jia Heng</p>
                                 </h4>
 
                                 <div class="contact">
@@ -274,7 +274,7 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                             <div class="detail">
                                 <h5>Office Manager</h5>
                                 <h4>
-                                    <a href="agent-detail.html">Beaven</a>
+                                    <p>Beaven</p>
                                 </h4>
 
                                 <div class="contact">
@@ -400,36 +400,36 @@ $cust_rec = mysqli_fetch_assoc($get_cust);
                     <h4>Recent Posts</h4>
                     <div class="f-border"></div>
                     <div class="media mb-4">
-                        <a class="pr-3" href="car-details.html">
+                    <a class="pr-3" href="car-list.php">
                             <img src="assets/img/sub-car/sub-car.jpg" alt="car">
                         </a>
                         <div class="media-body align-self-center">
                             <h5>
-                                <a href="car-details.html">2016 Audi S5 Coupe</a>
+                                <a href="car-list.php">2016 Audi S5 Coupe</a>
                             </h5>
                             <p>November 27, 2024</p>
                             <p> <strong>RM 245,000</strong></p>
                         </div>
                     </div>
                     <div class="media mb-4">
-                        <a class="pr-3" href="car-details.html">
+                        <a class="pr-3" href="car-list.php">
                             <img src="assets/img/sub-car/sub-car-2.jpg" alt="car">
                         </a>
                         <div class="media-body align-self-center">
                             <h5>
-                                <a href="car-details.html">2016 Audi R8</a>
+                                <a href="car-list.php">2016 Audi R8</a>
                             </h5>
                             <p>December 2, 2024</p>
                             <p> <strong>RM 545,000</strong></p>
                         </div>
                     </div>
                     <div class="media">
-                        <a class="pr-3" href="car-details.html">
+                        <a class="pr-3" href="car-list.php">
                             <img src="assets/img/sub-car/sub-car-3.jpg" alt="car">
                         </a>
                         <div class="media-body align-self-center">
                             <h5>
-                                <a href="car-details.html">Read Audi A7 TDI</a>
+                                <a href="car-list.php">Read Audi A7 TDI</a>
                             </h5>
                             <p>December 27, 2024</p>
                             <p> <strong>RM 345,000</strong></p>
