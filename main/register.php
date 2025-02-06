@@ -144,7 +144,7 @@ include "dataconnection.php";
                 <!-- Form content box start -->
                 <div class="form-content-box">
                     <!-- Logo-->
-                    <a href="index.html">
+                    <a href="index.php">
                         <img src="assets/img/logos/logo.png" class="cm-logo" alt="logo">
                     </a>
                     <!-- details -->
