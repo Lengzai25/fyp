@@ -612,7 +612,7 @@ include "dataconnection.php";
                                                     </tr>
                                                     <?php
                                                     }
-                                                ?>
+                                                    ?>
                                         </tbody>
                                     </table>
 

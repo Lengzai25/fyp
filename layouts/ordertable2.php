@@ -10,13 +10,21 @@ include "dataconnection.php";
 
 <head>
     <meta charset="utf-8" />
-    <title>Add Car | Admin Dashboard CARWOW</title>
+    <title>Datatables | Techmin - Bootstrap 5 Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Datatables css -->
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Theme Config Js -->
     <script src="assets/js/config.js"></script>
@@ -26,87 +34,6 @@ include "dataconnection.php";
 
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-
-    <script type="text/javascript">
-
-	// JS form validation
-
-	function check_form()
-	{
-		var no_error = true;
-		var productname = document.addfrm.product_name.value;
-		var productdesc = document.addfrm.product_description.value;
-		var productprc = document.addfrm.product_price.value;
-		var productstk = document.addfrm.product_stock_level.value;
-		var productdate = document.addfrm.product_date_created.value;
-		
-		if (productname == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_name").innerHTML = "Please key-in Product name.";
-		}
-		else 
-		{
-			document.getElementById("err_product_name").innerHTML = "";
-		}
-		
-		if (productdesc == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_description").innerHTML = "Please key-in Product Description.";
-		}
-		else
-		{
-			document.getElementById("err_product_description").innerHTML = "";
-		}
-		
-		if (productprc == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_price").innerHTML = "Price tag cannot be empty.";
-		}
-		else 
-			if (productprc < 1 )
-			{
-				no_error = false;
-				document.getElementById("err_product_price").innerHTML = "Cannot be less than RM 1.00.";
-			}	
-			else
-			{
-				document.getElementById("err_product_price").innerHTML = "";
-			}
-		
-		if (productstk == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_stock_level").innerHTML = "Stock Level cannot be empty.";
-		}
-		else
-			if (productstk < 10 )
-			{
-				no_error = false;
-				document.getElementById("err_product_stock_level").innerHTML = "Stock Level cannot be less than 10 units.";
-			}
-			else
-			{
-				document.getElementById("err_product_stock_level").innerHTML = "";
-			}
-		
-		if (productdate == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_date_created").innerHTML = "Date created cannot be empty.";
-		}
-		else
-		{
-			document.getElementById("err_product_date_created").innerHTML = "";
-		}
-		
-		return no_error;
-	}
-
-	</script>
-
 </head>
 
 <body>
@@ -121,7 +48,7 @@ include "dataconnection.php";
             <!-- Topbar Brand Logo -->
             <div class="logo-topbar">
                 <!-- Logo light -->
-                <a href="index.php" class="logo-light">
+                <a href="index.html" class="logo-light">
                     <span class="logo-lg">
                         <img src="assets/images/logo.png" alt="logo">
                     </span>
@@ -131,7 +58,7 @@ include "dataconnection.php";
                 </a>
 
                 <!-- Logo Dark -->
-                <a href="index.php" class="logo-dark">
+                <a href="index.html" class="logo-dark">
                     <span class="logo-lg">
                         <img src="assets/images/logo-dark.png" alt="dark logo">
                     </span>
@@ -147,7 +74,7 @@ include "dataconnection.php";
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Add Car</h4>
+            <h4 class="page-title d-none d-sm-block">Data Tables</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -428,9 +355,27 @@ include "dataconnection.php";
                     </div>
 
                     <!-- item-->
-                    <a href="profile.php" class="dropdown-item">
+                    <a href="pages-profile.html" class="dropdown-item">
                         <i class="ri-account-pin-circle-line fs-16 align-middle me-1 "></i>
                         <span>My Account</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="pages-profile.html" class="dropdown-item">
+                        <i class="ri-settings-4-line fs-16 align-middle me-1"></i>
+                        <span>Settings</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="pages-faq.html" class="dropdown-item">
+                        <i class="ri-customer-service-2-line fs-16 align-middle me-1"></i>
+                        <span>Support</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="auth-lock-screen.html" class="dropdown-item">                
+                        <i class="ri-lock-line fs-16 align-middle me-1"></i>
+                        <span>Lock Screen</span>
                     </a>
 
                     <!-- item-->
@@ -448,33 +393,33 @@ include "dataconnection.php";
         <!-- Left Sidebar Start -->
         <div class="leftside-menu">
 
-		    <!-- Logo Light -->
-		    <a href="index.php" class="logo logo-light">
-		        <span class="logo-lg">
-		            <img src="assets/images/logo.png" alt="logo">
-		        </span>
-		        <span class="logo-sm">
-		            <img src="assets/images/logo-sm.png" alt="small logo">
-		        </span>
-		    </a>
+            <!-- Logo Light -->
+            <a href="index.html" class="logo logo-light">
+                <span class="logo-lg">
+                    <img src="assets/images/logo.png" alt="logo">
+                </span>
+                <span class="logo-sm">
+                    <img src="assets/images/logo-sm.png" alt="small logo">
+                </span>
+            </a>
 
-		    <!-- Logo Dark -->
-		    <a href="index.php" class="logo logo-dark">
-		        <span class="logo-lg">
-		            <img src="assets/images/logo-dark.png" alt="dark logo">
-		        </span>
-		        <span class="logo-sm">
-		            <img src="assets/images/logo-sm.png" alt="small logo">
-		        </span>
-		    </a>
+            <!-- Logo Dark -->
+            <a href="index.html" class="logo logo-dark">
+                <span class="logo-lg">
+                    <img src="assets/images/logo-dark.png" alt="dark logo">
+                </span>
+                <span class="logo-sm">
+                    <img src="assets/images/logo-sm.png" alt="small logo">
+                </span>
+            </a>
 
-		    <!-- Sidebar -->
-		    <div data-simplebar>
+            <!-- Sidebar -->
+            <div data-simplebar>
                 <ul class="side-nav">
                     <li class="side-nav-title">Main</li>
 
                     <li class="side-nav-item">
-                        <a href="index.php" class="side-nav-link">
+                        <a href="index.html" class="side-nav-link">
                             <i class="ri-dashboard-2-line"></i>
                             <span> Dashboard </span>
                             <span class="badge bg-success float-end">9+</span>
@@ -482,6 +427,22 @@ include "dataconnection.php";
                     </li>
 
                     <li class="side-nav-title">App</li>
+            
+                    <li class="side-nav-item">
+                        <a href="apps-calendar.html" class="side-nav-link">
+                            <i class="ri-calendar-line"></i>
+                            <span> Calendar</span>
+
+                        </a>
+                    </li>
+           
+                    <li class="side-nav-item">
+                        <a href="apps-kanban-board.html" class="side-nav-link">
+                            <i class="ri-artboard-line"></i>
+                            <span> Kanban Board</span>
+                        </a>
+                    </li>
+
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPagesinvoice" aria-expanded="false" aria-controls="sidebarPagesinvoice" class="side-nav-link">
                             <i class="ri-article-line"></i>
@@ -492,16 +453,16 @@ include "dataconnection.php";
                         <div class="collapse" id="sidebarPagesinvoice">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="invoice-report.php">Invoice Report</a>
+                                    <a class="side-nav-link" href="apps-invoice-report.html">Invoice Report</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="invoice.php">Invoice</a>
+                                    <a class="side-nav-link" href="apps-invoice.html">Invoice</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-                    <li class="side-nav-title">Pages</li>
+                    <li class="side-nav-title">Extra Pages</li>
 
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
@@ -513,7 +474,34 @@ include "dataconnection.php";
                         <div class="collapse" id="sidebarPages">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="profile.php">Profile</a>
+                                    <a class="side-nav-link" href="pages-starter.html">Starter Page</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="pages-contact-list.html">Contact List</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="pages-profile.html">Profile</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="pages-timeline.html">Timeline</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="pages-faq.html">FAQ</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="pages-pricing.html">Pricing</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="pages-maintenance.html">Maintenance</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="error-404.html">Error 404</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="error-404-alt.html">Error 404-alt</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="error-500.html">Error 500</a>
                                 </li>
                             </ul>
                         </div>
@@ -529,18 +517,48 @@ include "dataconnection.php";
                         <div class="collapse" id="sidebarPagesAuth">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="login.php">Login</a>
+                                    <a class="side-nav-link" href="auth-login.html">Login</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="register.php">Register</a>
+                                    <a class="side-nav-link" href="auth-register.html">Register</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="logout.php">Logout</a>
+                                    <a class="side-nav-link" href="auth-logout.html">Logout</a>
                                 </li>
                                 <li class="side-nav-item">
                                     <a class="side-nav-link" href="auth-forgotpw.html">Forgot Password</a>
                                 </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="auth-lock-screen.html">Lock Screen</a>
+                                </li>
 
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarLayouts" aria-expanded="false" aria-controls="sidebarLayouts" class="side-nav-link">
+                            <i class="ri-layout-line"></i>
+                            <span class="badge bg-warning float-end">New</span>
+                            <span> Layouts </span>
+                        </a>
+                        <div class="collapse" id="sidebarLayouts">
+                            <ul class="side-nav-second-level">
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="layouts-light-sidebar.html" target="_blank">Light Sidebar</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="layouts-sm-sidebar.html" target="_blank">Small Sidebar</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="layouts-collapsed-sidebar.html" target="_blank">Collapsed Sidebar</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="layouts-unsticky-layout.html" target="_blank">Unsticky Layout</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="layouts-boxed.html" target="_blank">Boxed Layout</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -557,7 +575,117 @@ include "dataconnection.php";
                         <div class="collapse" id="sidebarBaseUI">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-accordions.html">Accordions</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-alerts.html">Alerts</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-avatars.html">Avatars</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-buttons.html">Buttons</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-button-group.html">Button group</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-badges.html">Badges</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-breadcrumb.html">Breadcrumb</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-cards.html">Cards</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-carousel.html">Carousel</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-collapse.html">Collapse</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-close-button.html">Close Button</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-dropdowns.html">Dropdowns</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-embed-video.html">Embed Video</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-grid.html">Grid</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-links.html">Links</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-list-group.html">List Group</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-modals.html">Modals</a>
+                                </li>
+                                <li class="side-nav-item">
                                     <a class="side-nav-link" href="ui-navbar.html">Navbar</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-offcanvas.html">Offcanvas</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-placeholders.html">Placeholders</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-pagination.html">Pagination</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-popovers.html">Popovers</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-progress.html">Progress</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-scrollspy.html">Scrollspy</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-spinners.html">Spinners</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-toasts.html">Toasts</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-tabs.html">Tabs</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-tooltips.html">Tooltips</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-typography.html">Typography</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="ui-utilities.html">Utilities</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
+                            <i class="ri-compass-3-line"></i>
+                            <span> Extended UI </span>
+                            <span class="menu-arrow"></span>
+
+                        </a>
+                        <div class="collapse" id="sidebarExtendedUI">
+                            <ul class="side-nav-second-level">
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="extended-portlets.html">Portlets</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="extended-scrollbar.html">Scrollbar</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="extended-range-slider.html">Range Slider</a>
                                 </li>
                             </ul>
                         </div>
@@ -570,6 +698,43 @@ include "dataconnection.php";
                             <span class="menu-arrow"></span>
 
                         </a>
+                        <div class="collapse" id="sidebarIcons">
+                            <ul class="side-nav-second-level">
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="icons-lucide.html">Lucide Icons</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="icons-remixicons.html">Remix Icons</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="icons-bootstrap.html">Bootstrap Icons</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="icons-mdi.html">Material Design Icons</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarCharts" aria-expanded="false" aria-controls="sidebarCharts" class="side-nav-link">
+                            <i class="ri-pie-chart-2-line"></i>
+                            <span> Charts </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarCharts">
+                            <ul class="side-nav-second-level">
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="charts-apex.html">Apex Charts</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="charts-chartjs.html">Chartjs</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="charts-sparklines.html">Sparkline Charts</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
                     <li class="side-nav-item">
@@ -582,7 +747,28 @@ include "dataconnection.php";
                         <div class="collapse" id="sidebarForms">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
+                                    <a class="side-nav-link" href="form-elements.html">Basic Elements</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="form-advanced.html">Form Advanced</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="form-validation.html">Form Validation</a>
+                                </li>
+                                <li class="side-nav-item">
                                     <a class="side-nav-link" href="form-wizard.html">Form Wizard</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="form-fileuploads.html">File Uploads</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="form-editors.html">Form Editors</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="form-image-crop.html">Image Crop</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="form-x-editable.html">X Editable</a>
                                 </li>
                             </ul>
                         </div>
@@ -599,21 +785,103 @@ include "dataconnection.php";
                         <div class="collapse" id="sidebarTables">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
+                                    <a class="side-nav-link" href="tables-basic.html">Basic Tables</a>
+                                </li>
+                                <li class="side-nav-item">
                                     <a class="side-nav-link" href="tables-datatable.html">Data Tables</a>
                                 </li>
                                 <li class="side-nav-item">
                                     <a class="side-nav-link" href="tables-editable.html">Editable Tables</a>
                                 </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="tables-responsive.html">Responsive Table</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
 
-                    
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarMaps" aria-expanded="false" aria-controls="sidebarMaps" class="side-nav-link">
+                            <i class="ri-map-pin-line"></i>
+                            <span> Maps </span>
+                            <span class="menu-arrow"></span>
 
-                    
+                        </a>
+                        <div class="collapse" id="sidebarMaps">
+                            <ul class="side-nav-second-level">
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="maps-google.html">Google Maps</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="maps-vector.html">Vector Maps</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarMultiLevel" aria-expanded="false" aria-controls="sidebarMultiLevel" class="side-nav-link">
+                            <i class="ri-share-line"></i>
+                            <span> Multi Level </span>
+                            <span class="menu-arrow"></span>
+
+                        </a>
+                        <div class="collapse" id="sidebarMultiLevel">
+                            <ul class="side-nav-second-level">
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="javascript: void(0);">Level 1.1</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a data-bs-toggle="collapse" href="#sidebarSecondLevel" aria-expanded="false" aria-controls="sidebarSecondLevel">
+                                        <span> Level 1.2 </span>
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <div class="collapse" id="sidebarSecondLevel">
+                                        <ul class="side-nav-third-level">
+                                            <li class="side-nav-item">
+                                                <a class="side-nav-link" href="javascript: void(0);">Item 1</a>
+                                            </li>
+                                            <li class="side-nav-item">
+                                                <a class="side-nav-link" href="javascript: void(0);">Item 2</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a data-bs-toggle="collapse" href="#sidebarThirdLevel" aria-expanded="false" aria-controls="sidebarThirdLevel">
+                                        <span> Level 1.3 </span>
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <div class="collapse" id="sidebarThirdLevel">
+                                        <ul class="side-nav-third-level">
+                                            <li class="side-nav-item">
+                                                <a class="side-nav-link" href="javascript: void(0);">Item 1</a>
+                                            </li>
+                                            <li class="side-nav-item">
+                                                <a data-bs-toggle="collapse" href="#sidebarFourthLevel" aria-expanded="false" aria-controls="sidebarFourthLevel">
+                                                    <span> Item 2 </span>
+                                                    <span class="menu-arrow"></span>
+                                                </a>
+                                                <div class="collapse" id="sidebarFourthLevel">
+                                                    <ul class="side-nav-forth-level">
+                                                        <li class="side-nav-item">
+                                                            <a class="side-nav-link" href="javascript: void(0);">Item 2.1</a>
+                                                        </li>
+                                                        <li class="side-nav-item">
+                                                            <a class="side-nav-link" href="javascript: void(0);">Item 2.2</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
-		</div>
+        </div>
         <!-- Left Sidebar End -->
         
 
@@ -626,146 +894,100 @@ include "dataconnection.php";
 
                 <!-- Start Content-->
                 <div class="container-fluid">
-
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class=".card-title">Car Details</h4>
-                                </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <form>
-
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 2</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 3</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 4</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 5</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-select" class="form-label">Car Brand</label>
-                                                    <select class="form-select" id="example-select">
-                                                        <option selected>Select car brand</option>
-                                                        <option value="1">Toyota</option>
-                                                        <option value="2">Honda</option>
-                                                        <option value="3">Mercedes-Benz</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="simpleinput" class="form-label">Car Model</label>
-                                                    <input type="text" id="simpleinput" class="form-control" placeholder="Enter the car model">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Car Price (RM)</label>
-                                                    <input class="form-control" id="example-number" type="number"
-                                                        name="number" min="0">
-                                                </div>
-
-                                            </form>
-                                        </div> <!-- end col -->
-
-                                        <div class="col-lg-6">
-                                            <form>
-
-                                                <div class="mb-3">
-                                                    <label for="example-textarea" class="form-label">Car Description</label>
-                                                    <textarea class="form-control" id="example-textarea" placeholder="Enter the car description...." rows="5"></textarea>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Year</label>
-                                                    <input  type="number" id="example-number" class="form-control" name="number" min="1970">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Mileage (km)</label>
-                                                    <input class="form-control" id="example-number" type="number"
-                                                        name="number" min="0">
-                                                </div>
-
-                                                <h6 class="fs-15 mt-3" >Body Color</h6>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio1" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio1">Grey</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio2" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio2">White</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio3" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio3">Blue</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio4" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio4">Red</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio5" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio5">Black</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio6" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio6">Dark Grey</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio7" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio7">Others</label>
-                                                    </div>
-                                                    <br>
-
-                                                <div class="mb-3">
-                                                    <label for="example-palaceholder"
-                                                        class="form-label">Car Engine</label>
-                                                    <input type="text" id="example-palaceholder" class="form-control"
-                                                        placeholder="Enter the car engine">
-                                                </div>
-
-                                            </form>
-                                            
-                                        </div> <!-- end col -->
-                                        <!-- Button Section -->
-                                        <div class="d-flex justify-content-end mt-auto">
-                                            <input type="submit" name="savebtn" value="Save Product" class="btn btn-info"/>
-                                            <input type="button" class="btn btn-secondary ms-2" name="cancelbtn" value="Cancel" onclick="window.location.href='cartable.php';"/>
-                                        </div>
-                                    </div>
-                                    <!-- end row-->
+                                    <h4 class=".card-title mb-4">All orders</h4>
                                     
-                                </div> <!-- end card-body -->
+                                    <table id="fixed-columns-datatable" class="table table-centered nowrap row-border order-column w-100">
+                                        <thead>
+                                            <tr class="bg-light">
+                                                <th>Customer</th>
+                                                <th>Car</th>
+                                                <th>Ordertime</th>
+                                                <th>Amount</th>
+                                                <th>Telephone</th>
+                                                <th>Status</th>
+                                                <th>Rate</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                $order = mysqli_query($conn, "select * from checkout");
+                                                while($row = mysqli_fetch_assoc($order))
+                                                {
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar-sm rounded-circle">
+                                                            <img src="assets/images/users/avatar-1.jpg" alt="" class="img-fluid rounded-circle">
+                                                        </div>
+                                                        <div class="ps-2">
+                                                            <h5 class="mb-1">
+                                                                <?php
+                                                                    echo $row['user_name'];
+                                                                ?>
+                                                            </h5>
+                                                            <p class="text-muted fs-6 mb-0">
+                                                                <?php
+                                                                    echo $row['user_email'];
+                                                                ?>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        echo $row['car_name'];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        echo $row['ordertime'];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <span class="text-success fw-bold">
+                                                        RM<?php
+                                                            echo $row['car_price'];
+                                                        ?>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        echo $row['user_tel'];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info-subtle text-info ">Work in Progress</span>
+                                                    <span class="badge bg-success-subtle text-success ">Paid</span>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        echo $row['rating'];
+                                                    ?> / 5.0
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-dark"><span class="mdi mdi-pencil"></span></button>
+                                                </td>
+                                                <td>
+                                                    
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                            
+                                </div> <!-- end card body-->
                             </div> <!-- end card -->
-                        </div><!-- end col -->
-                    </div><!-- end row -->
+                        </div><!-- end col-->
+                    </div> <!-- end row-->
                 </div> <!-- container -->
 
             </div> <!-- content -->
@@ -928,6 +1150,9 @@ include "dataconnection.php";
                 <div class="col-6">
                     <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
                 </div>
+                <div class="col-6">
+                    <a href="#" role="button" class="btn btn-primary w-100">Buy Now</a>
+                </div>
             </div>
         </div>
     </div>
@@ -935,69 +1160,39 @@ include "dataconnection.php";
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
 
+
+
+
+
+
+
+
+
     <script src="assets/vendor/lucide/umd/lucide.min.js"></script>
+
+    <!-- Datatables js -->
+    <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+
+    <!-- Datatable Demo Aapp js -->
+    <script src="assets/js/pages/datatable.init.js"></script>
 
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
 
 </body>
 
+
+<!-- Mirrored from techzaa.in/techmin/layouts/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Dec 2024 04:34:14 GMT -->
 </html>
-
-<?php
-
-if (isset($_POST["savebtn"]))
-{
-	// get all date from the form
-	$productname = $_POST["product_name"];
-	$productdesc = $_POST["product_description"];
-	$productprice = $_POST["product_price"];
-	$productstocklvl = $_POST["product_stock_level"];
-	$productcat = $_POST["product_category"];
-	$filename = $_POST["product_image"];
-	
-	// check for duplicate product name
-	$check_duplicate_productname = mysqli_query($conn, "select * from product where product_name = '$productname'");
-
-	$catid_result = mysqli_query($conn, "SELECT category_id FROM category WHERE category_name = '$productcat'");
-	while ($catid_row = mysqli_fetch_assoc($catid_result)) 
-	{
-		$catid = $catid_row['category_id'];
-	}
-	
-	if (mysqli_num_rows($check_duplicate_productname) > 0 )
-	{
-	echo
-	"<script type='text/javascript'>
-		alert('This Product Name already exists.');
-		history.go(-1);
-		window.location.href='addproduct.php';
-	</script>";
-	}
-	else // insert data into the product table
-	{	
-		if ($filename != "") 
-		{
-			$path = "../assets/img/".$filename;
-
-			mysqli_query($conn, "insert into product (product_name,product_desc,product_price,product_stock,category_id,product_image) values ('$productname','$productdesc','$productprice','$productstocklvl','$catid','$filename')");
-		}
-		else
-		{
-			echo "<script type='text/javascript'>
-						alert('Failed to upload image.');
-						window.location.href='viewproduct.php';
-					</script>";
-		}
-	}
-
-	echo
-		"<script type='text/javascript'>
-			alert('Record has been saved sucessfully.');
-			window.location.href='viewproduct.php';
-		</script>";
-	
-}
-
-
-?>

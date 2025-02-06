@@ -676,7 +676,7 @@ include "dataconnection.php";
                                                 <div class="mb-3">
                                                     <label for="example-fileinput" class="form-label" style="margin-bottom:75px;">Car Image</label>
                                                     <?php echo '<img src="assets/images/car/' . $car_rec['car_pic'] . '"height="150px" weight="350px";>'; ?>
-                                                    <input type="file" id="example-fileinput" class="form-control">
+                                                    <input name="image1" type="file" id="example-fileinput" class="form-control">
                                                 </div>
 
                                                 <div class="mb-3">
@@ -777,27 +777,33 @@ include "dataconnection.php";
                                                     <label class="form-check-label" for="customRadio1">Grey</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="radio" id="customRadio2" name="customRadio" class="form-check-input">
+                                                    <input type="radio" id="customRadio2" name="customRadio" class="form-check-input"
+                                                    <?php if($car_rec['car_col'] == "White") echo "checked"; ?>>
                                                     <label class="form-check-label" for="customRadio2">White</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="radio" id="customRadio3" name="customRadio" class="form-check-input">
-                                                    <label class="form-check-label" for="customRadio3">Red</label>
+                                                    <input type="radio" id="customRadio3" name="customRadio" class="form-check-input"
+                                                    <?php if($car_rec['car_col'] == "Blue") echo "checked"; ?>>
+                                                    <label class="form-check-label" for="customRadio3">Blue</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="radio" id="customRadio4" name="customRadio" class="form-check-input">
-                                                    <label class="form-check-label" for="customRadio4">Black</label>
+                                                    <input type="radio" id="customRadio4" name="customRadio" class="form-check-input"
+                                                    <?php if($car_rec['car_col'] == "Red") echo "checked"; ?>>
+                                                    <label class="form-check-label" for="customRadio4">Red</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="radio" id="customRadio5" name="customRadio" class="form-check-input">
-                                                    <label class="form-check-label" for="customRadio5">Dark Blue</label>
+                                                    <input type="radio" id="customRadio5" name="customRadio" class="form-check-input"
+                                                    <?php if($car_rec['car_col'] == "Black") echo "checked"; ?>>
+                                                    <label class="form-check-label" for="customRadio5">Black</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="radio" id="customRadio6" name="customRadio" class="form-check-input">
-                                                    <label class="form-check-label" for="customRadio6">Blue</label>
+                                                    <input type="radio" id="customRadio6" name="customRadio" class="form-check-input"
+                                                    <?php if($car_rec['car_col'] == "Dark Grey") echo "checked"; ?>>
+                                                    <label class="form-check-label" for="customRadio6">Dark Grey</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="radio" id="customRadio7" name="customRadio" class="form-check-input">
+                                                    <input type="radio" id="customRadio7" name="customRadio" class="form-check-input"
+                                                    <?php if($car_rec['car_col'] == "Others") echo "checked"; ?>>
                                                     <label class="form-check-label" for="customRadio7">Others</label>
                                                 </div>
 
@@ -1004,61 +1010,3 @@ include "dataconnection.php";
 </body>
 
 </html>
-
-<?php
-
-if (isset($_POST["savebtn"]))
-{
-	// get all date from the form
-	$carname = $_POST["car_name"];
-	$cardesc = $_POST["car_description"];
-	$carprice = $_POST["car_price"];
-	$carstocklvl = $_POST["car_stock_level"];
-	$carcat = $_POST["car_category"];
-	$filename = $_POST["car_image"];
-	
-	// check for duplicate car name
-	$check_duplicate_carname = mysqli_query($conn, "select * from car where car_name = '$carname'");
-
-	$catid_result = mysqli_query($conn, "SELECT category_id FROM category WHERE category_name = '$carcat'");
-	while ($catid_row = mysqli_fetch_assoc($catid_result)) 
-	{
-		$catid = $catid_row['category_id'];
-	}
-	
-	if (mysqli_num_rows($check_duplicate_carname) > 0 )
-	{
-	echo
-	"<script type='text/javascript'>
-		alert('This Car Name already exists.');
-		history.go(-1);
-		window.location.href='addcar.php';
-	</script>";
-	}
-	else // insert data into the car table
-	{	
-		if ($filename != "") 
-		{
-			$path = "../assets/img/".$filename;
-
-			mysqli_query($conn, "insert into car (car_name,car_desc,car_price,car_stock,category_id,car_image) values ('$carname','$cardesc','$carprice','$carstocklvl','$catid','$filename')");
-		}
-		else
-		{
-			echo "<script type='text/javascript'>
-						alert('Failed to upload image.');
-						window.location.href='viewcar.php';
-					</script>";
-		}
-	}
-
-	echo
-		"<script type='text/javascript'>
-			alert('Record has been saved sucessfully.');
-			window.location.href='viewcar.php';
-		</script>";
-	
-}
-
-
-?>

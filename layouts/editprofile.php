@@ -2,7 +2,16 @@
 
 include "dataconnection.php";
 
-?>
+// get the session that keeps the Primary key
+$sess_id = $_SESSION["sess_id"]; 
+
+// find from the admintbl the record related to this Primary key
+$get_admin = mysqli_query($conn, "select * from admin where admin_id=$sess_id");
+
+// Retrieve the record
+$admin_rec = mysqli_fetch_assoc($get_admin);
+
+?>  
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +19,7 @@ include "dataconnection.php";
 
 <head>
     <meta charset="utf-8" />
-    <title>Add Car | Admin Dashboard CARWOW</title>
+    <title>Profile | Admin Dashboard CARWOW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
@@ -29,83 +38,49 @@ include "dataconnection.php";
 
     <script type="text/javascript">
 
-	// JS form validation
+    // JS form validation
 
-	function check_form()
-	{
-		var no_error = true;
-		var productname = document.addfrm.product_name.value;
-		var productdesc = document.addfrm.product_description.value;
-		var productprc = document.addfrm.product_price.value;
-		var productstk = document.addfrm.product_stock_level.value;
-		var productdate = document.addfrm.product_date_created.value;
-		
-		if (productname == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_name").innerHTML = "Please key-in Product name.";
-		}
-		else 
-		{
-			document.getElementById("err_product_name").innerHTML = "";
-		}
-		
-		if (productdesc == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_description").innerHTML = "Please key-in Product Description.";
-		}
-		else
-		{
-			document.getElementById("err_product_description").innerHTML = "";
-		}
-		
-		if (productprc == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_price").innerHTML = "Price tag cannot be empty.";
-		}
-		else 
-			if (productprc < 1 )
-			{
-				no_error = false;
-				document.getElementById("err_product_price").innerHTML = "Cannot be less than RM 1.00.";
-			}	
-			else
-			{
-				document.getElementById("err_product_price").innerHTML = "";
-			}
-		
-		if (productstk == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_stock_level").innerHTML = "Stock Level cannot be empty.";
-		}
-		else
-			if (productstk < 10 )
-			{
-				no_error = false;
-				document.getElementById("err_product_stock_level").innerHTML = "Stock Level cannot be less than 10 units.";
-			}
-			else
-			{
-				document.getElementById("err_product_stock_level").innerHTML = "";
-			}
-		
-		if (productdate == "")
-		{
-			no_error = false;
-			document.getElementById("err_product_date_created").innerHTML = "Date created cannot be empty.";
-		}
-		else
-		{
-			document.getElementById("err_product_date_created").innerHTML = "";
-		}
-		
-		return no_error;
-	}
+    function check_form()
+    {
+        var no_error = true;
+        var adminname = document.editfrm.admin_name.value;
+        var adminemail = document.editfrm.admin_email.value;
+        var adminpassword = document.editfrm.admin_password.value;
+        
+        if (adminname == "")
+        {
+            no_error = false;
+            document.getElementById("err_admin_name").innerHTML = "Please key-in your name.";
+        }
+        else 
+        {
+            document.getElementById("err_admin_name").innerHTML = "";
+        }
+        
+        if (adminemail == "")
+        {
+            no_error = false;
+            document.getElementById("err_admin_email").innerHTML = "Please key-in your email.";
+        }
+        else
+        {
+            document.getElementById("err_admin_email").innerHTML = "";
+        }
 
-	</script>
+    if (adminpassword == "")
+        {
+            no_error = false;
+            document.getElementById("err_admin_password").innerHTML = "Please key-in your password.";
+        }
+        else
+        {
+            document.getElementById("err_admin_password").innerHTML = "";
+        }
+        
+        return no_error;
+    }
+
+    </script>
 
 </head>
 
@@ -147,7 +122,7 @@ include "dataconnection.php";
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Add Car</h4>
+            <h4 class="page-title d-none d-sm-block">Profile</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -415,10 +390,12 @@ include "dataconnection.php";
             <li class="dropdown">
                 <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="account-user-avatar">
-                        <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
+                        <?php
+                            echo '<img src="assets/images/users/' . $admin_rec['admin_image'] . '"alt="user-image" width="32" class="rounded-circle">';
+                        ?>
                     </span>
                     <span class="d-lg-block d-none">
-                        <h5 class="my-0 fw-normal">Adams<i class="ri-arrow-down-s-line fs-22 d-none d-sm-inline-block align-middle"></i></h5>
+                        <h5 class="my-0 fw-normal"><?php echo $admin_rec["admin_name"] ?><i class="ri-arrow-down-s-line fs-22 d-none d-sm-inline-block align-middle"></i></h5>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
@@ -434,7 +411,7 @@ include "dataconnection.php";
                     </a>
 
                     <!-- item-->
-                    <a href="auth-logout.html" class="dropdown-item">
+                    <a href="logout.php" class="dropdown-item">
                         <i class="ri-logout-circle-r-line align-middle me-1"></i>
                         <span>Logout</span>
                     </a>
@@ -627,148 +604,154 @@ include "dataconnection.php";
                 <!-- Start Content-->
                 <div class="container-fluid">
 
+                    <!-- start page title -->
                     <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class=".card-title">Car Details</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <form>
+                        <div class="col-sm-12">
+                            <div class="profile-bg-picture" style="background-image: url(assets/images/bg-profile.jpg); background-position: bottom;"></div>
+                            <div class="p-sm-3 p-0 profile-user">
+                                <div class="row g-2">
+                                    <div class="col-lg-3  d-none d-lg-block">
+                                        <div class="profile-user-img p-2 text-start">
+                                            <?php
+                                                echo '<img src="assets/images/users/' . $admin_rec['admin_image'] . '"class="img-thumbnail avatar-lg rounded" >';
+                                            ?>
+                                        </div>
+                                        <div class="text-start p-1 pt-2">
+                                            <h4 class=" fs-17 ellipsis">
+                                                <?php
+                                                echo $admin_rec['admin_name'];
+                                                ?>
+                                            </h4>
+                                            <p class="text-muted mb-0"><small>Malacca, Malaysia</small></p>
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                           
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 2</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 3</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                        </div>
+                                        <div class="pt-3 ps-2">
+                                            <p class="text-muted mb-2 font-13"><strong>UserName :</strong> <span class="ms-2"><?php echo $admin_rec['admin_name']; ?></span></p>
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 4</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                            <p class="text-muted mb-12 font-13"><strong>Email :</strong> <span class="ms-0"><?php echo $admin_rec['admin_email']; ?></span></p>
 
-                                                <div class="mb-3">
-                                                    <label for="example-fileinput" class="form-label">Car Image 5</label>
-                                                    <input type="file" id="example-fileinput" class="form-control">
-                                                </div>
+                                            <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ms-2">Malaysia</span></p>
+                                        </div>
 
-                                                <div class="mb-3">
-                                                    <label for="example-select" class="form-label">Car Brand</label>
-                                                    <select class="form-select" id="example-select">
-                                                        <option selected>Select car brand</option>
-                                                        <option value="1">Toyota</option>
-                                                        <option value="2">Honda</option>
-                                                        <option value="3">Mercedes-Benz</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="simpleinput" class="form-label">Car Model</label>
-                                                    <input type="text" id="simpleinput" class="form-control" placeholder="Enter the car model">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Car Price (RM)</label>
-                                                    <input class="form-control" id="example-number" type="number"
-                                                        name="number" min="0">
-                                                </div>
-
-                                            </form>
-                                        </div> <!-- end col -->
-
-                                        <div class="col-lg-6">
-                                            <form>
-
-                                                <div class="mb-3">
-                                                    <label for="example-textarea" class="form-label">Car Description</label>
-                                                    <textarea class="form-control" id="example-textarea" placeholder="Enter the car description...." rows="5"></textarea>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Year</label>
-                                                    <input  type="number" id="example-number" class="form-control" name="number" min="1970">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="example-number" class="form-label">Mileage (km)</label>
-                                                    <input class="form-control" id="example-number" type="number"
-                                                        name="number" min="0">
-                                                </div>
-
-                                                <h6 class="fs-15 mt-3" >Body Color</h6>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio1" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio1">Grey</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio2" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio2">White</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio3" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio3">Blue</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio4" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio4">Red</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio5" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio5">Black</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio6" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio6">Dark Grey</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input type="radio" id="customRadio7" name="customRadio"
-                                                            class="form-check-input">
-                                                        <label class="form-check-label" for="customRadio7">Others</label>
-                                                    </div>
-                                                    <br>
-
-                                                <div class="mb-3">
-                                                    <label for="example-palaceholder"
-                                                        class="form-label">Car Engine</label>
-                                                    <input type="text" id="example-palaceholder" class="form-control"
-                                                        placeholder="Enter the car engine">
-                                                </div>
-
-                                            </form>
-                                            
-                                        </div> <!-- end col -->
-                                        <!-- Button Section -->
-                                        <div class="d-flex justify-content-end mt-auto">
-                                            <input type="submit" name="savebtn" value="Save Product" class="btn btn-info"/>
-                                            <input type="button" class="btn btn-secondary ms-2" name="cancelbtn" value="Cancel" onclick="window.location.href='cartable.php';"/>
+                                        <div class="text-start mt-4">
+                                            <h4 class="">Follow On:</h4>
+                                            <div class="d-flex gap-2 mt-3">
+                                                <a href="javascript: void(0);" class="btn px-2 py-1 btn-soft-primary"><i class="mdi mdi-facebook"></i></a>
+                                                <a href="javascript: void(0);" class="btn px-2 py-1 btn-soft-danger"><i class="mdi mdi-google-plus"></i></a>
+                                                <a href="javascript: void(0);" class="btn px-2 py-1 btn-soft-info"><i class="mdi mdi-twitter"></i></a>
+                                                <a href="javascript: void(0);" class="btn px-2 py-1 btn-soft-dark"><i class="mdi mdi-github"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- end row-->
-                                    
-                                </div> <!-- end card-body -->
-                            </div> <!-- end card -->
-                        </div><!-- end col -->
-                    </div><!-- end row -->
-                </div> <!-- container -->
 
-            </div> <!-- content -->
+                                    <div class="col-lg-9 bg-light-subtle">
+                                        <div class="profile-content">
+                                            <div class="nav nav-pills nav-justified gap-0 p-3 text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                </li>
+                                                <li class="nav-item mt-2"><a class="nav-link fs-5 p-2 active" data-bs-toggle="tab" data-bs-target="#aboutme" type="button" role="tab" aria-controls="home" aria-selected="true" href="#aboutme">About</a>
+                                                </li>
+                                                <li class="nav-item mt-2"><a class="nav-link fs-5 p-2" data-bs-toggle="tab" data-bs-target="#edit-profile" type="button" role="tab" aria-controls="home" aria-selected="true" href="#edit-profile">Settings</a></li>
+                                            </div>
+
+                                            <div class="tab-content m-0 p-2 p-sm-4 " id="v-pills-tabContent">
+
+                                                <div class="tab-pane active" id="aboutme" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                                    <div class="profile-desk">
+                                                        <h5 class="mt-4 fs-17 text-dark">Contact Information</h5>
+                                                        <table class="table table-condensed table-bordered mb-0 border-top table-striped">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">UserName</th>
+                                                                    <td>
+                                                                        <div class="text-primary-emphasis">
+                                                                            <?php echo $admin_rec['admin_name']; ?>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Email</th>
+                                                                    <td>
+                                                                        <div class="text-primary-emphasis">
+                                                                            <?php echo $admin_rec['admin_email']; ?>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <th scope="row">Password</th>
+                                                                    <td class="text-primary-emphasis">
+                                                                        <?php echo $admin_rec['admin_password']; ?>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- end profile-desk -->
+                                                </div> <!-- about-me -->
+                                                <div id="edit-profile" class="tab-pane">
+                                                    <div class="user-profile-content">
+                                                        
+                                                        <form>
+                                                            <?php
+                                                                // identify which record to be updated
+                                                                $pid = $_REQUEST["edit_pid"]; 
+                                                            
+                                                                $get_list = mysqli_query($conn, "select * from admin where admin_id = $pid");
+                                                                $profile_rec= mysqli_fetch_assoc($get_list);
+                                                            ?>
+                                                            <div class="row row-cols-sm-2 row-cols-1">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="Username">Username</label>
+                                                                    <input type="text" value="<?php echo $admin_rec['admin_name']; ?>" id="Username" class="form-control">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="Email">Email</label>
+                                                                    <input type="email" value="<?php echo $admin_rec['admin_email']; ?>" placeholder="first.last@example.com" id="Email" class="form-control">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="Password">Password</label>
+                                                                    <input type="password" value="<?php echo $admin_rec['admin_password']; ?>" placeholder="6 - 15 Characters" id="Password" class="form-control">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="RePassword">Re-Password</label>
+                                                                    <input type="password" placeholder="6 - 15 Characters" id="RePassword" class="form-control">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="example-fileinput" class="form-label">Image</label>
+                                                                    <input type="file" id="example-fileinput" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <input class="btn btn-primary" type="submit"><i class="mdi mdi-content-save-outline me-1 fs-16 lh-1"></i> Save</input>
+                                                            <input type="submit" name="savebtn" value="Update" />
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- profile -->
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- --row end  -->
+
+                    
+
+                 
+
+
+                </div>
+                <!-- container -->
+
+            </div>
+            <!-- content -->
 
         </div>
 
@@ -931,73 +914,29 @@ include "dataconnection.php";
             </div>
         </div>
     </div>
-
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
 
+
+
+
+
+
+
+
+
     <script src="assets/vendor/lucide/umd/lucide.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/chart.js/chart.min.js"></script>
+
+    <!-- Profile Demo App js -->
+    <script src="assets/js/pages/profile.init.js"></script>
 
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
 
 </body>
 
+
 </html>
-
-<?php
-
-if (isset($_POST["savebtn"]))
-{
-	// get all date from the form
-	$productname = $_POST["product_name"];
-	$productdesc = $_POST["product_description"];
-	$productprice = $_POST["product_price"];
-	$productstocklvl = $_POST["product_stock_level"];
-	$productcat = $_POST["product_category"];
-	$filename = $_POST["product_image"];
-	
-	// check for duplicate product name
-	$check_duplicate_productname = mysqli_query($conn, "select * from product where product_name = '$productname'");
-
-	$catid_result = mysqli_query($conn, "SELECT category_id FROM category WHERE category_name = '$productcat'");
-	while ($catid_row = mysqli_fetch_assoc($catid_result)) 
-	{
-		$catid = $catid_row['category_id'];
-	}
-	
-	if (mysqli_num_rows($check_duplicate_productname) > 0 )
-	{
-	echo
-	"<script type='text/javascript'>
-		alert('This Product Name already exists.');
-		history.go(-1);
-		window.location.href='addproduct.php';
-	</script>";
-	}
-	else // insert data into the product table
-	{	
-		if ($filename != "") 
-		{
-			$path = "../assets/img/".$filename;
-
-			mysqli_query($conn, "insert into product (product_name,product_desc,product_price,product_stock,category_id,product_image) values ('$productname','$productdesc','$productprice','$productstocklvl','$catid','$filename')");
-		}
-		else
-		{
-			echo "<script type='text/javascript'>
-						alert('Failed to upload image.');
-						window.location.href='viewproduct.php';
-					</script>";
-		}
-	}
-
-	echo
-		"<script type='text/javascript'>
-			alert('Record has been saved sucessfully.');
-			window.location.href='viewproduct.php';
-		</script>";
-	
-}
-
-
-?>

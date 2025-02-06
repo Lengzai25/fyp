@@ -26,6 +26,35 @@ include "dataconnection.php";
 
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Toggle dropdown when clicking the "more options" icon
+    $(".more-options").click(function(event) {
+        event.stopPropagation(); // Prevent closing immediately
+        var id = $(this).data("id");
+        $(".dropdown-menu").hide(); // Hide other dropdowns
+        $("#dropdown-" + id).toggle(); // Show current dropdown
+    });
+
+    // Hide dropdown when clicking anywhere else
+    $(document).click(function() {
+        $(".dropdown-menu").hide();
+    });
+
+    // Edit function (Placeholder - You can add your edit logic)
+    $(".edit-status").click(function() {
+        alert("Edit function clicked for ID: " + $(this).data("id"));
+    });
+
+    // Update function (Placeholder - You can replace this with AJAX)
+    $(".update-status").click(function() {
+        var id = $(this).data("id");
+        alert("Update function clicked for ID: " + id);
+    });
+});
+</script>
 </head>
 
 <body>
@@ -555,9 +584,7 @@ include "dataconnection.php";
                                                 All Orders
                                             </h5>
                                         </div>
-    
-                                        
-    
+                                       
                                     </div>
                                 </div>
     
@@ -568,9 +595,6 @@ include "dataconnection.php";
                                                 <thead>
                                                     <tr class="bg-light">
                                                         <th>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </th>
-                                                        <th>
                                                             Customer
                                                         </th>
 
@@ -578,13 +602,13 @@ include "dataconnection.php";
                                                             Car
                                                         </th>
                                                         <th>
-                                                            Date
+                                                            Ordertime
                                                         </th>
                                                         <th>
                                                             Amount
                                                         </th>
                                                         <th>
-                                                            Vendor
+                                                            Telephone
                                                         </th>
                                                         <th>
                                                             Status
@@ -592,386 +616,111 @@ include "dataconnection.php";
                                                         <th>
                                                             Rate
                                                         </th>
-                                                        <th>
-                                                            Action
-                                                        </th>
+                                                        <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <?php
+
+                                                        if (isset($_POST["searchbtn"])) 
+                                                        {
+                                                            // Get the search term from the form
+                                                            $search = $_POST["search"];
+
+                                                            // Sanitize the search term to prevent SQL injection
+                                                            $search = mysqli_real_escape_string($conn, $search);
+
+                                                            // Query the database for the product name
+                                                            $check_search = mysqli_query($conn, "SELECT * FROM checkout WHERE user_name = '$search'");
+
+                                                            if (mysqli_num_rows($check_search) > 0) {
+                                                                // Fetch the associated row
+                                                                $row2 = mysqli_fetch_assoc($check_search);
+
+                                                                // Redirect to the product details page with the product ID
+                                                                $customer = mysqli_query($conn, "SELECT * FROM customer WHERE cust_id = " . $row2['cust_id']);
+
+                                                            }
+                                                            else 
+                                                            {
+                                                                // Handle case where no matching product is found
+                                                                echo "<script>alert('No matching user found.');</script>";
+                                                                $customer = mysqli_query($conn, "select * from customer");
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                        $checkout = mysqli_query($conn, "select * from checkout");
+                                                        }
+
+                                                        while($row = mysqli_fetch_assoc($checkout))
+                                                        {
+                                                    ?>
                                                     <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
+                                                        
                                                         <td>
                                                             <div class="d-flex align-items-center">
                                                                 <div class="avatar-sm rounded-circle">
                                                                     <img src="assets/images/users/avatar-1.jpg" alt="" class="img-fluid rounded-circle">
                                                                 </div>
                                                                 <div class="ps-2">
-                                                                    <h5 class="mb-1">Constance Norton</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#349122</p>
+                                                                    <h5 class="mb-1">
+                                                                        <?php
+                                                                            echo $row['user_name'];
+                                                                        ?>
+                                                                    </h5>
+                                                                    <p class="text-muted fs-6 mb-0">
+                                                                        <?php
+                                                                            echo $row['user_email'];
+                                                                        ?>
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </td>
 
                                                         <td>
-                                                            Dashboard
+                                                            <?php
+                                                                echo $row['car_name'];
+                                                            ?>
                                                         </td>
                                                         <td>
-                                                            12/02/2021
+                                                            <?php
+                                                                echo $row['ordertime'];
+                                                            ?>
                                                         </td>
                                                         <td>
-                                                            <span class="text-success fw-bold">$111.00</span>
+                                                            <span class="text-success fw-bold">
+                                                                RM<?php
+                                                                    echo $row['car_price'];
+                                                                ?>
+                                                            </span>
                                                         </td>
                                                         <td>
-                                                            Company Lac.
+                                                            <?php
+                                                                echo $row['user_tel'];
+                                                            ?>
                                                         </td>
 
+                                                        
+
                                                         <td>
-                                                            <span class="badge bg-success-subtle text-success ">Paid</span>
+                                                            <select class="form-select status-dropdown" data-id="<?php echo $row['order_id']; ?>">
+                                                                <option value="Done" class="badge bg-success-subtle text-success " <?php if ($row['stat'] == 'Done') echo 'selected'; ?>>Done</option>
+                                                                <option value="Work in Progress" class="badge bg-info-subtle text-info " <?php if ($row['stat'] == 'Work in Progress') echo 'selected'; ?>>Work in Progress</option>
+                                                            </select>
                                                         </td>
 
                                                         <td>
                                                             <h5 class="mb-0">4.0 <span class="fs-12 text-muted">(199 Votes)</span></h5>
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-3.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Stacey Santiago</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#215212</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            Dashboard UI
-                                                        </td>
-                                                        <td>
-                                                            01/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-danger fw-semibold">$29.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Design
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-danger-subtle text-danger">Unpaid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">4.8 <span class="fs-12 text-muted">(1k Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-12.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Elizabeth Yanez</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#215402</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Techmin UL Kit
-                                                        </td>
-                                                        <td>
-                                                            02/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-success fw-semibold">$22.00</span>
-                                                        </td>
-                                                        <td>
-                                                            3D Artist
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">3.8<span class="fs-12 text-muted">(259 Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
+                                                            <button class="btn btn-outline-dark"><span class="ri-check-fill"></span></button>
                                                         </td>
                                                     </tr>
 
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-5.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Erica Lagarde</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#223294</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            Glassmorphisam UL kit
-                                                        </td>
-                                                        <td>
-                                                            12/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-danger fw-semibold">$86.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Techzaa
-                                                        </td>
-
-                                                        <td>
-                                                            <sapn class="badge bg-danger-subtle text-danger">Unpaid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">4.0<span class="fs-12 text-muted">(4k Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-7.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Alfred Argo</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#224698</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Lugda UL Kit
-                                                        </td>
-                                                        <td>
-                                                            16/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-success fw-semibold">$32.00</span>
-                                                        </td>
-                                                        <td>
-                                                            IP Themes
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">3.7<span class="fs-12 text-muted">(220 Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-8.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Sean Kessler</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#21756</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Dashboard UI
-                                                        </td>
-                                                        <td>
-                                                            18/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-success fw-semibold">$98.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Techzaa
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">4.8<span class="fs-12 text-muted">(10K Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-10.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Byron Parkinson</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#568965</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Theme UI
-                                                        </td>
-                                                        <td>
-                                                            19/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-danger fw-semibold">$25.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Craft Inc.
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-danger-subtle text-danger">Unpaid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">3.6<span class="fs-12 text-muted">(1.2K Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-11.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">Rebecca Wheeler</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#926082</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Megzi UI kit
-                                                        </td>
-                                                        <td>
-                                                            22/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-success fw-semibold">$55.00</span>
-                                                        </td>
-                                                        <td>
-                                                            3D Aritst
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">3.0<span class="fs-12 text-muted">(120 Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm rounded-circle">
-                                                                    <img src="assets/images/users/avatar-9.jpg" alt="" class="img-fluid rounded-circle">
-                                                                </div>
-                                                                <div class="ps-2">
-                                                                    <h5 class="mb-1">James Royal</h5>
-                                                                    <p class="text-muted fs-6 mb-0">#120963</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            Zarko Dashboard UI
-                                                        </td>
-                                                        <td>
-                                                            25/04/2021
-                                                        </td>
-                                                        <td>
-                                                            <span class="text-danger fw-semibold">$119.00</span>
-                                                        </td>
-                                                        <td>
-                                                            Craft Inc.
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge bg-success-subtle text-success">Paid</button>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="mb-0">4.2<span class="fs-12 text-muted">(3.9k Votes)</span></h5>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-outline-dark">Details</button>
-                                                        </td>
-                                                    </tr>
-
+                                                    <?php
+                                                        }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -987,6 +736,7 @@ include "dataconnection.php";
             </div> <!-- content -->
 
         </div>
+        
 
         <!-- ============================================================== -->
         <!-- End Page content -->
